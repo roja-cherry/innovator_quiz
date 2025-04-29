@@ -1,9 +1,10 @@
-import React from 'react'
+import CreateQuizForm from "../components/CreateQuizForm"
 
 const CreateQuiz = () => {
   return (
-    <div>CreateQuiz</div>
+    <section>
+      <CreateQuizForm />
+    </section>
   )
 }
-
 export default CreateQuiz
