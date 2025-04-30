@@ -36,11 +36,20 @@ const CreateQuizForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <FileUpload handleFileChange={handleFileChange} />
-      <div >
-      <label for="QuizTitle" class="form-label">Quiz Title : </label>
-      <input type="text" class="form-control" id="quiztitle" placeholder=" Enter Quiz Title"/>
-      <label for="duration" class="form-label">Duration</label>
-      <input type="range" class="form-range" id="duration"></input>
+      <div>
+        <label for="QuizTitle" class="form-label">
+          Quiz Title :{" "}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="quiztitle"
+          placeholder=" Enter Quiz Title"
+        />
+        <label for="duration" class="form-label">
+          Duration
+        </label>
+        <input type="range" class="form-range" id="duration"></input>
       </div>
       <button type="submit">Submit</button>
     </form>
