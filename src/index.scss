@@ -1,0 +1,12 @@
+$primary: #000000; // Your new primary color
+
+// Then import Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+.form-label {
+  font-weight: 600;
+}
+
+.flex-1 {
+  flex: 1;
+}

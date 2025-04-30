@@ -2,16 +2,17 @@ import { useState } from "react";
 import "./FileUpload.scss";
 
 const FileUpload = ({ handleFileChange }) => {
-  const [file, setFile] = useState({})
-  
-  const handleChange = e => {
-    setFile(e.target?.files[0])
-    handleFileChange(e)
-  }
+  const [file, setFile] = useState({});
+
+  const handleChange = (e) => {
+    setFile(e.target?.files[0]);
+    handleFileChange(e);
+  };
 
   return (
     <>
-      <label htmlFor="file" className="file-upload-container">
+      <p className="form-label">Upload File :</p>
+      <label htmlFor="file" className="file-upload-container rounded">
         <div className="box">
           <svg
             width="26"
@@ -54,9 +55,11 @@ const FileUpload = ({ handleFileChange }) => {
         />
       </label>
       <div className="file-name-file-condition">
-        <div>
-          <p>{file?.name}</p>
-        </div>
+        {file?.name && (
+          <div>
+            <p>{file?.name}</p>
+          </div>
+        )}
         <div className="file-type-size">
           <span>EXCEL</span>
           <span>10 MB</span>

@@ -34,8 +34,7 @@ const CreateQuizForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FileUpload handleFileChange={handleFileChange} />
+    <form onSubmit={handleSubmit} className="quiz-form">
        <div>
         <label for="QuizTitle" class="form-label">
           Quiz Title :
@@ -49,28 +48,32 @@ const CreateQuizForm = () => {
           onChange={e => setQuizName(e.target?.value)}
         />
       </div>
-      <div className="d-flex justify-content-between align-items-center">
-        <div className="mt-3">
-          <p>
+      <div className="d-flex align-items-center mb-2">
+        <div className="mt-3 flex-1">
+          <p className="m-0">
             <label for="duration" class="form-label">
               Duration :
-            </label>
+            </label> ̰
           </p>
           <input
             type="range"
-            class="form-range"
-            style={{ width: "800px" }}
+            class="form_range"
             min={5}
             max={60}
             id="duration"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
+            style={{
+              accentColor: "black",
+              width: "100%"
+            }}
           ></input>
         </div>
-        <div className="border border-dark px-2 py-1 mt-5 rounded">
+        <div className="border border-dark px-2 py-1 mt-5 ms-2 rounded">
           {duration} MIN
         </div>
       </div>
+      <FileUpload handleFileChange={handleFileChange} />
       <div className="text-center">
         <button class="btn btn-dark mt-3" type="submit">
           UPLOAD

@@ -1,0 +1,15 @@
+.quiz-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f2f2f2;
+
+    .quiz-form {
+        width: 50%;
+
+        @media (width < 991px) {
+            width: 100%;
+        }
+    }
+}
+
