@@ -1,0 +1,17 @@
+.file-upload-container {
+  width: 60rem;
+  height: 20rem;
+  background: #f5f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .box {
+    text-align: center;
+
+    p {
+      text-decoration: underline;
+    }
+  }
+}
