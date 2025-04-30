@@ -48,7 +48,7 @@ const FileUpload = ({ handleFileChange }) => {
           type="file"
           name="file"
           id="file"
-          accept=".csv"
+          accept=".csv, .xlsx"
           required
           style={{ visibility: "hidden" }}
         />
@@ -58,7 +58,7 @@ const FileUpload = ({ handleFileChange }) => {
           <p>{file?.name}</p>
         </div>
         <div className="file-type-size">
-          <span>.CSV</span>
+          <span>EXCEL</span>
           <span>10 MB</span>
         </div>
       </div>

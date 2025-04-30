@@ -23,7 +23,7 @@ const CreateQuizForm = () => {
 
     const formData = new FormData();
     formData.set("file", excelFile);
-    formData.set("title", "Sample Title");
+    formData.set("quizName", "Sample Title");
     formData.set("duration", 30);
 
     try {
