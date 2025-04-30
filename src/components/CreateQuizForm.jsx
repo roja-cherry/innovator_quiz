@@ -4,6 +4,8 @@ import { createQuiz } from "../api/apiService";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState({});
+  const [fileName, setFileName] = useState("");
+  const [duration, setDuration] = useState(5);
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -34,7 +36,25 @@ const CreateQuizForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <FileUpload handleFileChange={handleFileChange} />
-
+      <div >
+        <label> Quiz Title :</label>
+        <input
+          type="text"
+          placeholder="Enter the Quiz Title"
+          value={fileName}
+          onChange={(e) => setFileName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label> Duration :</label>
+        <input
+          type="range"
+          value={duration}
+          min={5}
+          max={60}
+          onChange={(e) => setDuration(e.target.value)}
+        />
+      </div>
       <button type="submit">Submit</button>
     </form>
   );
