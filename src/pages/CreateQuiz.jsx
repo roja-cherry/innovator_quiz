@@ -2,7 +2,7 @@ import CreateQuizForm from "../components/CreateQuizForm"
 
 const CreateQuiz = () => {
   return (
-    <section>
+    <section >
       <CreateQuizForm />
     </section>
   )
