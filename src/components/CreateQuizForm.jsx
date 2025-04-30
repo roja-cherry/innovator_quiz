@@ -46,12 +46,34 @@ const CreateQuizForm = () => {
           id="quiztitle"
           placeholder=" Enter Quiz Title"
         />
-        <label for="duration" class="form-label">
-          Duration
-        </label>
-        <input type="range" class="form-range" id="duration"></input>
       </div>
-      <button type="submit">Submit</button>
+      <div className="d-flex justify-content-between align-items-center">
+        <div className="mt-3">
+          <p>
+            <label for="duration" class="form-label">
+              Duration :
+            </label>
+          </p>
+          <input
+            type="range"
+            class="form-range"
+            style={{ width: "800px" }}
+            min={5}
+            max={60}
+            id="duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+          ></input>
+        </div>
+        <div className="border border-dark px-2 py-1 mt-5 rounded">
+          {duration} MIN
+        </div>
+      </div>
+      <div className="text-center">
+        <button class="btn btn-dark mt-3" type="submit">
+          UPLOAD
+        </button>
+      </div>
     </form>
   );
 };
