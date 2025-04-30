@@ -1,8 +1,16 @@
+import { useState } from "react";
 import "./FileUpload.scss";
 
-const FileUpload = ({handleFileChange}) => {
+const FileUpload = ({ handleFileChange }) => {
+  const [file, setFile] = useState({})
+  
+  const handleChange = e => {
+    setFile(e.target?.files[0])
+    handleFileChange(e)
+  }
 
   return (
+    <>
       <label htmlFor="file" className="file-upload-container">
         <div className="box">
           <svg
@@ -36,14 +44,25 @@ const FileUpload = ({handleFileChange}) => {
           <p>Click To Upload</p>
         </div>
         <input
-        onChange={handleFileChange}
+          onChange={handleChange}
           type="file"
           name="file"
           id="file"
+          accept=".csv"
           required
           style={{ visibility: "hidden" }}
         />
       </label>
+      <div className="file-name-file-condition">
+        <div>
+          <p>{file?.name}</p>
+        </div>
+        <div className="file-type-size">
+          <span>.CSV</span>
+          <span>10 MB</span>
+        </div>
+      </div>
+    </>
   );
 };
 

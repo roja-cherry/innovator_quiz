@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
+import { createQuiz } from "../api/apiService";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState({});
@@ -11,12 +12,23 @@ const CreateQuizForm = () => {
       alert("Max allowed size is 10MB");
       return;
     }
-
     setExcelFile(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(excelFile);
+
+    const formData = new FormData();
+    formData.set("file", excelFile);
+    formData.set("title", "Sample Title");
+    formData.set("duration", 30);
+
+    try {
+      const res = await createQuiz(formData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
