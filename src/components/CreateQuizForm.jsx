@@ -4,7 +4,7 @@ import { createQuiz } from "../api/apiService";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState({});
-  const [fileName, setFileName] = useState("");
+  const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
 
   const handleFileChange = (e) => {
@@ -23,8 +23,8 @@ const CreateQuizForm = () => {
 
     const formData = new FormData();
     formData.set("file", excelFile);
-    formData.set("quizName", "Sample Title");
-    formData.set("duration", 30);
+    formData.set("quizName", quizName);
+    formData.set("duration", duration);
 
     try {
       const res = await createQuiz(formData);
@@ -36,15 +36,17 @@ const CreateQuizForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <FileUpload handleFileChange={handleFileChange} />
-      <div>
+       <div>
         <label for="QuizTitle" class="form-label">
-          Quiz Title :{" "}
+          Quiz Title :
         </label>
         <input
+          value={quizName}
           type="text"
           class="form-control"
           id="quiztitle"
           placeholder=" Enter Quiz Title"
+          onChange={e => setQuizName(e.target?.value)}
         />
       </div>
       <div className="d-flex justify-content-between align-items-center">
