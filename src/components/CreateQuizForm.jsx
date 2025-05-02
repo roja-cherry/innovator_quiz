@@ -32,7 +32,8 @@ const CreateQuizForm = () => {
     formData.set("duration", duration);
 
     try {
-      const res = await createQuiz(formData);
+      await createQuiz(formData);
+      toast.success("Quiz created successfully")
     } catch (err) {
       console.log(err);
     }
