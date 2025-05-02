@@ -26,8 +26,14 @@
         [type="email"].form-control:focus,
         [type="tel"].form-control:focus,
         [contenteditable].form-control:focus {
-          box-shadow: inset 0 -1px 0 #ddd;
+          box-shadow: none;
         }
+      }
+
+      .navbar-toggler:focus,
+      .navbar-toggler:active {
+        border: none;
+        box-shadow: none !important;
       }
 
       body {

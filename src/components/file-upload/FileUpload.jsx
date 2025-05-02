@@ -1,11 +1,9 @@
 import { useState } from "react";
 import "./FileUpload.scss";
 
-const FileUpload = ({ handleFileChange }) => {
-  const [file, setFile] = useState({});
+const FileUpload = ({ handleFileChange, file }) => {
 
   const handleChange = (e) => {
-    setFile(e.target?.files[0]);
     handleFileChange(e);
   };
 
@@ -50,7 +48,6 @@ const FileUpload = ({ handleFileChange }) => {
           name="file"
           id="file"
           accept=".csv, .xlsx"
-          required
           style={{ visibility: "hidden" }}
         />
       </label>

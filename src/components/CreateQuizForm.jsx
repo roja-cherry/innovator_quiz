@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
+import toast from "react-hot-toast";
 
 const CreateQuizForm = () => {
-  const [excelFile, setExcelFile] = useState({});
+  const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
 
@@ -11,7 +12,7 @@ const CreateQuizForm = () => {
     const file = e.target?.files[0];
 
     if (file?.size > 10000) {
-      alert("Max allowed size is 10MB");
+      toast.error("Maximum allowed size is 10MB");
       return;
     }
     setExcelFile(file);
@@ -19,8 +20,12 @@ const CreateQuizForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(excelFile);
 
+    if(!excelFile) {
+      toast.error("Please upload file")
+      return
+    }
+    
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
@@ -35,29 +40,31 @@ const CreateQuizForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="quiz-form">
-       <div>
-        <label for="QuizTitle" class="form-label">
+      <div>
+        <label htmlFor="QuizTitle" className="form-label">
           Quiz Title :
         </label>
         <input
           value={quizName}
           type="text"
-          class="form-control"
+          className="form-control"
           id="quiztitle"
           placeholder=" Enter Quiz Title"
-          onChange={e => setQuizName(e.target?.value)}
+          required
+          onChange={(e) => setQuizName(e.target?.value)}
         />
       </div>
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
           <p className="m-0">
-            <label for="duration" class="form-label">
+            <label htmlFor="duration" className="form-label">
               Duration :
-            </label> ̰
+            </label>
+             ̰
           </p>
           <input
             type="range"
-            class="form_range"
+            className="form_range"
             min={5}
             max={60}
             id="duration"
@@ -65,7 +72,7 @@ const CreateQuizForm = () => {
             onChange={(e) => setDuration(e.target.value)}
             style={{
               accentColor: "black",
-              width: "100%"
+              width: "100%",
             }}
           ></input>
         </div>
@@ -73,9 +80,9 @@ const CreateQuizForm = () => {
           {duration} MIN
         </div>
       </div>
-      <FileUpload handleFileChange={handleFileChange} />
+      <FileUpload file={excelFile} handleFileChange={handleFileChange} />
       <div className="text-center">
-        <button class="btn btn-dark mt-3" type="submit">
+        <button className="btn btn-dark mt-3" type="submit">
           UPLOAD
         </button>
       </div>
