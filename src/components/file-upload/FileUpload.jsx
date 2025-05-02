@@ -47,7 +47,7 @@ const FileUpload = ({ handleFileChange, file }) => {
           type="file"
           name="file"
           id="file"
-          accept=".csv, .xlsx"
+          accept=".xlsx"
           style={{ visibility: "hidden" }}
         />
       </label>
