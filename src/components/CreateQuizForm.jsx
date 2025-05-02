@@ -33,7 +33,7 @@ const CreateQuizForm = () => {
 
     try {
       await createQuiz(formData);
-      toast.success("Quiz created successfully")
+      toast.success("Quiz uploaded successfully")
     } catch (err) {
       console.log(err);
     }
