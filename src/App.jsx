@@ -12,7 +12,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<CreateQuiz />} />
-          <Route path="edit-quiz/:quizId" element={<EditQuiz />} />
+          <Route path="edit/:id" element={<EditQuiz />} />
         </Route>
       </Routes>
     </BrowserRouter>
