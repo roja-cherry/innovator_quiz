@@ -18,12 +18,17 @@ const EditQuizForm = () => {
         setDuration(data.duration);
       } catch (err) {
         console.error(err);
-        Swal.fire("Error", "Failed to load quiz details", "error");
+  
+        // Extracting the message from the backend response if available
+        const errorMessage = err.response?.data?.message || "Failed to load quiz details";
+  
+        Swal.fire("Error", errorMessage, "error");
       }
     };
-
+  
     fetchQuiz();
   }, [id]);
+  
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
