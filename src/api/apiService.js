@@ -7,3 +7,11 @@ export const createQuiz = (formData) => {
     },
   });
 };
+
+export const editQuiz = (formData, quizId) => {
+  return axiosInstance.put(`/api/admin/quiz/${quizId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
