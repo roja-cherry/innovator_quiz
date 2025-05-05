@@ -61,7 +61,6 @@ const CreateQuizForm = () => {
             <label htmlFor="duration" className="form-label">
               Duration :
             </label>
-             ̰
           </p>
           <input
             type="range"
