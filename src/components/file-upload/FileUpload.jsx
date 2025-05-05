@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./FileUpload.scss";
 
-const FileUpload = ({ handleFileChange, file }) => {
+const FileUpload = ({ handleFileChange, file, label }) => {
 
   const handleChange = (e) => {
     handleFileChange(e);
@@ -9,7 +9,7 @@ const FileUpload = ({ handleFileChange, file }) => {
 
   return (
     <>
-      <p className="form-label">Upload File :</p>
+      <p className="form-label">{label} :</p>
       <label htmlFor="file" className="file-upload-container rounded">
         <div className="box">
           <svg

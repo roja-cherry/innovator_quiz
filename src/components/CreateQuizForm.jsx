@@ -14,7 +14,7 @@ const CreateQuizForm = () => {
 
     if (file?.size > 10000) {
       console.log("errt");
-      
+
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -23,7 +23,7 @@ const CreateQuizForm = () => {
       // toast.error("Maximum allowed size is 10MB");
       return;
     }
-    
+
     setExcelFile(file);
   };
 
@@ -34,12 +34,12 @@ const CreateQuizForm = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Please upload file"
+        text: "Please upload file",
       });
       // toast.error("Please upload file")
-      return
+      return;
     }
-    
+
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
@@ -50,7 +50,7 @@ const CreateQuizForm = () => {
       Swal.fire({
         title: "Quiz uploaded successfully",
         icon: "success",
-        draggable: true
+        draggable: true,
       });
       // toast.success("Quiz uploaded successfully")
     } catch (err) {
@@ -99,7 +99,11 @@ const CreateQuizForm = () => {
           {duration} MIN
         </div>
       </div>
-      <FileUpload file={excelFile} handleFileChange={handleFileChange} />
+      <FileUpload
+        file={excelFile}
+        label="Upload File"
+        handleFileChange={handleFileChange}
+      />
       <div className="text-center">
         <button className="btn btn-dark mt-3" type="submit">
           UPLOAD

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
-import { editQuiz,getQuiz } from "../api/apiService";
+import { editQuiz, getQuiz } from "../api/apiService";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -32,11 +32,10 @@ const EditQuizForm = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Maximum allowed size is 10MB"
+        text: "Maximum allowed size is 10MB",
       });
       return;
     }
-
     setExcelFile(file);
   };
 
@@ -60,7 +59,9 @@ const EditQuizForm = () => {
   return (
     <form onSubmit={handleSubmit} className="quiz-form">
       <div>
-        <label htmlFor="QuizTitle" className="form-label">Quiz Title :</label>
+        <label htmlFor="QuizTitle" className="form-label">
+          Quiz Title :
+        </label>
         <input
           value={quizName}
           type="text"
@@ -74,7 +75,11 @@ const EditQuizForm = () => {
 
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
-          <p className="m-0"><label htmlFor="duration" className="form-label">Duration :</label></p>
+          <p className="m-0">
+            <label htmlFor="duration" className="form-label">
+              Duration :
+            </label>
+          </p>
           <input
             type="range"
             min={5}
@@ -91,10 +96,16 @@ const EditQuizForm = () => {
         </div>
       </div>
 
-      <FileUpload file={excelFile} handleFileChange={handleFileChange} />
-      
+      <FileUpload
+        file={excelFile}
+        label="Re-Upload File"
+        handleFileChange={handleFileChange}
+      />
+
       <div className="text-center">
-        <button className="btn btn-dark mt-3" type="submit">UPDATE</button>
+        <button className="btn btn-dark mt-3" type="submit">
+          UPDATE
+        </button>
       </div>
     </form>
   );
