@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
 import toast from "react-hot-toast";
+import Swal from 'sweetalert2'
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
@@ -12,9 +13,17 @@ const CreateQuizForm = () => {
     const file = e.target?.files[0];
 
     if (file?.size > 10000) {
-      toast.error("Maximum allowed size is 10MB");
+      console.log("errt");
+      
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Maximum allowed size is 10MB"
+      });
+      // toast.error("Maximum allowed size is 10MB");
       return;
     }
+    
     setExcelFile(file);
   };
 
@@ -22,7 +31,12 @@ const CreateQuizForm = () => {
     e.preventDefault();
 
     if(!excelFile) {
-      toast.error("Please upload file")
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please upload file"
+      });
+      // toast.error("Please upload file")
       return
     }
     
@@ -33,7 +47,12 @@ const CreateQuizForm = () => {
 
     try {
       await createQuiz(formData);
-      toast.success("Quiz uploaded successfully")
+      Swal.fire({
+        title: "Quiz uploaded successfully",
+        icon: "success",
+        draggable: true
+      });
+      // toast.success("Quiz uploaded successfully")
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +80,6 @@ const CreateQuizForm = () => {
             <label htmlFor="duration" className="form-label">
               Duration :
             </label>
-             ̰
           </p>
           <input
             type="range"
