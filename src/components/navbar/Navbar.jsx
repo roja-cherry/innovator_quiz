@@ -5,8 +5,16 @@ import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   const adminUrls = [
     {
-      text: "Quiz Management",
+      text: "Dashboard",
       path: "/",
+    },
+    {
+      text: "Quiz Management",
+      path: "/admin/quiz-management",
+    },
+    {
+      text: "Publish",
+      path: "/admin/publish",
     },
   ];
 

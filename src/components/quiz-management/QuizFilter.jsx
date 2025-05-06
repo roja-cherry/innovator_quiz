@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 
 const QuizFilter = ({ filters, handleFilterChange }) => {
   return (
-    <div className="row mt-3 filters bg-light">
+    <div className="row mt-3 filters bg-light p-2">
       <div className="col-md-4">
         <label htmlFor="status" className="form-label">
           Status
