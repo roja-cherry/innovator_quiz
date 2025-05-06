@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
-import { editQuiz,getQuiz } from "../api/apiService";
+import { editQuiz, getQuiz } from "../api/apiService";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -18,17 +18,17 @@ const EditQuizForm = () => {
         setDuration(data.duration);
       } catch (err) {
         console.error(err);
-  
+
         // Extracting the message from the backend response if available
-        const errorMessage = err.response?.data?.message || "Failed to load quiz details";
-  
+        const errorMessage =
+          err.response?.data?.message || "Failed to load quiz details";
+
         Swal.fire("Error", errorMessage, "error");
       }
     };
-  
+
     fetchQuiz();
   }, [id]);
-  
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -37,7 +37,7 @@ const EditQuizForm = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Maximum allowed size is 10MB"
+        text: "Maximum allowed size is 10MB",
       });
       return;
     }
@@ -49,15 +49,14 @@ const EditQuizForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    if (excelFile) formData.set("file", excelFile);
+    formData.set("file", excelFile);
     formData.set("quizName", quizName);
     formData.set("duration", duration);
 
     try {
       await editQuiz(formData, id);
-      Swal.fire("Success", "Quiz updated successfully", "success");
-    } catch (err) {
-      console.error(err);
+      Swal.fire("Success", "Quiz Updated successfully", "success");
+    } catch (error) {
       Swal.fire("Error", "Failed to update quiz", "error");
     }
   };
@@ -65,7 +64,9 @@ const EditQuizForm = () => {
   return (
     <form onSubmit={handleSubmit} className="quiz-form">
       <div>
-        <label htmlFor="QuizTitle" className="form-label">Quiz Title :</label>
+        <label htmlFor="QuizTitle" className="form-label">
+          Quiz Title :
+        </label>
         <input
           value={quizName}
           type="text"
@@ -79,7 +80,11 @@ const EditQuizForm = () => {
 
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
-          <p className="m-0"><label htmlFor="duration" className="form-label">Duration :</label></p>
+          <p className="m-0">
+            <label htmlFor="duration" className="form-label">
+              Duration :
+            </label>
+          </p>
           <input
             type="range"
             min={5}
@@ -97,9 +102,11 @@ const EditQuizForm = () => {
       </div>
 
       <FileUpload file={excelFile} handleFileChange={handleFileChange} />
-      
+
       <div className="text-center">
-        <button className="btn btn-dark mt-3" type="submit">UPDATE</button>
+        <button className="btn btn-dark mt-3" type="submit">
+          UPDATE
+        </button>
       </div>
     </form>
   );
