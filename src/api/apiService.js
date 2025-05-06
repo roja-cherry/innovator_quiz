@@ -22,3 +22,7 @@ export const getQuiz = (quizId) => {
   return axiosInstance.get(`/api/admin/quiz/${quizId}`);
 };
 
+export const deleteQuiz = (quizId) => {
+  return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
+}
+

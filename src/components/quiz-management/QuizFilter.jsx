@@ -33,7 +33,7 @@ const QuizFilter = ({ filters, handleFilterChange }) => {
             Created
           </option>
           <option value="COMPLETED" selected={filters["status"] === "COMPLETED"}>
-            Created
+            Completed
           </option>
         </select>
       </div>
