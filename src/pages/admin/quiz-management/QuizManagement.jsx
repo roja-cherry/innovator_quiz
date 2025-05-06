@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./QuizManagement.scss"
 import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
+import { CiFilter } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 
 const QuizManagement = () => {
