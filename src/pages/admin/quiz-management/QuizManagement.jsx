@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./QuizManagement.scss";
 import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
 import { CiFilter } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import QuizFilter from "../../../components/quiz-management/QuizFilter";
+import { getQuizList } from "../../../api/apiService";
+import Swal from "sweetalert2";
 
 const QuizManagement = () => {
   const [showFilter, setShowFilter] = useState(true);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({ isActive: false, status: "NOU" });
+  const [quizList, setQuizList] = useState([]);
 
   const handleFilterChange = (key, val) => {
     setFilters((prev) => ({
@@ -16,6 +19,20 @@ const QuizManagement = () => {
       [key]: val,
     }));
   };
+
+  const getAllQuiz = async () => {
+    try {
+      const res = await getQuizList(filters);
+      setQuizList(res?.data);
+    } catch (error) {
+      console.log(error);
+      Swal.fire("Error", error?.message, "error");
+    }
+  };
+
+  useEffect(() => {
+    getAllQuiz();
+  }, []);
 
   return (
     <section className="container-fluid quiz-management-container p-5">
