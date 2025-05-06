@@ -28,10 +28,9 @@ const EditQuizForm = () => {
         }
       }
     };
-  
+
     fetchQuiz();
   }, [id]);
-  
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -51,15 +50,14 @@ const EditQuizForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    if (excelFile) formData.set("file", excelFile);
+    formData.set("file", excelFile);
     formData.set("quizName", quizName);
     formData.set("duration", duration);
 
     try {
       await editQuiz(formData, id);
-      Swal.fire("Success", "Quiz updated successfully", "success");
-    } catch (err) {
-      console.error(err);
+      Swal.fire("Success", "Quiz Updated successfully", "success");
+    } catch (error) {
       Swal.fire("Error", "Failed to update quiz", "error");
     }
   };
