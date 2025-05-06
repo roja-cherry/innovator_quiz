@@ -4,7 +4,7 @@ import CreateQuiz from "./pages/admin/CreateQuiz";
 import EditQuiz from "./pages/admin/EditQuiz";
 import Layout from "./layout/Layout";
 import { Toaster } from "react-hot-toast";
-import QuizManagement from "./pages/admin/QuizManagement";
+import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 
 export const App = () => {
   return (
