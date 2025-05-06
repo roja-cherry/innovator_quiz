@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
 
@@ -14,7 +15,10 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
     }
   };
 
-  const handleEdit = async (quizId) => {};
+  const navigate = useNavigate()
+  const handleEdit = async (quizId) => {
+    navigate(`/admin/edit/${quizId}`); 
+  };
 
   return (
     <div className="mt-4">
