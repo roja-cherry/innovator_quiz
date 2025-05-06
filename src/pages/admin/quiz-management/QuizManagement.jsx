@@ -1,6 +1,6 @@
 import React from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import Quiz from "./QuizManagement.scss"
+import "./QuizManagement.scss"
 
 const QuizManagement = () => {
   return (
