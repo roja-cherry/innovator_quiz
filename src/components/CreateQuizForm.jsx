@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
-import toast from "react-hot-toast";
 import Swal from 'sweetalert2'
 
 const CreateQuizForm = () => {
@@ -13,14 +12,11 @@ const CreateQuizForm = () => {
     const file = e.target?.files[0];
 
     if (file?.size > 10000) {
-      console.log("errt");
-
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Maximum allowed size is 10MB"
       });
-      // toast.error("Maximum allowed size is 10MB");
       return;
     }
 
@@ -36,7 +32,6 @@ const CreateQuizForm = () => {
         title: "Oops...",
         text: "Please upload file",
       });
-      // toast.error("Please upload file")
       return;
     }
 
@@ -52,7 +47,9 @@ const CreateQuizForm = () => {
         icon: "success",
         draggable: true,
       });
-      // toast.success("Quiz uploaded successfully")
+      setQuizName('')
+      setDuration(5)
+      setExcelFile(null)
     } catch (err) {
       console.log(err);
     }

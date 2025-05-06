@@ -10,3 +10,7 @@ $primary: #000000; // Your new primary color
 .flex-1 {
   flex: 1;
 }
+
+.swal2-confirm.swal2-styled {
+  background: $primary;
+}

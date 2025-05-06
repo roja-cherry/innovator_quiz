@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
 import { editQuiz, getQuiz } from "../api/apiService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const EditQuizForm = () => {
@@ -9,6 +9,7 @@ const EditQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -17,12 +18,14 @@ const EditQuizForm = () => {
         setQuizName(data.quizName);
         setDuration(data.duration);
       } catch (err) {
-        console.error(err);
   
         // Extracting the message from the backend response if available
         const errorMessage = err.response?.data?.message || "Failed to load quiz details";
   
-        Swal.fire("Error", errorMessage, "error");
+        const res = await Swal.fire("Error", errorMessage, "error");
+        if(res?.dismissed || res?.isConfirmed) {
+          navigate("/")
+        }
       }
     };
   
