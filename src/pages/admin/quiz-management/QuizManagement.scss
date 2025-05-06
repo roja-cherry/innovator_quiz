@@ -1,0 +1,21 @@
+.quiz-management-container {
+    .search-icon {
+        position: absolute;
+        top: 0.5rem;
+        font-size: 1.5rem;
+        left: 0.75rem;
+    }
+
+    .filters {
+        .react-datepicker-wrapper {
+            width: 100%;
+
+            input {
+                width: 100%;
+                padding: 0;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
