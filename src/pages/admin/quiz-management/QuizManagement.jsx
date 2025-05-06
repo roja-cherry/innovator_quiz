@@ -1,6 +1,8 @@
 import React from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./QuizManagement.scss"
+import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
+
 
 const QuizManagement = () => {
   return (
@@ -21,7 +23,7 @@ const QuizManagement = () => {
             </div>
           </div>
         </div>
-        // table
+        <QuizManagementTable />
       </div>
     </section>
   );
