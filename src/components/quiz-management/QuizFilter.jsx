@@ -32,19 +32,29 @@ const QuizFilter = ({ filters, handleFilterChange }) => {
           <option value="CREATED" selected={filters["status"] === "CREATED"}>
             Created
           </option>
+          <option value="COMPLETED" selected={filters["status"] === "COMPLETED"}>
+            Created
+          </option>
         </select>
       </div>
-      {/* <div className="col-md-4">
-        <select className="form-select" aria-label="Default select example">
+      <div className="col-md-4">
+        <label htmlFor="date" className="form-label">
+          Date
+        </label>
+        <select
+          className="form-select"
+          name="date"
+          aria-label="Default select example"
+          onChange={(e) => {
+            handleFilterChange("date", e.target?.value);
+          }}
+        >
           <option selected>Duration</option>
-          <option value="10">Below 10 mins</option>
-          <option value="20">Below 20 mins</option>
-          <option value="30">Below 30 mins</option>
-          <option value="40">Below 40 mins</option>
-          <option value="50">Below 50 mins</option>
-          <option value="60">Below 60 mins</option>
+          <option value="1">Last 1 month</option>
+          <option value="3">Last 3 month</option>
+          <option value="6">Last 6 month</option>
         </select>
-      </div> */}
+      </div>
       {/* <div className="col-md-4">
         <div className="form-control">
           <DatePicker

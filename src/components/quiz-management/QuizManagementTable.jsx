@@ -30,7 +30,7 @@ const QuizManagementTable = () => {
   ]);
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       <table className="table">
         <thead>
           <tr>
