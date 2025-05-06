@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./QuizManagement.scss"
 import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
 
 
 const QuizManagement = () => {
+  const [showFilter, setShowFilter] = useState(true);
+  const [filters, setFilters] = useState({});
+
+  const handleFilterChange = (key, val) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: val,
+    }));
+  };
+
   return (
-    <section className="container-fluid p-5">
+    <section className="container-fluid quiz-management-container p-5">
       <h2>Quiz Management</h2>
-      <div className="p-5 mt-4">
-        {/* filters */}
-        <div>
-          <div>
-            <div class="mb-3 position-relative">
+      <div className="mt-4">
+        <div className="d-flex justify-content-between">
+          <div className="d-flex align-items-center">
+            <div className="position-relative">
               <input
                 type="text"
-                class="form-control"
+                className="form-control ps-5"
                 id="search"
                 placeholder="search"
               />
-              <IoSearchOutline />
+              <IoSearchOutline className="search-icon" />
             </div>
+            <button
+              className="btn border ms-2"
+              onClick={() => setShowFilter((prev) => !prev)}
+            >
+              <CiFilter className="me-2" style={{ fontSize: "1.5rem" }} />
+              <span>Filter</span>
+            </button>
+          </div>
+          <div>
+            <Link to="/admin/create-quiz" className="btn btn-primary">
+              Create Quiz
+            </Link>
           </div>
         </div>
         <QuizManagementTable />
