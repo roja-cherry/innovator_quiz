@@ -56,35 +56,43 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((quiz, index) => (
-            <tr key={index}>
-              <td scope="row">
-                <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
-              </td>
-              <td>{quiz.duration} min</td>
-              <td>{formatToDateTimeString(quiz.createdAt)}</td>
-              <td>
-                <LiaEdit
-                  style={{
-                    color: "#727171",
-                    cursor: "pointer",
-                    marginRight: "10px",
-                    fontSize: "1.5rem",
-                  }}
-                  onClick={() => handleEdit(quiz.quizId)}
-                />
-                <LiaTrashAltSolid
-                  className="ms-2"
-                  style={{
-                    color: "red",
-                    cursor: "pointer",
-                    fontSize: "1.5rem",
-                  }}
-                  onClick={() => handleDelete(quiz.quizId)}
-                />
+          {data.length === 0 ? (
+            <tr>
+              <td colSpan="4" className="text-center py-4">
+                No data available
               </td>
             </tr>
-          ))}
+          ) : (
+            data.map((quiz, index) => (
+              <tr key={index}>
+                <td scope="row">
+                  <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
+                </td>
+                <td>{quiz.duration} min</td>
+                <td>{formatToDateTimeString(quiz.createdAt)}</td>
+                <td>
+                  <LiaEdit
+                    style={{
+                      color: "black",
+                      cursor: "pointer",
+                      marginRight: "10px",
+                      fontSize: "1.5rem",
+                    }}
+                    onClick={() => handleEdit(quiz.quizId)}
+                  />
+                  <LiaTrashAltSolid
+                    className="ms-2"
+                    style={{
+                      color: "red",
+                      cursor: "pointer",
+                      fontSize: "1.5rem",
+                    }}
+                    onClick={() => handleDelete(quiz.quizId)}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
