@@ -10,10 +10,13 @@ import Swal from "sweetalert2";
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   const handleDelete = async (quizId) => {
     const confirm = await Swal.fire({
-      title: "Are you sure to delete?",
-      showDenyButton: true,
-      confirmButtonText: "Delete",
-      denyButtonText: `Cancel`,
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
     });
 
     if (confirm.isDenied || confirm.isDismissed) {

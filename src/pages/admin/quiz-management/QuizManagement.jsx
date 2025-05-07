@@ -51,9 +51,10 @@ const QuizManagement = () => {
   }, []);
 
   const handleDelete = (quizId) => {
-    setQuizList((prevList) => prevList.filter((quiz) => quiz.quizId !== quizId));
+    setQuizList((prevList) =>
+      prevList.filter((quiz) => quiz.quizId !== quizId)
+    );
   };
-  
 
   return (
     <section className="container-fluid quiz-management-container p-5">
