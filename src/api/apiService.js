@@ -23,3 +23,8 @@ export const getQuiz = (quizId) => {
 export const getQuizList = (params) => {
   return axiosInstance.get("api/admin/quiz/quizzes", { params });
 };
+
+export const deleteQuiz = (quizId) => {
+  return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
+}
+
