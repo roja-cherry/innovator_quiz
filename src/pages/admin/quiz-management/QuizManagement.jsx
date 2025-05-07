@@ -9,7 +9,7 @@ import { getQuizList } from "../../../api/apiService";
 import Swal from "sweetalert2";
 
 const QuizManagement = () => {
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ isActive: false });
   const [quizList, setQuizList] = useState([]);
