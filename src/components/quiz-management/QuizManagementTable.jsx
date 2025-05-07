@@ -16,7 +16,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     });
 
     if (confirm.isDenied || confirm.isDismissed) {
@@ -54,7 +54,14 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((quiz, index) => (
+        {data.length === 0 ? (
+            <tr>
+              <td colSpan="4" className="text-center py-4">
+                No data available
+              </td>
+            </tr>
+          ) : (
+          data.map((quiz, index) => (
             <tr key={index}>
               <td scope="row">
                 <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
@@ -64,7 +71,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               <td>
                 <LiaEdit
                   style={{
-                    color : "black" ,
+                    color: "black",
                     cursor: "pointer",
                     marginRight: "10px",
                     fontSize: "1.5rem",
@@ -73,12 +80,17 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 />
                 <LiaTrashAltSolid
                   className="ms-2"
-                  style={{ color : "red" ,cursor: "pointer", fontSize: "1.5rem" }}
+                  style={{
+                    color: "red",
+                    cursor: "pointer",
+                    fontSize: "1.5rem",
+                  }}
                   onClick={() => handleDelete(quiz.quizId)}
                 />
               </td>
             </tr>
-          ))}
+          ))
+        )}
         </tbody>
       </table>
     </div>
