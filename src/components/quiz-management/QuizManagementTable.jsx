@@ -14,9 +14,11 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        confirmButton: "btn btn-danger bg-danger",
+        cancelButton: "btn btn-outline-primary",
+      },
     });
 
     if (confirm.isDenied || confirm.isDismissed) {
@@ -64,7 +66,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               <td>
                 <LiaEdit
                   style={{
-                    color : "black" ,
+                    color: "#727171",
                     cursor: "pointer",
                     marginRight: "10px",
                     fontSize: "1.5rem",
@@ -73,7 +75,11 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 />
                 <LiaTrashAltSolid
                   className="ms-2"
-                  style={{ color : "red" ,cursor: "pointer", fontSize: "1.5rem" }}
+                  style={{
+                    color: "red",
+                    cursor: "pointer",
+                    fontSize: "1.5rem",
+                  }}
                   onClick={() => handleDelete(quiz.quizId)}
                 />
               </td>

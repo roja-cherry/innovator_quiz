@@ -1,10 +1,20 @@
 export const formatToDateTimeString = (dateTime) => {
+  // const options = {
+  //   year: "numeric",
+  //   month: "short",
+  //   day: "numeric",
+  //   hour: "numeric",
+  //   minute: "2-digit",
+  //   hour12: true,
+  // };
+
   const options = {
+    weekday: "short",
     year: "numeric",
     month: "short",
     day: "numeric",
     hour: "numeric",
-    minute: "2-digit",
+    minute: "numeric",
     hour12: true,
   };
 
