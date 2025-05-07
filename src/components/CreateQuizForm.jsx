@@ -20,6 +20,7 @@ const CreateQuizForm = () => {
       return;
     }
 
+
     setExcelFile(file);
   };
 
@@ -51,7 +52,14 @@ const CreateQuizForm = () => {
       setDuration(5)
       setExcelFile(null)
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      const errorMessage = err.response?.data?.message
+      
+      Swal.fire({
+        icon:"error",
+        title:"Oops...",
+        text:errorMessage
+      })
     }
   };
 
