@@ -1,6 +1,10 @@
 import React from "react";
 
-const QuizFilter = ({ filters, handleFilterChange }) => {
+const QuizFilter = ({
+  filters,
+  handleFilterChange = () => {},
+  applyFilter = () => {},
+}) => {
   return (
     <div className="row mt-3 filters bg-light p-2">
       <div className="col-md-4">
@@ -16,6 +20,7 @@ const QuizFilter = ({ filters, handleFilterChange }) => {
           }}
         >
           <option
+            value={-1}
             selected={
               filters["status"] === null || filters["status"] === undefined
             }
@@ -52,26 +57,36 @@ const QuizFilter = ({ filters, handleFilterChange }) => {
           }}
         >
           <option
+            value={-1}
             selected={
-              filters["createdWithin"] === null || filters["createdWithin"] === undefined
+              filters["createdWithin"] === null ||
+              filters["createdWithin"] === undefined
             }
           >
             Select Created Within
           </option>
-          <option value="1m" selected={filters["createdWithin"] === "1m"}>Last 1 month</option>
-          <option value="3m" selected={filters["createdWithin"] === "3m"}>Last 3 month</option>
-          <option value="6m" selected={filters["createdWithin"] === "6m"}>Before 6 month</option>
-          <option value="before6m" selected={filters["createdWithin"] === "before6m"}>Before 6 months</option>
+          <option value="1m" selected={filters["createdWithin"] === "1m"}>
+            Last 1 month
+          </option>
+          <option value="3m" selected={filters["createdWithin"] === "3m"}>
+            Last 3 month
+          </option>
+          <option value="6m" selected={filters["createdWithin"] === "6m"}>
+            Before 6 month
+          </option>
+          <option
+            value="before6m"
+            selected={filters["createdWithin"] === "before6m"}
+          >
+            Before 6 months
+          </option>
         </select>
       </div>
-      {/* <div className="col-md-4">
-        <div className="form-control">
-          <DatePicker
-            selected={createdBefore}
-            onChange={(date) => console.log(date)}
-          />
-        </div>
-      </div> */}
+      <div className="col-12 mt-4">
+        <button className="btn btn-primary ms-auto" onClick={applyFilter}>
+          Apply Filters
+        </button>
+      </div>
     </div>
   );
 };

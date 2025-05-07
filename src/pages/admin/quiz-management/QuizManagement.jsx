@@ -15,18 +15,22 @@ const QuizManagement = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleFilterChange = (key, val) => {
-    searchParams.set(key, val);
+    if (val == "-1") {
+      const { [key]: _, ...newFilters } = filters;
+      setFilters(newFilters);
+    } else {
+      searchParams.set(key, val);
+      setFilters((prev) => ({
+        ...prev,
+        [key]: val,
+      }));
+    }
     setSearchParams(searchParams);
-
-    setFilters((prev) => ({
-      ...prev,
-      [key]: val,
-    }));
   };
 
-  const getAllQuiz = async () => {
+  const getAllQuiz = async (query = filters) => {
     try {
-      const res = await getQuizList(filters);
+      const res = await getQuizList(query);
       setQuizList(res?.data);
     } catch (error) {
       console.log(error);
@@ -34,9 +38,16 @@ const QuizManagement = () => {
     }
   };
 
-  useEffect(() => {
-    setFilters(Object.fromEntries(new URLSearchParams(searchParams).entries()));
+  const applyFilter = () => {
+    console.log(filters);
     getAllQuiz();
+  };
+
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams.entries());
+    const updatedFilters = { ...params, ...filters };
+    setFilters(updatedFilters);
+    getAllQuiz(updatedFilters);
   }, []);
 
   const handleDelete = (id) => {};
@@ -74,6 +85,7 @@ const QuizManagement = () => {
           <QuizFilter
             filters={filters}
             handleFilterChange={handleFilterChange}
+            applyFilter={applyFilter}
           />
         )}
         <QuizManagementTable data={quizList} onDelete={handleDelete} />
