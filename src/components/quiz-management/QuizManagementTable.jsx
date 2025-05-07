@@ -3,16 +3,24 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { formatToDateTimeString } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   const handleDelete = async (quizId) => {
     try {
       await deleteQuiz(quizId);
       // setData((prevData) => prevData.filter((quiz) => quiz.quizId !== quizId));
-      alert("Quiz deleted successfully.");
+      // alert("Quiz deleted successfully.");
+      await Swal.fire({
+        title: "Quiz Deleted Successfully!",
+        icon: "success",
+        draggable: true
+      });
+      onDelete(quizId);
+
     } catch (error) {
       console.error("Failed to delete quiz:", error);
-      alert("Failed to delete quiz.");
+      Swal.fire("Error", "Failed to delete quiz.", "error");
     }
   };
 

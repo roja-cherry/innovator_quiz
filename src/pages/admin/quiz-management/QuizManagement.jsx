@@ -50,7 +50,10 @@ const QuizManagement = () => {
     getAllQuiz(updatedFilters);
   }, []);
 
-  const handleDelete = (id) => {};
+  const handleDelete = (quizId) => {
+    setQuizList((prevList) => prevList.filter((quiz) => quiz.quizId !== quizId));
+  };
+  
 
   return (
     <section className="container-fluid quiz-management-container p-5">
