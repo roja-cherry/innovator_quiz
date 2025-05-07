@@ -48,20 +48,31 @@ const EditQuizForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
     formData.set("duration", duration);
-
+  
     try {
       await editQuiz(formData, id);
-      Swal.fire("Success", "Quiz Updated successfully", "success");
+      
+      const confirm = await Swal.fire({
+        title: "Quiz Updated successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+        draggable: true,
+      });
+  
+      if (confirm.isDismissed || confirm.isConfirmed) {
+        navigate("/admin/quiz-management");
+      }
     } catch (error) {
-      Swal.fire("Error", "Failed to update quiz", "error");
+      const errorMessage = error.response?.data?.message || "Failed to update quiz";
+      Swal.fire("Error", errorMessage, "error");
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit} className="quiz-form">
       <div>
