@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -15,11 +17,10 @@ const CreateQuizForm = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Maximum allowed size is 10MB"
+        text: "Maximum allowed size is 10MB",
       });
       return;
     }
-
 
     setExcelFile(file);
   };
@@ -27,7 +28,7 @@ const CreateQuizForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!excelFile) {
+    if (!excelFile) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -43,23 +44,26 @@ const CreateQuizForm = () => {
 
     try {
       await createQuiz(formData);
-      Swal.fire({
+      const confirm = await Swal.fire({
         title: "Quiz uploaded successfully",
         icon: "success",
         draggable: true,
       });
-      setQuizName('')
-      setDuration(5)
-      setExcelFile(null)
+      setQuizName("");
+      setDuration(5);
+      setExcelFile(null);
+
+      if(confirm.isDismissed || confirm.isConfirmed)
+        navigate("/admin/quiz-management");
     } catch (err) {
       // console.log(err);
-      const errorMessage = err.response?.data?.message
-      
+      const errorMessage = err.response?.data?.message;
+
       Swal.fire({
-        icon:"error",
-        title:"Oops...",
-        text:errorMessage
-      })
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
     }
   };
 

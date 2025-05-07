@@ -4,7 +4,7 @@ import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
 import { formatToDateTimeString } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
@@ -43,7 +43,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-5">
       <table className="table">
         <thead>
           <tr>
@@ -56,7 +56,9 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
         <tbody>
           {data.map((quiz, index) => (
             <tr key={index}>
-              <td scope="row">{quiz.quizName}</td>
+              <td scope="row">
+                <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
+              </td>
               <td>{quiz.duration} min</td>
               <td>{formatToDateTimeString(quiz.createdAt)}</td>
               <td>
