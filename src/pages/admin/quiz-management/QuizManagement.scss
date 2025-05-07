@@ -26,6 +26,17 @@
           padding-top: 1rem;
           padding-bottom: 1rem;
           color: #727171;
+
+          a {
+            color: #727171;
+          }
+        }
+
+        .quiz-name {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }

@@ -66,7 +66,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
             data.map((quiz, index) => (
               <tr key={index}>
                 <td scope="row">
-                  <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
+                  <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">{quiz.quizName}</Link>
                 </td>
                 <td>{quiz.duration} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
