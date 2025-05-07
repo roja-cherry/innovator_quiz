@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { formatToDateTimeString } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
+import { useNavigate } from "react-router-dom";
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   const handleDelete = async (quizId) => {
@@ -15,7 +16,10 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
     }
   };
 
-  const handleEdit = async (quizId) => {};
+  const navigate = useNavigate();
+  const handleEdit = async (quizId) => {
+    navigate(`/admin/edit/${quizId}`);
+  };
 
   return (
     <div className="mt-4">
