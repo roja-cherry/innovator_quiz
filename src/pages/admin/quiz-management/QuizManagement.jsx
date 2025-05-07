@@ -31,6 +31,8 @@ const QuizManagement = () => {
   const handleFilterChange = (key, val) => {
     if (val == "-1") {
       const { [key]: _, ...newFilters } = filters;
+      console.log(newFilters);
+      searchParams.delete(key)
       setFilters(newFilters);
     } else {
       searchParams.set(key, val);
