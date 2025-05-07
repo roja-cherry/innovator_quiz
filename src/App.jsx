@@ -6,7 +6,7 @@ import Layout from "./layout/Layout";
 import { Toaster } from "react-hot-toast";
 import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
-import { Publish } from "./pages/publish/Publish";
+import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
 
 export const App = () => {
