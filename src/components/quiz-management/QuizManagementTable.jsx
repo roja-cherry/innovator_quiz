@@ -1,18 +1,36 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+//import { FaEdit, FaTrash } from "react-icons/fa";
+import { LiaEdit } from "react-icons/lia";
+import { LiaTrashAltSolid } from "react-icons/lia";
 import { formatToDateTimeString } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   const handleDelete = async (quizId) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure to delete?",
+      showDenyButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Cancel`,
+    });
+
+    if (confirm.isDenied || confirm.isDismissed) {
+      return;
+    }
+
     try {
       await deleteQuiz(quizId);
-      // setData((prevData) => prevData.filter((quiz) => quiz.quizId !== quizId));
-      alert("Quiz deleted successfully.");
+      await Swal.fire({
+        title: "Quiz Deleted Successfully!",
+        icon: "success",
+        draggable: true,
+      });
+      onDelete(quizId);
     } catch (error) {
       console.error("Failed to delete quiz:", error);
-      alert("Failed to delete quiz.");
+      Swal.fire("Error", "Failed to delete quiz.", "error");
     }
   };
 
@@ -35,17 +53,24 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
         <tbody>
           {data.map((quiz, index) => (
             <tr key={index}>
-              <td scope="row">{quiz.quizName}</td>
+              <td scope="row">
+                <Link to={`/admin/quiz/${quiz.quizId}`}>{quiz.quizName}</Link>
+              </td>
               <td>{quiz.duration} min</td>
               <td>{formatToDateTimeString(quiz.createdAt)}</td>
               <td>
-                <FaEdit
-                  style={{ cursor: "pointer", marginRight: "10px" }}
+                <LiaEdit
+                  style={{
+                    color : "black" ,
+                    cursor: "pointer",
+                    marginRight: "10px",
+                    fontSize: "1.5rem",
+                  }}
                   onClick={() => handleEdit(quiz.quizId)}
                 />
-                <FaTrash
+                <LiaTrashAltSolid
                   className="ms-2"
-                  style={{ cursor: "pointer" }}
+                  style={{ color : "red" ,cursor: "pointer", fontSize: "1.5rem" }}
                   onClick={() => handleDelete(quiz.quizId)}
                 />
               </td>
