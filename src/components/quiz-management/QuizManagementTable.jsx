@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { formatToDateTimeString } from "../../utilities";
+import { deleteQuiz } from "../../api/apiService";
 
 const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
-
   const handleDelete = async (quizId) => {
     try {
       await deleteQuiz(quizId);
-      setData((prevData) => prevData.filter((quiz) => quiz.quizId !== quizId));
+      // setData((prevData) => prevData.filter((quiz) => quiz.quizId !== quizId));
       alert("Quiz deleted successfully.");
     } catch (error) {
       console.error("Failed to delete quiz:", error);
@@ -31,8 +32,8 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
           {data.map((quiz, index) => (
             <tr key={index}>
               <td scope="row">{quiz.quizName}</td>
-              <td>{quiz.duration}</td>
-              <td>{quiz.createdAt}</td>
+              <td>{quiz.duration} min</td>
+              <td>{formatToDateTimeString(quiz.createdAt)}</td>
               <td>
                 <FaEdit
                   style={{ cursor: "pointer", marginRight: "10px" }}

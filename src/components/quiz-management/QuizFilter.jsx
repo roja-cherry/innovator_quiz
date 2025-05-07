@@ -1,5 +1,4 @@
 import React from "react";
-import DatePicker from "react-datepicker";
 
 const QuizFilter = ({ filters, handleFilterChange }) => {
   return (
@@ -32,27 +31,37 @@ const QuizFilter = ({ filters, handleFilterChange }) => {
           <option value="CREATED" selected={filters["status"] === "CREATED"}>
             Created
           </option>
-          <option value="COMPLETED" selected={filters["status"] === "COMPLETED"}>
+          <option
+            value="COMPLETED"
+            selected={filters["status"] === "COMPLETED"}
+          >
             Completed
           </option>
         </select>
       </div>
       <div className="col-md-4">
         <label htmlFor="date" className="form-label">
-          Date
+          Created Within
         </label>
         <select
           className="form-select"
           name="date"
           aria-label="Default select example"
           onChange={(e) => {
-            handleFilterChange("date", e.target?.value);
+            handleFilterChange("createdWithin", e.target?.value);
           }}
         >
-          <option selected>Duration</option>
-          <option value="1">Last 1 month</option>
-          <option value="3">Last 3 month</option>
-          <option value="6">Last 6 month</option>
+          <option
+            selected={
+              filters["createdWithin"] === null || filters["createdWithin"] === undefined
+            }
+          >
+            Select Created Within
+          </option>
+          <option value="1m" selected={filters["createdWithin"] === "1m"}>Last 1 month</option>
+          <option value="3m" selected={filters["createdWithin"] === "3m"}>Last 3 month</option>
+          <option value="6m" selected={filters["createdWithin"] === "6m"}>Before 6 month</option>
+          <option value="before6m" selected={filters["createdWithin"] === "before6m"}>Before 6 months</option>
         </select>
       </div>
       {/* <div className="col-md-4">
