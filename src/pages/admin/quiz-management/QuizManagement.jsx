@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import "./QuizManagement.scss";
 import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
@@ -10,9 +10,23 @@ import Swal from "sweetalert2";
 
 const QuizManagement = () => {
   const [showFilter, setShowFilter] = useState(true);
+  const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({ isActive: false });
   const [quizList, setQuizList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const data = useMemo(() => {
+    if (!search) return quizList;
+
+    const searchResult = quizList.filter((quiz) => {
+      if (
+        quiz?.quizName?.toLowerCase()?.includes(search?.toLowerCase()?.trim())
+      ) {
+        return quiz;
+      }
+    });
+    return searchResult;
+  }, [quizList, search]);
 
   const handleFilterChange = (key, val) => {
     if (val == "-1") {
@@ -64,6 +78,8 @@ const QuizManagement = () => {
                 className="form-control ps-5"
                 id="search"
                 placeholder="search"
+                value={search}
+                onChange={(e) => setSearch(e.target?.value)}
               />
               <IoSearchOutline className="search-icon" />
             </div>
@@ -88,7 +104,7 @@ const QuizManagement = () => {
             applyFilter={applyFilter}
           />
         )}
-        <QuizManagementTable data={quizList} onDelete={handleDelete} />
+        <QuizManagementTable data={data} onDelete={handleDelete} />
       </div>
     </section>
   );

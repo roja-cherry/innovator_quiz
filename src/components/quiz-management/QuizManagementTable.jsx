@@ -22,7 +22,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-5">
       <table className="table">
         <thead>
           <tr>
