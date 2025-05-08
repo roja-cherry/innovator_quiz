@@ -2,12 +2,16 @@ import React from "react";
 //import { FaEdit, FaTrash } from "react-icons/fa";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
-import { formatStatus, formatToDateTimeString, getStatusClassName } from "../../utilities";
+import {
+  formatStatus,
+  formatToDateTimeString,
+  getStatusClassName,
+} from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
+const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   const handleDelete = async (quizId) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -46,14 +50,24 @@ const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
 
   return (
     <div className="mt-5">
-      <table className="table table-hover">
+      <table className="table">
         <thead>
           <tr>
-            <th scope="col" className="bg-light">Quiz Title</th>
-            <th scope="col" className="bg-light">Status</th>
-            <th scope="col" className="bg-light">Timer</th>
-            <th scope="col" className="bg-light">Created At</th>
-            <th scope="col" className="bg-light">Action</th>
+            <th scope="col" className="bg-light">
+              Quiz Title
+            </th>
+            <th scope="col" className="bg-light">
+              Status
+            </th>
+            <th scope="col" className="bg-light">
+              Timer
+            </th>
+            <th scope="col" className="bg-light">
+              Created At
+            </th>
+            <th scope="col" className="bg-light">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -66,8 +80,10 @@ const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
           ) : (
             data.map((quiz, index) => (
               <tr key={index}>
-                <td scope="row" >
-                  <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">{quiz.quizName}</Link>
+                <td scope="row">
+                  <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">
+                    {quiz.quizName}
+                  </Link>
                 </td>
                 <td>
                   <span class={getStatusClassName(quiz.status)}>
@@ -78,21 +94,15 @@ const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
                   <LiaEdit
-                    style={{
-                      color: "black",
-                      cursor: "pointer",
-                      marginRight: "10px",
-                      fontSize: "1.5rem",
+                    className={`action-btn me-3 text-black ${
+                      quiz?.status === "COMPLETED" ? "btn-disabled" : ""
+                    }`}
+                    onClick={() => {
+                      if (quiz?.status !== "COMPLETED") handleEdit(quiz.quizId);
                     }}
-                    onClick={() => handleEdit(quiz.quizId)}
                   />
                   <LiaTrashAltSolid
-                    className="ms-2"
-                    style={{
-                      color: "red",
-                      cursor: "pointer",
-                      fontSize: "1.5rem",
-                    }}
+                    className="ms-2 action-btn text-danger"
                     onClick={() => handleDelete(quiz.quizId)}
                   />
                 </td>
