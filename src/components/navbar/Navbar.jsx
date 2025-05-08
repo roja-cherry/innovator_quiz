@@ -43,7 +43,7 @@ const Navbar = () => {
               <li className="nav-item" key={url?.text}>
                 <NavLink
                   to={url?.path}
-                  className="nav-link active"
+                  className="nav-link"
                   aria-current="page"
                 >
                   {url?.text}

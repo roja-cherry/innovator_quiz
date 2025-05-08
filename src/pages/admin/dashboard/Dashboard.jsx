@@ -2,7 +2,10 @@ import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <section className="container-fluid quiz-management-container p-5">
+      <h2>Dashboard</h2>
+      <div className="mt-4"></div>
+    </section>
   )
 }
 

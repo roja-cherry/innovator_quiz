@@ -3,6 +3,15 @@ $primary: #000000; // Your new primary color
 // Then import Bootstrap
 @import "bootstrap/scss/bootstrap";
 
+.nav-link {
+  color: #5d5d5d;
+  
+  &.active {
+    color: #000 !important;
+    font-weight: 500;
+  }
+}
+
 .form-label {
   font-weight: 600;
 }

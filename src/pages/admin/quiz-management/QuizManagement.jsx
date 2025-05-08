@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
-import "./QuizManagement.scss";
 import QuizManagementTable from "../../../components/quiz-management/QuizManagementTable";
 import { CiFilter } from "react-icons/ci";
 import { Link, useSearchParams } from "react-router-dom";
 import QuizFilter from "../../../components/quiz-management/QuizFilter";
 import { getQuizList } from "../../../api/apiService";
 import Swal from "sweetalert2";
+import "./QuizManagement.scss";
 
 const QuizManagement = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -31,7 +31,7 @@ const QuizManagement = () => {
   const handleFilterChange = (key, val) => {
     if (val == "-1") {
       const { [key]: _, ...newFilters } = filters;
-      searchParams.delete(key)
+      searchParams.delete(key);
       setFilters(newFilters);
     } else {
       searchParams.set(key, val);
@@ -83,6 +83,7 @@ const QuizManagement = () => {
                 id="search"
                 placeholder="search"
                 value={search}
+                autoComplete="off"
                 onChange={(e) => setSearch(e.target?.value)}
               />
               <IoSearchOutline className="search-icon" />

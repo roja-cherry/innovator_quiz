@@ -2,12 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 export const ViewQuiz = () => {
-  let quizid = useParams()
-  
+  let { id } = useParams();
+
   return (
-    <div>
-      <h2>ViewQuiz</h2>
-      <label>Quiz Id : {quizid.id}</label>
-    </div>
+    <section className="container-fluid quiz-management-container p-5">
+      <h2>Quiz Details</h2>
+      <div className="mt-4">{id}</div>
+    </section>
   );
 };
