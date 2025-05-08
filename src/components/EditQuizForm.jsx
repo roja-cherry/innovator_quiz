@@ -37,7 +37,7 @@ const EditQuizForm = () => {
     const inputValue = e.target.value;
 
     if (inputValue.length > 50) {
-      setErrors({quizName: "Quiz Title can't exceed 20 characters"});
+      setErrors({quizName: "Quiz Title can't exceed 50 characters"});
       return;
     } else {
       setErrors({});
