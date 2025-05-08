@@ -11,7 +11,10 @@ import "./QuizManagement.scss";
 const QuizManagement = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({ isActive: false , status: "CREATED"});
+  const [filters, setFilters] = useState({
+    isActive: false,
+    status: "CREATED",
+  });
   const [quizList, setQuizList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -59,7 +62,7 @@ const QuizManagement = () => {
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
-    const updatedFilters = { ...params, ...filters };
+    const updatedFilters = { ...filters, ...params };
     setFilters(updatedFilters);
     getAllQuiz(updatedFilters);
   }, []);
@@ -97,7 +100,10 @@ const QuizManagement = () => {
             </button>
           </div>
           <div>
-            <Link to="/admin/quiz-management/create-quiz" className="btn btn-primary">
+            <Link
+              to="/admin/quiz-management/create-quiz"
+              className="btn btn-primary"
+            >
               Create Quiz
             </Link>
           </div>
