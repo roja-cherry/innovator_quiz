@@ -90,7 +90,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                     {formatStatus(quiz.status)}
                   </span>
                 </td>
-                <td>{quiz.duration} min</td>
+                <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
                   <LiaEdit

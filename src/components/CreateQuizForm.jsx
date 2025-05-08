@@ -8,7 +8,7 @@ import { GiSmallFire } from "react-icons/gi";
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
-  const [duration, setDuration] = useState(5);
+  const [timer, setTimer] = useState(5);
   const [errors,setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const CreateQuizForm = () => {
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
-    formData.set("duration", duration);
+    formData.set("timer", timer);
 
     try {
       await createQuiz(formData);
@@ -66,7 +66,7 @@ const CreateQuizForm = () => {
         draggable: true,
       });
       setQuizName("");
-      setDuration(5);
+      setTimer(5);
       setExcelFile(null);
 
       if(confirm.isDismissed || confirm.isConfirmed)
@@ -104,8 +104,8 @@ const CreateQuizForm = () => {
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
           <p className="m-0">
-            <label htmlFor="duration" className="form-label">
-              Duration :
+            <label htmlFor="timer" className="form-label">
+              Timer :
             </label>
           </p>
           <input
@@ -113,9 +113,9 @@ const CreateQuizForm = () => {
             className="form_range"
             min={5}
             max={60}
-            id="duration"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            id="timer"
+            value={timer}
+            onChange={(e) => setTimer(e.target.value)}
             style={{
               accentColor: "black",
               width: "100%",
@@ -123,7 +123,7 @@ const CreateQuizForm = () => {
           ></input>
         </div>
         <div className="border border-dark px-2 py-1 mt-5 ms-2 rounded">
-          {duration} MIN
+          {timer} MIN
         </div>
       </div>
       <FileUpload
