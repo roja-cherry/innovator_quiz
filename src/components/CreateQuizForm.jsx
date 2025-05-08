@@ -80,7 +80,19 @@ const CreateQuizForm = () => {
           id="quiztitle"
           placeholder=" Enter Quiz Title"
           required
-          onChange={(e) => setQuizName(e.target?.value)}
+          onChange={(e) => {
+            const value = e.target?.value;
+            if (value.length > 20) {
+              Swal.fire({
+                icon: "warning",
+                title: "Warning",
+                text: "Quiz Title cannot exceed 20 characters",
+              });
+              return;
+            }
+            setQuizName(value);
+          }}
+          maxLength={21}
         />
       </div>
       <div className="d-flex align-items-center mb-2">
