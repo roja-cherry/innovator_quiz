@@ -9,7 +9,8 @@ const EditQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
-  const navigate = useNavigate()
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -18,19 +19,32 @@ const EditQuizForm = () => {
         setQuizName(data.quizName);
         setDuration(data.duration);
       } catch (err) {
-  
         // Extracting the message from the backend response if available
-        const errorMessage = err.response?.data?.message || "Failed to load quiz details";
-  
+        const errorMessage =
+          err.response?.data?.message || "Failed to load quiz details";
+
         const res = await Swal.fire("Error", errorMessage, "error");
-        if(res?.dismissed || res?.isConfirmed) {
-          navigate("/")
+        if (res?.dismissed || res?.isConfirmed) {
+          navigate("/");
         }
       }
     };
 
     fetchQuiz();
   }, [id]);
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length > 50) {
+      setErrors({quizName: "Quiz Title can't exceed 50 characters"});
+      return;
+    } else {
+      setErrors({});
+    }
+
+    setQuizName(inputValue);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -48,31 +62,32 @@ const EditQuizForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
     formData.set("duration", duration);
-  
+
     try {
       await editQuiz(formData, id);
-      
+
       const confirm = await Swal.fire({
         title: "Quiz Updated successfully",
         icon: "success",
         confirmButtonText: "OK",
         draggable: true,
       });
-  
+
       if (confirm.isDismissed || confirm.isConfirmed) {
         navigate("/admin/quiz-management");
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.message || "Failed to update quiz";
+      const errorMessage =
+        error.response?.data?.message || "Failed to update quiz";
       Swal.fire("Error", errorMessage, "error");
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="quiz-form">
       <div>
@@ -85,9 +100,11 @@ const EditQuizForm = () => {
           className="form-control"
           id="quiztitle"
           placeholder=" Enter Quiz Title"
+          maxLength={51}
           required
-          onChange={(e) => setQuizName(e.target.value)}
+          onChange={handleInputChange}
         />
+        {errors?.quizName && <small style={{ color: "red" }}>{errors?.quizName}</small>}
       </div>
 
       <div className="d-flex align-items-center mb-2">

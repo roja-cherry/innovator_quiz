@@ -46,7 +46,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
 
   return (
     <div className="mt-5">
-      <table className="table">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col" className="bg-light">Quiz Title</th>

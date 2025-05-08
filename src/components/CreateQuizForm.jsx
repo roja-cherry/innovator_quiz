@@ -3,12 +3,28 @@ import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { GiSmallFire } from "react-icons/gi";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [duration, setDuration] = useState(5);
+  const [errors,setErrors] = useState({});
   const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length>50){
+      setErrors({quizName:"Quiz Title can't exceed 50 characters"});
+      return
+    }
+    else{
+      setErrors({})
+    }
+
+    setQuizName(inputValue);
+  }
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -80,20 +96,10 @@ const CreateQuizForm = () => {
           id="quiztitle"
           placeholder=" Enter Quiz Title"
           required
-          onChange={(e) => {
-            const value = e.target?.value;
-            if (value.length > 20) {
-              Swal.fire({
-                icon: "warning",
-                title: "Warning",
-                text: "Quiz Title cannot exceed 20 characters",
-              });
-              return;
-            }
-            setQuizName(value);
-          }}
-          maxLength={21}
+          onChange={handleInputChange}
+          maxLength={51}
         />
+        {errors?.quizName && <small style={{color:"red"}}>{errors.quizName}</small>}
       </div>
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
