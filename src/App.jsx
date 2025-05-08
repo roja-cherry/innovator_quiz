@@ -18,7 +18,7 @@ export const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="/admin/create-quiz" element={<CreateQuiz />} />
           <Route path="/admin/edit/:id" element={<EditQuiz />} />
-          <Route path="admin/quiz-management" element={<QuizManagement />} />
+          <Route path="/admin/quiz-management" element={<QuizManagement />} />
           <Route path="/admin/publish" element={<Publish />} />
           <Route path="/admin/quiz/:id" element={<ViewQuiz />} /> 
         </Route>

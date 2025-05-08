@@ -3,6 +3,7 @@ import FileUpload from "./file-upload/FileUpload";
 import { editQuiz, getQuiz } from "../api/apiService";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const EditQuizForm = () => {
   const { id } = useParams(); // quiz ID from URL
@@ -16,6 +17,10 @@ const EditQuizForm = () => {
     const fetchQuiz = async () => {
       try {
         const { data } = await getQuiz(id);
+        if(data.status === "COMPLETED"){
+          toast.error("Can't edit the quiz, Quiz already exists");
+          navigate(`/admin/quiz-management`);
+        }
         setQuizName(data.quizName);
         setTimer(data.timer);
       } catch (err) {
