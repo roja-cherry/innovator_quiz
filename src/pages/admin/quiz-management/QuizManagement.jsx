@@ -11,7 +11,7 @@ import "./QuizManagement.scss";
 const QuizManagement = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({ isActive: false });
+  const [filters, setFilters] = useState({ isActive: false , status: "CREATED"});
   const [quizList, setQuizList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
