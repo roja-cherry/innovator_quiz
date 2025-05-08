@@ -97,7 +97,7 @@ const QuizManagement = () => {
             </button>
           </div>
           <div>
-            <Link to="/admin/create-quiz" className="btn btn-primary">
+            <Link to="/admin/quiz-management/create-quiz" className="btn btn-primary">
               Create Quiz
             </Link>
           </div>

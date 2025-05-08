@@ -97,6 +97,7 @@ const CreateQuizForm = () => {
           placeholder=" Enter Quiz Title"
           required
           onChange={handleInputChange}
+          autoComplete="off"
           maxLength={51}
         />
         {errors?.quizName && <small style={{color:"red"}}>{errors.quizName}</small>}
@@ -132,7 +133,7 @@ const CreateQuizForm = () => {
         handleFileChange={handleFileChange}
       />
       <div className="text-center">
-        <button className="btn btn-dark mt-3" type="submit">
+        <button className="btn btn-primary mt-3" type="submit">
           UPLOAD
         </button>
       </div>

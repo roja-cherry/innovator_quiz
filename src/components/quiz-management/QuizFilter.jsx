@@ -7,7 +7,7 @@ const QuizFilter = ({
 }) => {
   return (
     <div className="row mt-3 filters bg-light p-2">
-      <div className="col-md-2">
+      <div className="col-md-3">
         <label htmlFor="status" className="form-label">
           Status
         </label>
@@ -44,7 +44,7 @@ const QuizFilter = ({
           </option>
         </select>
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3">
         <label htmlFor="date" className="form-label">
           Created Within
         </label>
