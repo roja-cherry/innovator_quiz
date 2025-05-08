@@ -50,6 +50,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
         <thead>
           <tr>
             <th scope="col">Quiz Title</th>
+            <th scope="col">Status</th>
             <th scope="col">Timer</th>
             <th scope="col">Created At</th>
             <th scope="col">Action</th>
@@ -68,6 +69,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 <td scope="row">
                   <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">{quiz.quizName}</Link>
                 </td>
+                <td>{quiz.status}</td>
                 <td>{quiz.duration} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
