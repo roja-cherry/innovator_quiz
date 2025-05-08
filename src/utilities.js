@@ -25,8 +25,8 @@ export const formatStatus = (status) => {
 
 export const getStatusClassName = (status) => {
   const statusClassName = {
-    COMPLETED: "badge text-bg-danger",
-    PUBLISHED: "badge text-bg-success",
+    COMPLETED: "badge text-bg-success",
+    PUBLISHED: "badge text-bg-warning",
     CREATED: "badge bg-badge-blue",
   };
   return statusClassName[status];

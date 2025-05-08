@@ -8,7 +8,7 @@ const EditQuizForm = () => {
   const { id } = useParams(); // quiz ID from URL
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
-  const [duration, setDuration] = useState(5);
+  const [timer, setTimer] = useState(5);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const EditQuizForm = () => {
       try {
         const { data } = await getQuiz(id);
         setQuizName(data.quizName);
-        setDuration(data.duration);
+        setTimer(data.timer);
       } catch (err) {
         // Extracting the message from the backend response if available
         const errorMessage =
@@ -66,7 +66,7 @@ const EditQuizForm = () => {
     const formData = new FormData();
     formData.set("file", excelFile);
     formData.set("quizName", quizName);
-    formData.set("duration", duration);
+    formData.set("timer", timer);
 
     try {
       await editQuiz(formData, id);
@@ -110,24 +110,24 @@ const EditQuizForm = () => {
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
           <p className="m-0">
-            <label htmlFor="duration" className="form-label">
-              Duration :
+            <label htmlFor="timer" className="form-label">
+              Timer :
             </label>
           </p>
           <input
             type="range"
             min={5}
             max={60}
-            id="duration"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            id="timer"
+            value={timer}
+            onChange={(e) => setTimer(e.target.value)}
             className="form_range"
             autoComplete="off"
             style={{ accentColor: "black", width: "100%" }}
           />
         </div>
         <div className="border border-dark px-2 py-1 mt-5 ms-2 rounded">
-          {duration} MIN
+          {timer} MIN
         </div>
       </div>
 
