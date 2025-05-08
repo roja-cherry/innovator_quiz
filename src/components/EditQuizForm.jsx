@@ -127,6 +127,7 @@ const EditQuizForm = () => {
             value={timer}
             onChange={(e) => setTimer(e.target.value)}
             className="form_range"
+            autoComplete="off"
             style={{ accentColor: "black", width: "100%" }}
           />
         </div>
@@ -142,7 +143,7 @@ const EditQuizForm = () => {
       />
 
       <div className="text-center">
-        <button className="btn btn-dark mt-3" type="submit">
+        <button className="btn btn-primary mt-3" type="submit">
           UPDATE
         </button>
       </div>

@@ -1,13 +1,26 @@
-$primary: #000000; // Your new primary color
+$primary: #0d9486; 
+
+
 
 // Then import Bootstrap
 @import "bootstrap/scss/bootstrap";
 
+.bg-primary,
+.btn-primary {
+  color: #fff !important;
+}
+
 .nav-link {
   color: #5d5d5d;
+  color: #ffffff9d;
+
+  &:hover {
+    color: #fff;
+  }
   
   &.active {
     color: #000 !important;
+    color: #fff !important;
     font-weight: 500;
   }
 }

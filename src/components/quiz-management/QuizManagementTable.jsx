@@ -45,7 +45,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
 
   const navigate = useNavigate();
   const handleEdit = async (quizId) => {
-    navigate(`/admin/edit/${quizId}`);
+    navigate(`/admin/quiz-management/edit/${quizId}`);
   };
 
   return (
