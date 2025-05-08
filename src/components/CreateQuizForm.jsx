@@ -9,22 +9,21 @@ const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [quizName, setQuizName] = useState("");
   const [timer, setTimer] = useState(5);
-  const [errors,setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
 
-    if (inputValue.length>50){
-      setErrors({quizName:"Quiz Title can't exceed 50 characters"});
-      return
-    }
-    else{
-      setErrors({})
+    if (inputValue.length > 50) {
+      setErrors({ quizName: "Quiz Title can't exceed 50 characters" });
+      return;
+    } else {
+      setErrors({});
     }
 
     setQuizName(inputValue);
-  }
+  };
 
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
@@ -69,7 +68,7 @@ const CreateQuizForm = () => {
       setTimer(5);
       setExcelFile(null);
 
-      if(confirm.isDismissed || confirm.isConfirmed)
+      if (confirm.isDismissed || confirm.isConfirmed)
         navigate("/admin/quiz-management");
     } catch (err) {
       // console.log(err);
@@ -100,7 +99,9 @@ const CreateQuizForm = () => {
           autoComplete="off"
           maxLength={51}
         />
-        {errors?.quizName && <small style={{color:"red"}}>{errors.quizName}</small>}
+        {errors?.quizName && (
+          <small style={{ color: "red" }}>{errors.quizName}</small>
+        )}
       </div>
       <div className="d-flex align-items-center mb-2">
         <div className="mt-3 flex-1">
@@ -118,12 +119,11 @@ const CreateQuizForm = () => {
             value={timer}
             onChange={(e) => setTimer(e.target.value)}
             style={{
-              accentColor: "black",
               width: "100%",
             }}
           ></input>
         </div>
-        <div className="border border-dark px-2 py-1 mt-5 ms-2 rounded">
+        <div className="border border-primary px-2 py-1 mt-5 ms-2 rounded">
           {timer} MIN
         </div>
       </div>

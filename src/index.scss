@@ -1,9 +1,4 @@
-$primary: #0d9486; 
-
-
-
-// Then import Bootstrap
-@import "bootstrap/scss/bootstrap";
+@import "./variables.scss";
 
 .bg-primary,
 .btn-primary {
@@ -39,4 +34,8 @@ $primary: #0d9486;
 
 .bg-badge-blue{
 background-color: var(--bs-blue);
+}
+
+input[type=range]{
+  accent-color: $primary;
 }

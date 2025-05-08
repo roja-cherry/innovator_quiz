@@ -128,10 +128,10 @@ const EditQuizForm = () => {
             onChange={(e) => setTimer(e.target.value)}
             className="form_range"
             autoComplete="off"
-            style={{ accentColor: "black", width: "100%" }}
+            style={{ width: "100%" }}
           />
         </div>
-        <div className="border border-dark px-2 py-1 mt-5 ms-2 rounded">
+        <div className="border border-primary px-2 py-1 mt-5 ms-2 rounded">
           {timer} MIN
         </div>
       </div>

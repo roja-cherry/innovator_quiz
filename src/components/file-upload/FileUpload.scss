@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .file-upload-container {
   height: 20rem;
   background: #ffffff;
@@ -34,7 +36,7 @@
 
       &:last-child {
         background-color: rgb(255, 254, 254);
-        border: 1px solid #000;
+        border: 1px solid $primary;
       }
     }
   }
