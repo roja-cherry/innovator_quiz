@@ -2,12 +2,12 @@ import React from "react";
 //import { FaEdit, FaTrash } from "react-icons/fa";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
-import { formatStatus, formatToDateTimeString } from "../../utilities";
+import { formatStatus, formatToDateTimeString, getStatusClassName } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
+const QuizManagementTable = ({ data = [], onDelete = () => { } }) => {
   const handleDelete = async (quizId) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -49,11 +49,11 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Quiz Title</th>
-            <th scope="col">Status</th>
-            <th scope="col">Timer</th>
-            <th scope="col">Created At</th>
-            <th scope="col">Action</th>
+            <th scope="col" className="bg-light">Quiz Title</th>
+            <th scope="col" className="bg-light">Status</th>
+            <th scope="col" className="bg-light">Timer</th>
+            <th scope="col" className="bg-light">Created At</th>
+            <th scope="col" className="bg-light">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -66,10 +66,14 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
           ) : (
             data.map((quiz, index) => (
               <tr key={index}>
-                <td scope="row">
+                <td scope="row" >
                   <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">{quiz.quizName}</Link>
                 </td>
-                <td>{formatStatus(quiz.status)}</td>
+                <td>
+                  <span class={getStatusClassName(quiz.status)}>
+                    {formatStatus(quiz.status)}
+                  </span>
+                </td>
                 <td>{quiz.duration} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>

@@ -22,3 +22,12 @@ export const formatStatus = (status) => {
 
   return formattedStatus[status];
 };
+
+export const getStatusClassName = (status) => {
+  const statusClassName = {
+    COMPLETED: "badge text-bg-danger",
+    PUBLISHED: "badge text-bg-success",
+    CREATED: "badge bg-badge-blue",
+  };
+  return statusClassName[status];
+}
