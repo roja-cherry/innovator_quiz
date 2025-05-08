@@ -72,7 +72,7 @@ const QuizFilter = ({
             Last 3 month
           </option>
           <option value="6m" selected={filters["createdWithin"] === "6m"}>
-            Before 6 month
+            Last 6 month
           </option>
           <option
             value="before6m"
