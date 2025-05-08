@@ -21,7 +21,7 @@ const Navbar = () => {
   const [urls, setUrls] = useState(adminUrls);
 
   return (
-    <nav className="navbar bg-body-tertiary_ bg-primary navbar-expand-lg">
+    <nav className="navbar bg-body-tertiary bg-primary navbar-expand-lg">
       <div className="container-fluid px-5">
         <Link className="navbar-brand" href="#">
           <img src="/logo.png" alt="logo" className="logo" />
