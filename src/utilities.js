@@ -1,13 +1,4 @@
 export const formatToDateTimeString = (dateTime) => {
-  // const options = {
-  //   year: "numeric",
-  //   month: "short",
-  //   day: "numeric",
-  //   hour: "numeric",
-  //   minute: "2-digit",
-  //   hour12: true,
-  // };
-
   const options = {
     weekday: "short",
     year: "numeric",
@@ -20,4 +11,14 @@ export const formatToDateTimeString = (dateTime) => {
 
   let date = new Date(dateTime);
   return date.toLocaleString("en-US", options);
+};
+
+export const formatStatus = (status) => {
+  const formattedStatus = {
+    COMPLETED: "Completed",
+    PUBLISHED: "Published",
+    CREATED: "Created",
+  };
+
+  return formattedStatus[status];
 };

@@ -2,7 +2,7 @@ import React from "react";
 //import { FaEdit, FaTrash } from "react-icons/fa";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
-import { formatToDateTimeString } from "../../utilities";
+import { formatStatus, formatToDateTimeString } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -69,7 +69,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 <td scope="row">
                   <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">{quiz.quizName}</Link>
                 </td>
-                <td>{quiz.status}</td>
+                <td>{formatStatus(quiz.status)}</td>
                 <td>{quiz.duration} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
