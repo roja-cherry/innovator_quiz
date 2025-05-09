@@ -24,12 +24,17 @@ export const getQuizList = (params) => {
   return axiosInstance.get("api/admin/quiz/quizzes", { params });
 };
 
-export const deleteQuiz = (quizId) => {
-  return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
-}
-export const updateQuizStatus = (quizId, isActive) => {
-  return axios.patch(`/api/admin/quiz/${quizId}`, {
-    isActive,
+export const searchQuiz = (keyword) => {
+  return axiosInstance.get("api/admin/quiz/quizzes", { 
+    params: { keyword },
   });
 };
 
+export const deleteQuiz = (quizId) => {
+  return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
+}
+
+export const getQuizWithQuestions = async (id) => {
+  const response = await axiosInstance.get(`/api/admin/quiz/quiz-with-questions/${id}`);
+  return response.data; 
+};

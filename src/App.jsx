@@ -20,7 +20,7 @@ export const App = () => {
           <Route path="/admin/quiz-management/create-quiz" element={<CreateQuiz />} />
           <Route path="/admin/quiz-management/edit/:id" element={<EditQuiz />} />
           <Route path="/admin/publish" element={<Publish />} />
-          <Route path="/admin/quiz/:id" element={<ViewQuiz />} /> 
+          <Route path="/admin/quiz-management/quiz/:id" element={<ViewQuiz />} /> 
         </Route>
       </Routes>
     </BrowserRouter>

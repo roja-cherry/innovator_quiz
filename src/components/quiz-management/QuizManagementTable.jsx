@@ -81,7 +81,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
             data.map((quiz, index) => (
               <tr key={index}>
                 <td scope="row">
-                  <Link to={`/admin/quiz/${quiz.quizId}`} className="quiz-name">
+                  <Link to={`/admin/quiz-management/quiz/${quiz.quizId}`} className="quiz-name">
                     {quiz.quizName}
                   </Link>
                 </td>
