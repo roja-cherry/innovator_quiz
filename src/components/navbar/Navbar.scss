@@ -5,16 +5,16 @@
   }
 
   .nav-link {
-    color: #5d5d5d;
-    // color: #ffffff9d;
+    // color: #5d5d5d;
+    color: #ffffff9d;
 
     &:hover {
-    //   color: #fff;
+      color: #fff;
     }
 
     &.active {
-      color: #000 !important;
-    //   color: #fff !important;
+    //   color: #000 !important;
+      color: #fff !important;
       font-weight: 500;
     }
   }
