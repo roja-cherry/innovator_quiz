@@ -27,7 +27,7 @@ export const getStatusClassName = (status) => {
   const statusClassName = {
     COMPLETED: "badge text-bg-success",
     PUBLISHED: "badge text-bg-warning",
-    CREATED: "badge bg-badge-blue",
+    CREATED: "badge bg-badge-blue text-bg-dark-",
   };
   return statusClassName[status];
 }
