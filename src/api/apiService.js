@@ -24,7 +24,12 @@ export const getQuizList = (params) => {
   return axiosInstance.get("api/admin/quiz/quizzes", { params });
 };
 
+export const searchQuiz = (keyword) => {
+  return axiosInstance.get("api/admin/quiz/quizzes", {
+    params: { keyword },
+  });
+};
+
 export const deleteQuiz = (quizId) => {
   return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
-}
-
+};
