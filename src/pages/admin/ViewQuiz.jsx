@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { QuizWithAnswer } from "../../components/QuizWithAnswer";
+import { getQuizWithQuestions } from "../../api/apiService";
 
 export const ViewQuiz = () => {
   let { id } = useParams();
+  const [quizData, setQuizData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      try {
+        const data = await getQuizWithQuestions(id);
+        console.log("Fetched quiz data:", data);
+        setQuizData(data);
+      } catch (error) {
+        console.error("Error fetching quiz:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuiz();
+  }, [id]);
+
+  if (loading) {
+    return <p>Loading quiz...</p>;
+  }
+
+  if (!quizData || !quizData.questions || quizData.questions.length === 0) {
+    return <p>Quiz not found or no questions available!</p>;
+  }
 
   return (
-    <section className="container-fluid quiz-management-container p-5">
-      <h2>Quiz Details</h2>
-      <div className="mt-4">{id}</div>
+    <section className="container-fluid p-5">
+      <h2>{quizData.quiz.quizName} Questions</h2>
+      <div className="quiz-list">
+        {quizData.questions.map((question, index) => (
+          <QuizWithAnswer 
+            question={question} 
+            key={question.questionId} 
+            number={index + 1} 
+          />
+        ))}
+      </div>
     </section>
   );
 };
