@@ -29,4 +29,10 @@ input[type=range]{
   .react-datepicker-wrapper {
     width : 100%;
   }
+
+  .css-13cymwt-control,
+  .css-t3ipsp-control {
+    border: none !important;
+    box-shadow: none;
+  }
 }
