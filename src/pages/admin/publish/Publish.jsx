@@ -1,18 +1,60 @@
 import React, { useState } from "react";
-import Select from "react-select";
 import { searchQuiz } from "../../../api/apiService";
 import AsyncSelect from "react-select/async";
 import DatePicker from "react-datepicker";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+const customStyles = {
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? "#0d9486" // selected option
+      : state.isFocused
+      ? "#0d9486" // hover/focus (optional)
+      : "white",
+    color: state.isFocused ? "white" : "black",
+  }),
+  control: (base) => ({
+    ...base,
+    borderColor: "#dee2e6",
+    boxShadow: "none",
+    "&:hover": { borderColor: "#0d9486" },
+    height: "calc(2.25rem + 2px)",
+    fontSize: "1rem",
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 0.75rem",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+  }),
+  indicatorsContainer: (base) => ({
+    ...base,
+    height: "100%",
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    padding: "0 0.5rem",
+  }),
+  menu: (base) => ({
+    ...base,
+    zIndex: 9999,
+  }),
+};
 
 export const Publish = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [startDateTime, setStartDateTime] = useState(null);
+  const [endDateTime, setEndDateTime] = useState(null);
+
+  const calculateTermDuration = () => {
+    const start = new Date(startDateTime);
+    const end = new Date(endDateTime);
+    const timeDiff = end - start;
+    const days = timeDiff / (1000 * 3600 * 24);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault;
@@ -45,48 +87,31 @@ export const Publish = () => {
               className="form-control"
               onChange={(e) => console.log(e)}
               loadOptions={handleSearch}
+              styles={customStyles}
             />
           </div>
 
-          <div>
-            <div className="mt-3">
-              <label htmlFor="" className="form-label">
-                Start Date & Time
-              </label>
-            </div>
-            <DatePicker
-              name="start-date-time"
-              selected={startDateTime}
-              onChange={(date) => console.log(date)}
-              dateFormat="MMMM d, yyyy h:mm aa"
-              className="form-control w-100"
-              showTimeSelect
+          <div className="mt-3">
+            <label htmlFor="startDateTime" className="form-label">
+              Start Date & Time
+            </label>
+            <input
+              type="datetime-local"
+              className="form-control"
+              name="startDateTime"
             />
           </div>
-          <div>
-            <div className="mt-3">
-              <label htmlFor="" className="form-label">
-                End Date & Time
-              </label>
-            </div>
-            <DatePicker
-              name="start-date-time"
-              selected={startDateTime}
-              onChange={(date) => console.log(date)}
-              dateFormat="MMMM d, yyyy h:mm aa"
-              className="form-control w-100"
-              showTimeSelect
-            />
-            <div className="text-center">
-              <button className="btn btn-primary mt-3" type="submit">
-                PUBLISH
-              </button>
-            </div>
+
+          <div className="text-center">
+            <button className="btn btn-primary mt-3" type="submit">
+              PUBLISH
+            </button>
           </div>
         </form>
       </div>
     </section>
   );
+
   return (
     <div style={{ padding: "40px" }}>
       <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>PUBLISH QUIZ</h1>

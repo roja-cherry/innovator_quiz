@@ -25,7 +25,7 @@ export const getQuizList = (params) => {
 };
 
 export const searchQuiz = (keyword) => {
-  return axiosInstance.get("api/admin/quiz/quizzes", {
+  return axiosInstance.get("api/admin/quiz/search", { 
     params: { keyword },
   });
 };
