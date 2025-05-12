@@ -57,9 +57,6 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               Quiz Title
             </th>
             <th scope="col" className="bg-light">
-              Status
-            </th>
-            <th scope="col" className="bg-light">
               Timer
             </th>
             <th scope="col" className="bg-light">
