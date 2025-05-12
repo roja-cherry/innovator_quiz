@@ -11,8 +11,8 @@ export const ViewQuiz = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const data = await getQuizWithQuestions(id);
-        console.log("Fetched quiz data:", data);
+        const response = await getQuizWithQuestions(id);
+        console.log("Fetched quiz data:", response?.data);
         setQuizData(data);
       } catch (error) {
         console.error("Error fetching quiz:", error);

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
-import { getQuizList } from "../../../api/apiService";
+import { getQuizList ,statusActivate} from "../../../api/apiService";
 import { formatToDateTimeString } from "../../../utilities";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Dashboard = () => {
@@ -31,6 +32,8 @@ const Dashboard = () => {
           quiz.quizId === quizId ? { ...quiz, isActive: newStatus } : quiz
         )
       );
+      await statusActivate(quizId, newStatus);
+      toast.success("Quiz status updated successfully");
     } catch (error) {
       toast.error("Failed to update quiz status");
       console.error("Toggle error:", error);
@@ -75,12 +78,7 @@ const Dashboard = () => {
                 <td>
                   <button className="btn btn-dark btn-sm">View</button>
 
-                  <button
-                    className="btn btn-primary btn-sm ms-2"
-                    
-                  >
-                    Edit
-                  </button>
+                  <button className="btn btn-primary btn-sm ms-2">Edit</button>
                 </td>
               </tr>
             ))}

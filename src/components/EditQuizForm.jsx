@@ -144,7 +144,7 @@ const EditQuizForm = () => {
 
       <div className="text-center">
         <button className="btn btn-primary mt-3" type="submit">
-          UPDATE
+          Update
         </button>
       </div>
     </form>

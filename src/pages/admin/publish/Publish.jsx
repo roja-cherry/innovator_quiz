@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { searchQuiz } from "../../../api/apiService";
+import React, { useMemo, useState } from "react";
+import { createSchedule, searchQuiz } from "../../../api/apiService";
 import AsyncSelect from "react-select/async";
 import DatePicker from "react-datepicker";
+import { APP_URLS } from "../../../utilities";
+import toast from "react-hot-toast";
 
 const customStyles = {
   option: (base, state) => ({
@@ -49,15 +51,20 @@ export const Publish = () => {
   const [startDateTime, setStartDateTime] = useState(null);
   const [endDateTime, setEndDateTime] = useState(null);
 
-  const calculateTermDuration = () => {
-    const start = new Date(startDateTime);
-    const end = new Date(endDateTime);
-    const timeDiff = end - start;
-    const days = timeDiff / (1000 * 3600 * 24);
-  };
+  const now = new Date().toISOString().slice(0, 16);
 
-  const handleSubmit = (e) => {
-    e.preventDefault;
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await createSchedule({
+        startDateTime,
+        endDateTime,
+        quizId: selectedOption,
+      });
+      console.log(response);
+    } catch (error) {
+      toast.error(error?.message ?? "Error in creating quiz");
+    }
   };
 
   const handleSearch = async (search, callBack) => {
@@ -73,7 +80,7 @@ export const Publish = () => {
 
   return (
     <section className="container-fluid p-5 publish-page">
-      <h2>Publish Quiz</h2>
+      <h2>Schedule Quiz</h2>
       <div className="quiz-form-container p-5 mt-4">
         <form onSubmit={handleSubmit} className="quiz-form">
           <div>
@@ -85,7 +92,7 @@ export const Publish = () => {
               defaultValue={selectedOption}
               placeholder="Search quiz..."
               className="form-control"
-              onChange={(e) => console.log(e)}
+              onChange={(e) => setSelectedOption(e?.value)}
               loadOptions={handleSearch}
               styles={customStyles}
             />
@@ -99,45 +106,39 @@ export const Publish = () => {
               type="datetime-local"
               className="form-control"
               name="startDateTime"
+              value={startDateTime}
+              min={now}
+              onChange={(e) => {
+                setStartDateTime(e.target.value);
+                if (endDateTime && e.target.value > endDateTime) {
+                  setEndDateTime(""); // clear end time if it's invalid now
+                }
+              }}
             />
           </div>
 
-          <div className="text-center">
+          <div className="mt-3">
+            <label htmlFor="endDateTime" className="form-label">
+              End Date & Time
+            </label>
+            <input
+              type="datetime-local"
+              className="form-control"
+              name="endDateTime"
+              value={endDateTime}
+              min={startDateTime || now}
+              onChange={(e) => setEndDateTime(e.target.value)}
+              disabled={!startDateTime}
+            />
+          </div>
+
+          <div className="text-center mt-5">
             <button className="btn btn-primary mt-3" type="submit">
-              PUBLISH
+              {APP_URLS["publish"]?.text}
             </button>
           </div>
         </form>
       </div>
     </section>
-  );
-
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>PUBLISH QUIZ</h1>
-
-      <form>
-        <label>Select Quiz</label>
-        <br />
-        <select>
-          <option value="">Choose a quiz...</option>
-          <option value="math">Math Quiz</option>
-          <option value="science">Science Quiz</option>
-        </select>
-        <br />
-        <br />
-        <label> Start Date & Time</label>
-        <br />
-        <input type="datetime-local" />
-        <br />
-        <br></br>
-        <label>End Date & Time</label>
-        <br />
-        <input type="datetime-local" />
-        <br />
-        <br></br>
-        <button type="submit">Publish</button>
-      </form>
-    </div>
   );
 };
