@@ -63,6 +63,26 @@ export const Publish = () => {
               showTimeSelect
             />
           </div>
+          <div>
+            <div className="mt-3">
+              <label htmlFor="" className="form-label">
+                End Date & Time
+              </label>
+            </div>
+            <DatePicker
+              name="start-date-time"
+              selected={startDateTime}
+              onChange={(date) => console.log(date)}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              className="form-control w-100"
+              showTimeSelect
+            />
+            <div className="text-center">
+              <button className="btn btn-primary mt-3" type="submit">
+                PUBLISH
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </section>
