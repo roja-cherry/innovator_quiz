@@ -11,7 +11,7 @@ const customStyles = {
       : state.isFocused
       ? "#0d9486" // hover/focus (optional)
       : "white",
-    color: state.isFocused ? 'white' : 'black',
+    color: state.isFocused ? "white" : "black",
   }),
   control: (base) => ({
     ...base,
@@ -47,6 +47,14 @@ const customStyles = {
 export const Publish = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [startDateTime, setStartDateTime] = useState(null);
+  const [endDateTime, setEndDateTime] = useState(null);
+
+  const calculateTermDuration = () => {
+    const start = new Date(startDateTime);
+    const end = new Date(endDateTime);
+    const timeDiff = end - start;
+    const days = timeDiff / (1000 * 3600 * 24);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault;
@@ -83,51 +91,27 @@ export const Publish = () => {
             />
           </div>
 
-          <div>
-            <input type="datetime-local" className="form-control" style={{
-              accentColor: "var(--bs-primary)"
-            }} />
+          <div className="mt-3">
+            <label htmlFor="startDateTime" className="form-label">
+              Start Date & Time
+            </label>
+            <input
+              type="datetime-local"
+              className="form-control"
+              name="startDateTime"
+            />
           </div>
 
-          <div>
-            <div className="mt-3">
-              <label htmlFor="" className="form-label">
-                Start Date & Time
-              </label>
-            </div>
-            <DatePicker
-              name="start-date-time"
-              selected={startDateTime}
-              onChange={(date) => console.log(date)}
-              dateFormat="MMMM d, yyyy h:mm aa"
-              className="form-control w-100"
-              showTimeSelect
-            />
-          </div>
-          <div>
-            <div className="mt-3">
-              <label htmlFor="" className="form-label">
-                End Date & Time
-              </label>
-            </div>
-            <DatePicker
-              name="start-date-time"
-              selected={startDateTime}
-              onChange={(date) => console.log(date)}
-              dateFormat="MMMM d, yyyy h:mm aa"
-              className="form-control w-100"
-              showTimeSelect
-            />
-            <div className="text-center">
-              <button className="btn btn-primary mt-3" type="submit">
-                PUBLISH
-              </button>
-            </div>
+          <div className="text-center">
+            <button className="btn btn-primary mt-3" type="submit">
+              PUBLISH
+            </button>
           </div>
         </form>
       </div>
     </section>
   );
+
   return (
     <div style={{ padding: "40px" }}>
       <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>PUBLISH QUIZ</h1>
