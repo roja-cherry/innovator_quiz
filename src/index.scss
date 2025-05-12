@@ -29,4 +29,14 @@ input[type=range]{
   .react-datepicker-wrapper {
     width : 100%;
   }
+
+  .css-13cymwt-control,
+  .css-t3ipsp-control {
+    border: none !important;
+    box-shadow: none;
+  }
+
+  .form-control.css-b62m3t-container {
+    padding: 0;
+  }
 }

@@ -1,14 +1,48 @@
 import React, { useState } from "react";
-import Select from "react-select";
 import { searchQuiz } from "../../../api/apiService";
 import AsyncSelect from "react-select/async";
 import DatePicker from "react-datepicker";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+const customStyles = {
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? "#0d9486" // selected option
+      : state.isFocused
+      ? "#0d9486" // hover/focus (optional)
+      : "white",
+    color: state.isFocused ? 'white' : 'black',
+  }),
+  control: (base) => ({
+    ...base,
+    borderColor: "#dee2e6",
+    boxShadow: "none",
+    "&:hover": { borderColor: "#0d9486" },
+    height: "calc(2.25rem + 2px)",
+    fontSize: "1rem",
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 0.75rem",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+  }),
+  indicatorsContainer: (base) => ({
+    ...base,
+    height: "100%",
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    padding: "0 0.5rem",
+  }),
+  menu: (base) => ({
+    ...base,
+    zIndex: 9999,
+  }),
+};
 
 export const Publish = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -45,6 +79,7 @@ export const Publish = () => {
               className="form-control"
               onChange={(e) => console.log(e)}
               loadOptions={handleSearch}
+              styles={customStyles}
             />
           </div>
 
