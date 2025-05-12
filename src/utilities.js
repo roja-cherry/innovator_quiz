@@ -1,3 +1,11 @@
+export const APP_URLS = {
+  publish: {
+    text: "Schedule",
+    url: "/admin/schedule"
+  }
+}
+
+
 export const formatToDateTimeString = (dateTime) => {
   const options = {
     weekday: "short",
@@ -31,3 +39,4 @@ export const getStatusClassName = (status) => {
   };
   return statusClassName[status];
 }
+

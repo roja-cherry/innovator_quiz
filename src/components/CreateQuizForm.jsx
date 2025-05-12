@@ -134,7 +134,7 @@ const CreateQuizForm = () => {
       />
       <div className="text-center">
         <button className="btn btn-primary mt-3" type="submit">
-          UPLOAD
+          Upload
         </button>
       </div>
     </form>

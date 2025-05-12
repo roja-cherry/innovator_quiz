@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
+import { APP_URLS } from "../../utilities";
 
 const Navbar = () => {
   const adminUrls = [
@@ -13,8 +14,8 @@ const Navbar = () => {
       path: "/admin/quiz-management",
     },
     {
-      text: "Publish",
-      path: "/admin/publish",
+      text: APP_URLS['publish']?.text,
+      path: APP_URLS['publish']?.url,
     },
   ];
 

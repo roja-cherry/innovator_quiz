@@ -8,6 +8,7 @@ import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
+import { APP_URLS } from "./utilities";
 
 export const App = () => {
   return (
@@ -19,7 +20,7 @@ export const App = () => {
           <Route path="admin/quiz-management" element={<QuizManagement />} />
           <Route path="/admin/quiz-management/create-quiz" element={<CreateQuiz />} />
           <Route path="/admin/quiz-management/edit/:id" element={<EditQuiz />} />
-          <Route path="/admin/publish" element={<Publish />} />
+          <Route path={APP_URLS["publish"].url} element={<Publish />} />
           <Route path="/admin/quiz-management/quiz/:id" element={<ViewQuiz />} /> 
         </Route>
       </Routes>
