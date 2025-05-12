@@ -49,6 +49,12 @@ export const Publish = () => {
           </div>
 
           <div>
+            <input type="datetime-local" className="form-control" style={{
+              accentColor: "var(--bs-primary)"
+            }} />
+          </div>
+
+          <div>
             <div className="mt-3">
               <label htmlFor="" className="form-label">
                 Start Date & Time
