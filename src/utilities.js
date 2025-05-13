@@ -31,12 +31,9 @@ export const formatStatus = (status) => {
   return formattedStatus[status];
 };
 
-export const getStatusClassName = (status) => {
-  const statusClassName = {
-    COMPLETED: "badge text-bg-success",
-    PUBLISHED: "badge text-bg-warning",
-    CREATED: "badge bg-badge-blue text-bg-dark-",
-  };
-  return statusClassName[status];
+export const STATUS_CLASSNAME = {
+  COMPLETED: "badge text-bg-success",
+  LIVE: "badge text-bg-warning",
+  SCHEDULED: "badge bg-badge-blue text-bg-dark-",
+  CANCELLED: "badge text-bg-danger"
 }
-
