@@ -13,7 +13,7 @@ export const ViewQuiz = () => {
       try {
         const response = await getQuizWithQuestions(id);
         console.log("Fetched quiz data:", response?.data);
-        setQuizData(data);
+        setQuizData(response?.data);
       } catch (error) {
         console.error("Error fetching quiz:", error);
       } finally {
@@ -28,9 +28,9 @@ export const ViewQuiz = () => {
     return <p>Loading quiz...</p>;
   }
 
-  if (!quizData || !quizData.questions || quizData.questions.length === 0) {
-    return <p>Quiz not found or no questions available!</p>;
-  }
+//   if (!quizData?.quizId) {
+//     return <p>Quiz not found or no questions available!</p>;
+//   }
 
   return (
     <section className="container-fluid p-5">
