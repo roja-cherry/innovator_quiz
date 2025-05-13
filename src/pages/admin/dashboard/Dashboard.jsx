@@ -49,7 +49,7 @@ fetchAllSchedules();
               <th>Start Time</th>
               <th>End Time</th>
               <th>Status</th>
-              <th>Action</th>
+              <th className="action">Action</th>
             </tr>
           </thead>
 
