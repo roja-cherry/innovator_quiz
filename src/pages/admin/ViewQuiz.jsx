@@ -14,11 +14,14 @@ export const ViewQuiz = () => {
   useEffect(() => {
     const fetchQuizAndSchedules = async () => {
       try {
-        const response = await getQuizWithQuestions(id);
-        setQuizData(response.data);
 
-        const schedulesRes = await getSchedulesByQuizId(id);
-        setSchedules(schedulesRes);
+        const [quizWithQuestions, schedulesForQuiz] = await Promise.all([
+          getQuizWithQuestions(id),
+          getSchedulesByQuizId(id)
+        ])
+        
+        setQuizData(quizWithQuestions?.data);
+        setSchedules(schedulesForQuiz?.data);
       } catch (error) {
         console.error("Error fetching quiz or schedules:", error);
       } finally {
@@ -33,18 +36,14 @@ export const ViewQuiz = () => {
     return <p>Loading quiz...</p>;
   }
 
-  if (!quizData || !quizData.questions || quizData.questions.length === 0) {
-    return <p>Quiz not found or no questions available!</p>;
-  }
-
   return (
     <section className="container-fluid p-5">
-      <h2>{quizData.quiz.quizName} Questions</h2>
+      <h2>{quizData?.quiz?.quizName} Questions</h2>
       <div className="row mt-4">
         {/* Left column: Quiz Questions */}
         <div className="col-md-6">
           <div className="quiz-list">
-            {quizData.questions.map((question, index) => (
+            {quizData?.questions.map((question, index) => (
               <QuizWithAnswer
                 question={question}
                 key={question.questionId}
@@ -57,8 +56,8 @@ export const ViewQuiz = () => {
         {/* Right column: Schedules Table */}
         <div className="col-md-6 quiz-management-container table-responsive">
           <h5 className="my-4">Scheduled Sessions</h5>
-          <div className="table-responsive">
-            {schedules.length > 0 ? (
+          <div className="table-responsive" key={schedules?.length}>
+            {schedules?.length > 0 ? (
               <table className="table table-hover">
                 <thead>
                   <tr>

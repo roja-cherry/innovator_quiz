@@ -7,7 +7,7 @@ const QuizFilter = ({
 }) => {
   return (
     <div className="row mt-3 filters bg-light p-2">
-      <div className="col-md-3">
+      {/* <div className="col-md-3">
         <label htmlFor="status" className="form-label">
           Status
         </label>
@@ -43,7 +43,7 @@ const QuizFilter = ({
             Completed
           </option>
         </select>
-      </div>
+      </div> */}
       <div className="col-md-3">
         <label htmlFor="date" className="form-label">
           Created Within
@@ -82,6 +82,31 @@ const QuizFilter = ({
           </option>
         </select>
       </div>
+      {/* Scheduled? Filter */}
+      <div className="col-md-3">
+        <label htmlFor="isScheduled" className="form-label">
+          Scheduled?
+        </label>
+        <select
+          id="isScheduled"
+          name="isScheduled"
+          className="form-select"
+          value={
+            filters.isScheduled === true
+              ? "true"
+              : filters.isScheduled === false
+              ? "false"
+              : ""
+          }
+          onChange={(e) => handleFilterChange("isScheduled", e.target.value)}
+        >
+          <option value={-1}>All</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      
       <div className="col-12 mt-4">
         <button className="btn btn-primary ms-auto" onClick={applyFilter}>
           Apply Filters
