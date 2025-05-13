@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <section className="container-fluid quiz-management-container p-5">
-      <h2>Quiz Dashboard</h2>
+      <h2>Dashboard</h2>
 
       <div className="mt-4">
         <table className="quiz-table">
@@ -53,10 +53,11 @@ const Dashboard = () => {
                       navigate(`/admin/quiz-management/quiz/${schedule.quizId}`)
                     }
                   >
-                    View
+                    View Quiz
                   </button>
 
-                  <button className="btn btn-primary btn-sm ms-2">Edit</button>
+                  <button className="btn btn-primary btn-sm ms-2">Reschedule</button>
+                  <button className="btn btn-primary btn-sm ms-2">Cancel</button>
                 </td>
               </tr>
             ))}
