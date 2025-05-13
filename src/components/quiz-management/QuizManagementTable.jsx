@@ -5,7 +5,6 @@ import { LiaTrashAltSolid } from "react-icons/lia";
 import {
   formatStatus,
   formatToDateTimeString,
-  getStatusClassName,
 } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { Link, useNavigate } from "react-router-dom";
