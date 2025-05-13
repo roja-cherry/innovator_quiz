@@ -47,7 +47,15 @@ const Dashboard = () => {
                 <td>{formatToDateTimeString(schedule.endDateTime)}</td>
                 <td>{schedule.status}</td>
                 <td>
-                  <button className="btn btn-dark btn-sm">View</button>
+                  <button
+                    className="btn btn-dark btn-sm"
+                    onClick={() =>
+                      navigate(`/admin/quiz-management/quiz/${schedule.quizId}`)
+                    }
+                  >
+                    View
+                  </button>
+
                   <button className="btn btn-primary btn-sm ms-2">Edit</button>
                 </td>
               </tr>
