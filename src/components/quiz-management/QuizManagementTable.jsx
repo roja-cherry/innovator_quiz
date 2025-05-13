@@ -53,27 +53,17 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col" className="bg-light">
-              Quiz Title
-            </th>
-            <th scope="col" className="bg-light">
-              Status
-            </th>
-            <th scope="col" className="bg-light">
-              Timer
-            </th>
-            <th scope="col" className="bg-light">
-              Created At
-            </th>
-            <th scope="col" className="bg-light">
-              Action
-            </th>
+            <th scope="col" className="bg-light">Quiz Title</th>
+            <th scope="col" className="bg-light">Timer</th>
+            <th scope="col" className="bg-light">Created At</th>
+            <th scope="col" className="bg-light">Scheduled?</th>    {/* ← new */}
+            <th scope="col" className="bg-light">Action</th>
           </tr>
         </thead>
         <tbody>
           {data.length === 0 ? (
             <tr>
-              <td colSpan="4" className="text-center py-4">
+              <td colSpan="5" className="text-center py-4">        {/* ← updated */}
                 No data available
               </td>
             </tr>
@@ -81,17 +71,22 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
             data.map((quiz, index) => (
               <tr key={index}>
                 <td scope="row">
-                  <Link to={`/admin/quiz-management/quiz/${quiz.quizId}`} className="quiz-name">
+                  <Link
+                    to={`/admin/quiz-management/quiz/${quiz.quizId}`}
+                    className="quiz-name"
+                  >
                     {quiz.quizName}
                   </Link>
                 </td>
-                <td>
-                  <span class={getStatusClassName(quiz.status)}>
-                    {formatStatus(quiz.status)}
-                  </span>
-                </td>
                 <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
+                <td>
+                  {quiz.isScheduled ? (
+                    <span className="badge bg-warning text-dark">Yes</span>
+                  ) : (
+                    <span className="badge bg-secondary">No</span>
+                  )}
+                </td>                                                  {/* ← new */}
                 <td>
                   <LiaEdit
                     className={`action-btn me-3 text-black ${
