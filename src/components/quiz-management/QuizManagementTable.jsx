@@ -82,11 +82,11 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                     {quiz.quizName}
                   </Link>
                 </td>
-                <td>
+                {/* <td>
                   <span class={getStatusClassName(quiz.status)}>
                     {formatStatus(quiz.status)}
                   </span>
-                </td>
+                </td> */}
                 <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
