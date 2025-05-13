@@ -40,3 +40,38 @@ input[type=range]{
     padding: 0;
   }
 }
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+
+  &.primary {
+    background-color: rgba(13, 148, 134, 0.5); // blue-500
+    color: rgb(13, 148, 134);
+  }
+
+  &.danger {
+    background-color: rgba(239, 68, 68, 0.5); // red-500
+    color: #7f1d1d;
+  }
+
+  &.warning {
+    background-color: rgba(234, 179, 8, 0.5); // yellow-500
+    color: #78350f;
+  }
+
+  &.info {
+    background-color: rgba(6, 182, 212, 0.5); // cyan-500
+    color: #164e63;
+  }
+
+  &.success {
+    background-color: rgba(34, 197, 94, 0.5); // green-500
+    color: #14532d;
+  }
+}

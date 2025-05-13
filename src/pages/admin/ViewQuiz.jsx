@@ -34,7 +34,7 @@ export const ViewQuiz = () => {
 
   return (
     <section className="container-fluid p-5">
-      <h2>{quizData.quiz.quizName} Questions</h2>
+      <h2>{quizData.quiz.quizName}</h2>
       <div className="quiz-list">
         {quizData.questions.map((question, index) => (
           <QuizWithAnswer 
