@@ -2,7 +2,7 @@ export const APP_URLS = {
   publish: {
     text: "Schedule",
     url: "/admin/schedule"
-  }
+  },
 }
 
 

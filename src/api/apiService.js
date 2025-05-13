@@ -44,7 +44,14 @@ export const getQuizWithQuestions = async (id) => {
   return await axiosInstance.get(`/api/admin/quiz/quiz-with-questions/${id}`);
 };
 
-
 export const createSchedule = async (data) => {
   return await axiosInstance.post("/api/schedule", data)
+}
+
+export const reScheduleQuiz = async (id, data) => {
+  return await axiosInstance.patch(`/api/schedule/${id}/reschedule`, data)
+}
+
+export const getSchedule = async (id) => {
+  return await axiosInstance.get(`/api/schedule/${id}`)
 }
