@@ -53,17 +53,30 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col" className="bg-light">Quiz Title</th>
-            <th scope="col" className="bg-light">Timer</th>
-            <th scope="col" className="bg-light">Created At</th>
-            <th scope="col" className="bg-light">Scheduled?</th>    {/* ← new */}
-            <th scope="col" className="bg-light">Action</th>
+            <th scope="col" className="bg-light">
+              Quiz Title
+            </th>
+            <th scope="col" className="bg-light">
+              Timer
+            </th>
+            <th scope="col" className="bg-light">
+              Created At
+            </th>
+            <th scope="col" className="bg-light">
+              Scheduled?
+            </th>{" "}
+            {/* ← new */}
+            <th scope="col" className="bg-light">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           {data.length === 0 ? (
             <tr>
-              <td colSpan="5" className="text-center py-4">        {/* ← updated */}
+              <td colSpan="5" className="text-center py-4">
+                {" "}
+                {/* ← updated */}
                 No data available
               </td>
             </tr>
@@ -86,19 +99,24 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                   ) : (
                     <span className="badge bg-secondary">No</span>
                   )}
-                </td>                                                  {/* ← new */}
+                </td>{" "}
+                {/* ← new */}
                 <td>
                   <LiaEdit
                     className={`action-btn me-3 text-black ${
-                      quiz?.status === "COMPLETED" ? "btn-disabled" : ""
+                      quiz?.isScheduled ? "btn-disabled" : ""
                     }`}
                     onClick={() => {
-                      if (quiz?.status !== "COMPLETED") handleEdit(quiz.quizId);
+                      if (!quiz?.isScheduled) handleEdit(quiz.quizId);
                     }}
                   />
                   <LiaTrashAltSolid
-                    className="ms-2 action-btn text-danger"
-                    onClick={() => handleDelete(quiz.quizId)}
+                    className={`ms-2 action-btn text-danger ${
+                      quiz?.isScheduled ? "btn-disabled" : ""
+                    }`}
+                    onClick={() => {
+                      if (!quiz?.isScheduled) handleDelete(quiz.quizId);
+                    }}
                   />
                 </td>
               </tr>
