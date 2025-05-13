@@ -100,7 +100,7 @@ const QuizFilter = ({
           }
           onChange={(e) => handleFilterChange("isScheduled", e.target.value)}
         >
-          <option value="">All</option>
+          <option value={-1}>All</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>

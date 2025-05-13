@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <section className="container-fluid quiz-management-container p-5">
-      <h2>Quiz Dashboard</h2>
+      <h2>Dashboard</h2>
 
       <div className="mt-4">
         <table className="quiz-table">

@@ -22,7 +22,7 @@ export const App = () => {
           <Route path="/admin/quiz-management/create-quiz" element={<CreateQuiz />} />
           <Route path="/admin/quiz-management/edit/:id" element={<EditQuiz />} />
           <Route path={APP_URLS["publish"].url} element={<Publish />} />
-          <Route path="/admin/schedule/:id/edit" element={<EditPublish />} />
+          <Route path="/admin/schedule/:id/re-schedule" element={<EditPublish />} />
           <Route path="/admin/quiz-management/quiz/:id" element={<ViewQuiz />} /> 
         </Route>
       </Routes>
