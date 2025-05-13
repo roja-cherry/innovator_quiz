@@ -82,6 +82,31 @@ const QuizFilter = ({
           </option>
         </select>
       </div>
+      {/* Scheduled? Filter */}
+      <div className="col-md-3">
+        <label htmlFor="isScheduled" className="form-label">
+          Scheduled?
+        </label>
+        <select
+          id="isScheduled"
+          name="isScheduled"
+          className="form-select"
+          value={
+            filters.isScheduled === true
+              ? "true"
+              : filters.isScheduled === false
+              ? "false"
+              : ""
+          }
+          onChange={(e) => handleFilterChange("isScheduled", e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      
       <div className="col-12 mt-4">
         <button className="btn btn-primary ms-auto" onClick={applyFilter}>
           Apply Filters
