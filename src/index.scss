@@ -5,6 +5,10 @@
   color: #fff !important;
 }
 
+.btn-disabled {
+  cursor: not-allowed !important;
+}
+
 .form-label {
   font-weight: 600;
 }
@@ -17,17 +21,17 @@
   background: $primary;
 }
 
-.bg-badge-blue{
-background-color: var(--bs-blue);
+.bg-badge-blue {
+  background-color: var(--bs-blue);
 }
 
-input[type=range]{
+input[type="range"] {
   accent-color: $primary;
 }
 
 .publish-page {
   .react-datepicker-wrapper {
-    width : 100%;
+    width: 100%;
   }
 
   .css-13cymwt-control,
@@ -41,37 +45,48 @@ input[type=range]{
   }
 }
 
-.badge {
+.status-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
-  border-radius: 9999px;
+  border-radius: 3px;
   font-weight: 500;
   line-height: 1;
   color: #fff;
 
-  &.primary {
-    background-color: rgba(13, 148, 134, 0.5); // blue-500
-    color: rgb(13, 148, 134);
+  &.scheduled {
+    background-color: rgba(13, 109, 253, 0.1); // blue-500
+    color: #0d6efd;
   }
 
-  &.danger {
-    background-color: rgba(239, 68, 68, 0.5); // red-500
-    color: #7f1d1d;
+  &.live {
+    background-color: rgba(25, 135, 84, 0.1); // red-500
+    color: #198754;
   }
 
-  &.warning {
-    background-color: rgba(234, 179, 8, 0.5); // yellow-500
-    color: #78350f;
+  &.completed {
+    color: #6610f2;
+    background-color: rgba(102, 16, 242, 0.1);
   }
 
-  &.info {
-    background-color: rgba(6, 182, 212, 0.5); // cyan-500
-    color: #164e63;
+  &.cancelled {
+    background-color: rgba(220, 53, 70, 0.1); // cyan-500
+    color: #dc3545;
   }
 
   &.success {
-    background-color: rgba(34, 197, 94, 0.5); // green-500
+    background-color: rgba(34, 197, 94, 0.1); // green-500
     color: #14532d;
   }
+
+  &.is-scheduled {
+    background-color: rgba(255, 157, 0, 0.1); // emerald-600, more visible
+    color: rgba(255, 157, 0); // white text for contrast
+  }
+  
+  &.unscheduled {
+    background-color: rgba(12, 114, 67, 0.1); // red-500
+    color: #198754;
+  }
+  
 }

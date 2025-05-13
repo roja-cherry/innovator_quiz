@@ -70,15 +70,23 @@ const ScheduleForm = ({ isEdit = false }) => {
 
   const reSchedule = async () => {
     try {
-      const response = await reScheduleQuiz(id, {
+      await reScheduleQuiz(id, {
         id: id,
         startDateTime,
         endDateTime,
         quizId: selectedOption?.value ?? selectedOption,
       });
-      console.log(response);
+
+      const confirm = await Swal.fire({
+        title: "Quiz re-scheduled successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
+      if (confirm.isDismissed || confirm.isConfirmed)
+        navigate("/admin/quiz-management");
     } catch (error) {
-      toast.error(error?.message ?? "Error in creating quiz");
+      toast.error(error?.response?.data?.message ?? "Error in creating quiz");
     }
   };
 

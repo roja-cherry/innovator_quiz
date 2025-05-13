@@ -1,12 +1,14 @@
 export const APP_URLS = {
   publish: {
     text: "Schedule",
-    url: "/admin/schedule"
+    url: "/admin/schedule",
   },
-}
-
+};
 
 export const formatToDateTimeString = (dateTime) => {
+  if (!dateTime) {
+    return "-";
+  }
   const options = {
     weekday: "short",
     year: "numeric",
@@ -38,5 +40,13 @@ export const getStatusClassName = (status) => {
     CREATED: "badge bg-badge-blue text-bg-dark-",
   };
   return statusClassName[status];
-}
+};
 
+export const STATUS_CLASSNAME = {
+  COMPLETED: "status-badge completed",
+  SCHEDULED: "status-badge scheduled",
+  CANCELLED: "status-badge cancelled",
+  LIVE: "status-badge live",
+  true: "status-badge is-scheduled",
+  false: "status-badge unscheduled",
+};

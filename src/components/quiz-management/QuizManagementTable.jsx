@@ -6,6 +6,7 @@ import {
   formatStatus,
   formatToDateTimeString,
   getStatusClassName,
+  STATUS_CLASSNAME,
 } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,7 +51,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
 
   return (
     <div className="mt-5">
-      <table className="table">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col" className="bg-light">
@@ -75,8 +76,6 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
           {data.length === 0 ? (
             <tr>
               <td colSpan="5" className="text-center py-4">
-                {" "}
-                {/* ← updated */}
                 No data available
               </td>
             </tr>
@@ -94,13 +93,13 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
-                  {quiz.isScheduled ? (
+                  <span className={STATUS_CLASSNAME[quiz?.isScheduled]}>{quiz?.isScheduled ? "Yes" : "No"}</span>
+                  {/* {quiz.isScheduled ? (
                     <span className="badge bg-warning text-dark">Yes</span>
                   ) : (
                     <span className="badge bg-secondary">No</span>
-                  )}
-                </td>{" "}
-                {/* ← new */}
+                  )} */}
+                </td>
                 <td>
                   <LiaEdit
                     className={`action-btn me-3 text-black ${

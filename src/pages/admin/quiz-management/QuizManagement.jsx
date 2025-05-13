@@ -9,11 +9,11 @@ import Swal from "sweetalert2";
 import "./QuizManagement.scss";
 
 const QuizManagement = () => {
-  const [showFilter, setShowFilter] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [showFilter, setShowFilter] = useState(searchParams?.size > 0);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [quizList, setQuizList] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const data = useMemo(() => {
     if (!search) return quizList;
@@ -29,18 +29,17 @@ const QuizManagement = () => {
   }, [quizList, search]);
 
   const handleFilterChange = (key, val) => {
-    if (val === "") {
+    if (val === "" || val == -1) {
       // “All” selected: remove the key
       searchParams.delete(key);
       const { [key]: _, ...rest } = filters;
       setFilters(rest);
     } else {
       // For isScheduled, we want a boolean not a string
-      const actualValue =
-        key === "isScheduled" ? val === "true" : val;
-  
+      const actualValue = key === "isScheduled" ? val === "true" : val;
+
       searchParams.set(key, actualValue);
-      setFilters(prev => ({
+      setFilters((prev) => ({
         ...prev,
         [key]: actualValue,
       }));

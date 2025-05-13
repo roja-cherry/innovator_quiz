@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-body-tertiary_ bg-primary navbar-expand-lg">
       <div className="container-fluid px-5">
-        <Link className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           <img src="/logo.png" alt="logo" className="logo" />
         </Link>
         <button
