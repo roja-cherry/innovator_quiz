@@ -29,15 +29,20 @@ const QuizManagement = () => {
   }, [quizList, search]);
 
   const handleFilterChange = (key, val) => {
-    if (val == "-1") {
-      const { [key]: _, ...newFilters } = filters;
+    if (val === "") {
+      // “All” selected: remove the key
       searchParams.delete(key);
-      setFilters(newFilters);
+      const { [key]: _, ...rest } = filters;
+      setFilters(rest);
     } else {
-      searchParams.set(key, val);
-      setFilters((prev) => ({
+      // For isScheduled, we want a boolean not a string
+      const actualValue =
+        key === "isScheduled" ? val === "true" : val;
+  
+      searchParams.set(key, actualValue);
+      setFilters(prev => ({
         ...prev,
-        [key]: val,
+        [key]: actualValue,
       }));
     }
     setSearchParams(searchParams);
