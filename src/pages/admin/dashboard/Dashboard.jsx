@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
-import { getAllSchedules } from "../../../api/apiService";
+import { cancelById, getAllSchedules } from "../../../api/apiService";
 import { formatToDateTimeString } from "../../../utilities";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,20 @@ const Dashboard = () => {
       toast.error("Failed to load scheduled quizzes");
     }
   };
+
+  const handleCancel=async(id)=>{
+    try{
+await cancelById(id)
+toast.success("Schedule cancelled successfully");
+fetchAllSchedules();
+    }
+    catch(error){
+      console.error("Cancel failed:", error);
+      toast.error("Failed to cancel schedule");
+    }
+    };
+
+  
 
   return (
     <section className="container-fluid quiz-management-container p-5">
@@ -56,8 +70,18 @@ const Dashboard = () => {
                     View Quiz
                   </button>
 
-                  <button className="btn btn-primary btn-sm ms-2">Reschedule</button>
-                  <button className="btn btn-primary btn-sm ms-2">Cancel</button>
+                  <button
+                    className="btn btn-primary btn-sm ms-2"
+                    onClick={() =>
+                      navigate(`/admin/schedule/${schedule.id}/re-schedule`)
+                    }
+                  >
+                    Reschedule
+                  </button>
+
+                  <button className="btn btn-primary btn-sm ms-2" onClick={()=>handleCancel(schedule.id)} >
+                    Cancel
+                  </button>
                 </td>
               </tr>
             ))}

@@ -69,3 +69,7 @@ export const getScheduleById = async (id) => {
   return await axiosInstance.get(`/api/schedule/${id}`);
 };
 
+export const cancelById=async(id)=>{
+  return await axiosInstance.patch(`/api/schedule/${id}/cancel`)
+};
+
