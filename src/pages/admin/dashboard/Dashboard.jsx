@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
-import { getScheduledQuizzes } from "../../../api/apiService";
+import { getAllSchedules } from "../../../api/apiService";
 import { formatToDateTimeString } from "../../../utilities";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const fetchAllSchedules = async () => {
     try {
-      const response = await getScheduledQuizzes();
+      const response = await getAllSchedules();
       setSchedules(response.data);
     } catch (error) {
       console.error("Failed to fetch scheduled quizzes:", error);
