@@ -62,7 +62,9 @@ export const getScheduledQuizzes = async () => {
 };
 
 export const getAllSchedules = async () => {
-  return await axiosInstance.get("/api/schedule/all-schedule");
+  return await axiosInstance.get("/api/schedule/all-schedule", {params: {
+    status: ["SCHEDULED", "LIVE"]
+  }});
 };
 
 export const getScheduleById = async (id) => {
