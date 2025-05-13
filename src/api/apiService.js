@@ -63,3 +63,8 @@ export const getScheduleById = async (id) => {
   return await axiosInstance.get(`/api/schedule/${id}`);
 };
 
+export const getSchedulesByQuizId = async (quizId) => {
+  const response = await api.get(`/schedule/by-quiz/${quizId}`);
+  return response.data;
+};
+
