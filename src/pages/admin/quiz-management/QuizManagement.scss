@@ -20,12 +20,19 @@
   }
 
   .table {
+    td, th {
+      &.sl-no {
+        max-width: 3rem !important;
+        min-width: 3rem !important;
+      }
+    }
     tbody {
       tr {
         td {
           padding-top: 1rem;
           padding-bottom: 1rem;
           color: #727171;
+
 
           &:first-child {
             min-width: 12rem;

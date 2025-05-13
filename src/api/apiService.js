@@ -50,7 +50,7 @@ export const createSchedule = async (data) => {
 }
 
 export const getScheduledQuizzes = async () => {
-  return await axiosInstance.get("/api/schedule", {
+  return await axiosInstance.get("/api/schedule/status", {
     params: { status: "SCHEDULED" },
   });
 };
@@ -59,12 +59,10 @@ export const getAllSchedules = async () => {
   return await axiosInstance.get("/api/schedule/all-schedule");
 };
 
-export const getScheduleById = async (id) => {
-  return await axiosInstance.get(`/api/schedule/${id}`);
-};
-
 export const getSchedulesByQuizId = async (quizId) => {
-  const response = await api.get(`/schedule/by-quiz/${quizId}`);
+  const response = await axiosInstance.get(`/api/schedule/quiz/${quizId}`);
   return response.data;
 };
+
+
 

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { QuizWithAnswer } from "../../components/QuizWithAnswer";
 import { getQuizWithQuestions } from "../../api/apiService";
 import { getSchedulesByQuizId } from "../../api/apiService";
-
+import { formatToDateTimeString, STATUS_CLASSNAME } from "../../utilities";
 
 export const ViewQuiz = () => {
   let { id } = useParams();
@@ -16,7 +16,7 @@ export const ViewQuiz = () => {
       try {
         const response = await getQuizWithQuestions(id);
         setQuizData(response.data);
-  
+
         const schedulesRes = await getSchedulesByQuizId(id);
         setSchedules(schedulesRes);
       } catch (error) {
@@ -25,10 +25,9 @@ export const ViewQuiz = () => {
         setLoading(false);
       }
     };
-  
+
     fetchQuizAndSchedules();
   }, [id]);
-  
 
   if (loading) {
     return <p>Loading quiz...</p>;
@@ -41,37 +40,54 @@ export const ViewQuiz = () => {
   return (
     <section className="container-fluid p-5">
       <h2>{quizData.quiz.quizName} Questions</h2>
-      <h3>Schedules</h3>
-{schedules.length === 0 ? (
-  <p>No schedules available for this quiz.</p>
-) : (
-  <table className="table table-striped">
-    <thead>
-      <tr>
-        <th>Start</th>
-        <th>End</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      {schedules.map((schedule) => (
-        <tr key={schedule.id}>
-          <td>{new Date(schedule.startDateTime).toLocaleString()}</td>
-          <td>{new Date(schedule.endDateTime).toLocaleString()}</td>
-          <td>{schedule.status}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-)}
-      <div className="quiz-list">
-        {quizData.questions.map((question, index) => (
-          <QuizWithAnswer 
-            question={question} 
-            key={question.questionId} 
-            number={index + 1} 
-          />
-        ))}
+      <div className="row mt-4">
+        {/* Left column: Quiz Questions */}
+        <div className="col-md-6">
+          <div className="quiz-list">
+            {quizData.questions.map((question, index) => (
+              <QuizWithAnswer
+                question={question}
+                key={question.questionId}
+                number={index + 1}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right column: Schedules Table */}
+        <div className="col-md-6 quiz-management-container table-responsive">
+          <h5 className="my-4">Scheduled Sessions</h5>
+          <div className="table-responsive">
+            {schedules.length > 0 ? (
+              <table className="table table-hover">
+                <thead>
+                  <tr>
+                    <th className="sl-no bg-light">SlNo</th>
+                    <th className="bg-light">Status</th>
+                    <th className="bg-light">Start Time</th>
+                    <th className="bg-light">End Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {schedules.map((schedule, index) => (
+                    <tr key={schedule.id}>
+                      <td className="sl-no">{index + 1}</td>
+                      <td>
+                        <span className={STATUS_CLASSNAME[schedule?.status]}>
+                          {schedule.status}
+                        </span>
+                      </td>
+                      <td>{formatToDateTimeString(schedule.startDateTime)}</td>
+                      <td>{formatToDateTimeString(schedule.endDateTime)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p>No schedules found for this quiz.</p>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
