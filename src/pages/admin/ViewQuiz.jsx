@@ -65,7 +65,7 @@ export const ViewQuiz = () => {
                     <th className="bg-light">Status</th>
                     <th className="bg-light">Start Time</th>
                     <th className="bg-light">End Time</th>
-                    <th className="bg-light">Action</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -79,16 +79,7 @@ export const ViewQuiz = () => {
                       </td>
                       <td>{formatToDateTimeString(schedule.startDateTime)}</td>
                       <td>{formatToDateTimeString(schedule.endDateTime)}</td>
-                      <td>
-                        {schedule.status === "CANCELLED" && (
-                          <button
-                            className="btn btn-primary btn-sm"
-                            onClick={() => navigate(`/admin/schedule/${schedule.id}/re-schedule`)}
-                          >
-                            Re-Schedule
-                          </button>
-                        )}
-                      </td>
+                      
                     </tr>
                   ))}
                 </tbody>
