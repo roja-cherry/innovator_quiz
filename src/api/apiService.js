@@ -1,4 +1,6 @@
 import { axiosInstance } from "./axiosInstance";
+import qs from "qs";
+
 
 export const createQuiz = (formData) => {
   return axiosInstance.post("/api/admin/quiz/create", formData, {
@@ -25,14 +27,14 @@ export const getQuizList = (params) => {
 };
 
 export const searchQuiz = (keyword) => {
-  return axiosInstance.get("api/admin/quiz/search", { 
+  return axiosInstance.get("api/admin/quiz/search", {
     params: { keyword },
   });
 };
 
-export const statusActivate = (quizId,newStatus) => {
+export const statusActivate = (quizId, newStatus) => {
   return axiosInstance.patch(`api/admin/quiz/${quizId}`, {
-    isActive: newStatus
+    isActive: newStatus,
   });
 };
 
@@ -45,31 +47,38 @@ export const getQuizWithQuestions = async (id) => {
 };
 
 export const createSchedule = async (data) => {
-  return await axiosInstance.post("/api/schedule", data)
-}
+  return await axiosInstance.post("/api/schedule", data);
+};
 
 export const reScheduleQuiz = async (id, data) => {
-  return await axiosInstance.patch(`/api/schedule/${id}/reschedule`, data)
-}
+  return await axiosInstance.patch(`/api/schedule/${id}/reschedule`, data);
+};
 
 export const getSchedule = async (id) => {
-  return await axiosInstance.get(`/api/schedule/${id}`)
-}
+  return await axiosInstance.get(`/api/schedule/${id}`);
+};
 export const getScheduledQuizzes = async () => {
-  return await axiosInstance.get("/api/schedule", {
+  return await axiosInstance.get("/api/schedule/status", {
     params: { status: "SCHEDULED" },
   });
 };
 
 export const getAllSchedules = async () => {
-  return await axiosInstance.get("/api/schedule/all-schedule");
+  return await axiosInstance.get("/api/schedule/all-schedule", {
+    params: {
+      status: ["SCHEDULED", "LIVE"],
+    },
+    paramsSerializer: (params) => {
+      // Custom format to handle multiple values for the same parameter
+      return qs.stringify(params, { arrayFormat: "repeat" });
+    },
+  });
 };
 
-export const getScheduleById = async (id) => {
-  return await axiosInstance.get(`/api/schedule/${id}`);
+export const getSchedulesByQuizId = async (quizId) => {
+  return await axiosInstance.get(`/api/schedule/quiz/${quizId}`);
 };
 
-export const cancelById=async(id)=>{
-  return await axiosInstance.patch(`/api/schedule/${id}/cancel`)
+export const cancelById = async (id) => {
+  return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
 };
-
