@@ -155,7 +155,7 @@ const ScheduleForm = ({ isEdit = false }) => {
           placeholder="Search quiz..."
           className="form-control"
           disabled={isEdit}
-          onChange={(e) => setSelectedOption(e?.value)}
+          oonChange={(option) => setSelectedOption(option)}
           loadOptions={handleSearch}
           styles={customStyles}
         />
