@@ -64,7 +64,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               Created At
             </th>
             <th scope="col" className="bg-light">
-              Scheduled?
+              Scheduled
             </th>{" "}
             {/* ← new */}
             <th scope="col" className="bg-light">

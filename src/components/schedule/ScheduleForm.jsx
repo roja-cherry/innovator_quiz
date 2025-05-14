@@ -95,7 +95,7 @@ const ScheduleForm = ({ isEdit = false }) => {
       await createSchedule({
         startDateTime,
         endDateTime,
-        quizId: selectedOption,
+        quizId: selectedOption.value,
       });
       const confirm = await Swal.fire({
         title: "Quiz scheduled successfully",
@@ -155,7 +155,7 @@ const ScheduleForm = ({ isEdit = false }) => {
           placeholder="Search quiz..."
           className="form-control"
           disabled={isEdit}
-          oonChange={(option) => setSelectedOption(option)}
+          onChange={(option) => setSelectedOption(option)}
           loadOptions={handleSearch}
           styles={customStyles}
         />
