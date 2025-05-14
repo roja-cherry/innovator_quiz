@@ -39,7 +39,7 @@ export const statusActivate = (quizId, newStatus) => {
 };
 
 export const deleteQuiz = (quizId) => {
-  return axiosInstance.delete(`/api/admin/quiz/${quizId}`);
+  return axiosInstance.delete(`/api/schedule/${quizId}`);
 };
 
 export const getQuizWithQuestions = async (id) => {
