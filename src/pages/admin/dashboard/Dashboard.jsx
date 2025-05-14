@@ -100,6 +100,8 @@ const Dashboard = () => {
   }, [schedules, search]);
 
   const handleFilterChange = (key, val) => {
+    console.log(`key: ${key}, val: ${val}`);
+    
     if (val === "" || val == -1 || val == null) {
       searchParams.delete(key);
       const { [key]: _, ...rest } = filters;
@@ -148,8 +150,6 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-
-      <p>{JSON.stringify(filters)}</p>
 
       {showFilter && (
         <ScheduleFilter

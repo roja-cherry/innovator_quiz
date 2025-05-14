@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const APP_URLS = {
   publish: {
     text: "Schedule",
@@ -22,6 +24,10 @@ export const formatToDateTimeString = (dateTime) => {
   let date = new Date(dateTime);
   return date.toLocaleString("en-US", options);
 };
+
+export const formatToLocalDateTime = date => {
+  return format(date, "yyyy-MM-dd'T'HH:mm");
+} 
 
 export const formatStatus = (status) => {
   const formattedStatus = {
