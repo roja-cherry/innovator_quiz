@@ -37,6 +37,8 @@ export const ScheduleFilter = ({
         <div className="form-control">
           <DatePicker
             selectsRange={true}
+            dateFormat="yyyy-MM-dd'T'HH:mm:ss"
+            timeFormat="HH:mm"
             startDate={startDate}
             endDate={endDate}
             onChange={(update) => {

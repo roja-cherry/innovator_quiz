@@ -15,18 +15,18 @@ const Dashboard = () => {
   const [schedules, setSchedules] = useState([]);
   const [showFilter, setShowFilter] = useState(searchParams?.size > 0);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({status: "SCHEDULED"});
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
     const updatedFilters = { ...filters, ...params };
     setFilters(updatedFilters);
-    fetchAllSchedules();
+    fetchAllSchedules(updatedFilters);
   }, []);
 
-  const fetchAllSchedules = async () => {
+  const fetchAllSchedules = async (params=filters) => {
     try {
-      const response = await getAllSchedules();
+      const response = await getAllSchedules(params);
       setSchedules(response.data?.reverse());
     } catch (error) {
       console.error("Failed to fetch scheduled quizzes:", error);
@@ -34,7 +34,6 @@ const Dashboard = () => {
     }
   };
   
-
   const handleCancel = async (id) => {
     try {
       const confirm = await Swal.fire({
@@ -118,7 +117,9 @@ const Dashboard = () => {
     setSearchParams(searchParams);
   };
 
-  const applyFilter = () => {};
+  const applyFilter = () => {
+    fetchAllSchedules()
+  };
 
   return (
     <section className="container-fluid quiz-management-container p-5">
@@ -147,6 +148,8 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
+
+      <p>{JSON.stringify(filters)}</p>
 
       {showFilter && (
         <ScheduleFilter
