@@ -33,6 +33,7 @@ const Dashboard = () => {
       toast.error("Failed to load scheduled quizzes");
     }
   };
+  
 
   const handleCancel = async (id) => {
     try {

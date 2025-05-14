@@ -63,17 +63,14 @@ export const getScheduledQuizzes = async () => {
   });
 };
 
-export const getAllSchedules = async () => {
+export const getAllSchedules = async (params) => {
   return await axiosInstance.get("/api/schedule/all-schedule", {
-    params: {
-      status: ["SCHEDULED", "LIVE"],
-    },
-    paramsSerializer: (params) => {
-      // Custom format to handle multiple values for the same parameter
-      return qs.stringify(params, { arrayFormat: "repeat" });
-    },
+    params,
+    paramsSerializer: (params) =>
+      qs.stringify(params, { arrayFormat: "repeat" }), // handles arrays like ?status=SCHEDULED&status=LIVE
   });
 };
+
 
 export const getSchedulesByQuizId = async (quizId) => {
   return await axiosInstance.get(`/api/schedule/quiz/${quizId}`);
@@ -82,3 +79,5 @@ export const getSchedulesByQuizId = async (quizId) => {
 export const cancelById = async (id) => {
   return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
 };
+
+
