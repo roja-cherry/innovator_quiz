@@ -19,7 +19,7 @@ export const editQuiz = (formData, quizId) => {
 };
 
 export const getQuiz = (quizId) => {
-  return axiosInstance.get(`/api/admin/quiz/${quizId}`);
+  return axiosInstance.get(`/api/quiz/${quizId}`);
 };
 
 export const getQuizList = (params) => {
