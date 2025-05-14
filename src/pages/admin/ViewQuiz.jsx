@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { QuizWithAnswer } from "../../components/QuizWithAnswer";
 import { getQuizWithQuestions } from "../../api/apiService";
 import { getSchedulesByQuizId } from "../../api/apiService";
@@ -10,16 +10,16 @@ export const ViewQuiz = () => {
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [schedules, setSchedules] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuizAndSchedules = async () => {
       try {
-
         const [quizWithQuestions, schedulesForQuiz] = await Promise.all([
           getQuizWithQuestions(id),
-          getSchedulesByQuizId(id)
-        ])
-        
+          getSchedulesByQuizId(id),
+        ]);
+
         setQuizData(quizWithQuestions?.data);
         setSchedules(schedulesForQuiz?.data);
       } catch (error) {
@@ -65,6 +65,7 @@ export const ViewQuiz = () => {
                     <th className="bg-light">Status</th>
                     <th className="bg-light">Start Time</th>
                     <th className="bg-light">End Time</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -78,6 +79,7 @@ export const ViewQuiz = () => {
                       </td>
                       <td>{formatToDateTimeString(schedule.startDateTime)}</td>
                       <td>{formatToDateTimeString(schedule.endDateTime)}</td>
+                      
                     </tr>
                   ))}
                 </tbody>
