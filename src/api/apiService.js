@@ -3,7 +3,7 @@ import qs from "qs";
 
 
 export const createQuiz = (formData) => {
-  return axiosInstance.post("/api/admin/quiz/create", formData, {
+  return axiosInstance.post("/api/quiz", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -11,7 +11,7 @@ export const createQuiz = (formData) => {
 };
 
 export const editQuiz = (formData, quizId) => {
-  return axiosInstance.put(`/api/admin/quiz/${quizId}`, formData, {
+  return axiosInstance.put(`/api/quiz/${quizId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

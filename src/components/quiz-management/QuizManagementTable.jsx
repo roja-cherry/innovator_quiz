@@ -3,7 +3,6 @@ import React from "react";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
 import {
-  formatStatus,
   formatToDateTimeString,
   getStatusClassName,
   STATUS_CLASSNAME,

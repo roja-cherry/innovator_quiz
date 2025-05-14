@@ -23,16 +23,6 @@ export const formatToDateTimeString = (dateTime) => {
   return date.toLocaleString("en-US", options);
 };
 
-export const formatStatus = (status) => {
-  const formattedStatus = {
-    COMPLETED: "Completed",
-    PUBLISHED: "Published",
-    CREATED: "Created",
-  };
-
-  return formattedStatus[status];
-};
-
 export const getStatusClassName = (status) => {
   const statusClassName = {
     COMPLETED: "badge text-bg-success",
