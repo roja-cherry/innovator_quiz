@@ -1,4 +1,6 @@
 import { axiosInstance } from "./axiosInstance";
+import qs from "qs";
+
 
 export const createQuiz = (formData) => {
   return axiosInstance.post("/api/admin/quiz/create", formData, {
