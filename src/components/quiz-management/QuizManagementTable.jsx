@@ -39,7 +39,10 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       onDelete(quizId);
     } catch (error) {
       console.error("Failed to delete quiz:", error);
-      Swal.fire("Error", "Failed to delete quiz.", "error");
+      const errorMessage =
+        error?.response?.data?.message || "Failed to delete quiz.";
+    
+      Swal.fire("Error", errorMessage, "error");
     }
   };
 

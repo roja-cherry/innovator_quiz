@@ -3,21 +3,22 @@ import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import { APP_URLS } from "../../utilities";
 
+export const adminUrls = [
+  {
+    text: "Dashboard",
+    path: "/",
+  },
+  {
+    text: "Quiz Management",
+    path: "/admin/quiz-management",
+  },
+  {
+    text: APP_URLS['publish']?.text,
+    path: APP_URLS['publish']?.url,
+  },
+];
+
 const Navbar = () => {
-  const adminUrls = [
-    {
-      text: "Dashboard",
-      path: "/",
-    },
-    {
-      text: "Quiz Management",
-      path: "/admin/quiz-management",
-    },
-    {
-      text: APP_URLS['publish']?.text,
-      path: APP_URLS['publish']?.url,
-    },
-  ];
 
   const [urls, setUrls] = useState(adminUrls);
 

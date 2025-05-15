@@ -13,9 +13,34 @@
     }
 
     &.active {
-    //   color: #000 !important;
+      //   color: #000 !important;
       color: #fff !important;
       font-weight: 500;
     }
+  }
+}
+
+.sidebar {
+  transition: width 0.3s ease;
+  overflow: hidden;
+  height: 100vh;
+  box-shadow: 0 0 10px #0000000d;
+}
+
+.sidebar.open {
+  min-width: 15rem;
+}
+
+.sidebar.closed {
+  width: 0;
+}
+
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important;
   }
 }
