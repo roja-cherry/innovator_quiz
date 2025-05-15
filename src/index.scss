@@ -88,5 +88,47 @@ input[type="range"] {
     background-color: rgba(12, 114, 67, 0.1); // red-500
     color: #198754;
   }
-  
 }
+
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  .tooltip-text {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 10px;
+
+    position: absolute;
+    bottom: 125%; // position above the element
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%; // arrow pointing down
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: black transparent transparent transparent;
+    }
+  }
+
+  &:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+

@@ -99,25 +99,34 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                   </span>
                 </td>
                 <td>
-                  <LiaEdit
-                    className={`action-btn me-3 text-black ${
-                      !["PUBLISHED", "CREATED"].includes(quiz?.status)
-                        ? "btn-disabled"
-                        : ""
-                    }`}
-                    onClick={() => {
-                      if (["PUBLISHED", "CREATED"].includes(quiz?.status))
-                        handleEdit(quiz.quizId);
-                    }}
-                  />
-                  <LiaTrashAltSolid
-                    className={`ms-2 action-btn text-danger ${
-                      !["COMPLETED", "CREATED"].includes(quiz?.status) ? "btn-disabled" : ""
-                    }`}
-                    onClick={() => {
-                      if (["COMPLETED", "CREATED"].includes(quiz?.status)) handleDelete(quiz.quizId);
-                    }}
-                  />
+                  <div class="tooltip-container">
+                    <LiaEdit
+                      className={`action-btn me-3 text-black ${
+                        !["PUBLISHED", "CREATED"].includes(quiz?.status)
+                          ? "btn-disabled"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        if (["PUBLISHED", "CREATED"].includes(quiz?.status))
+                          handleEdit(quiz.quizId);
+                      }}
+                    />
+                    <span class="tooltip-text">Edit Quiz</span>
+                  </div>
+                  <div class="tooltip-container">
+                    <LiaTrashAltSolid
+                      className={`ms-2 action-btn text-danger ${
+                        !["COMPLETED", "CREATED"].includes(quiz?.status)
+                          ? "btn-disabled"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        if (["COMPLETED", "CREATED"].includes(quiz?.status))
+                          handleDelete(quiz.quizId);
+                      }}
+                    />
+                    <span class="tooltip-text">Delete Quiz</span>
+                  </div>
                 </td>
               </tr>
             ))

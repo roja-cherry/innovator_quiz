@@ -12,6 +12,8 @@ import { CiFilter } from "react-icons/ci";
 import { IoSearchOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { ScheduleFilter } from "../../../components/schedule/ScheduleFilter";
+import { MdContentCopy, MdEditCalendar, MdOutlineRepeat } from "react-icons/md";
+import { FaRegCircleStop } from "react-icons/fa6";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,12 +27,12 @@ const Dashboard = () => {
     const params = Object.fromEntries(searchParams.entries());
     const updatedFilters = { ...filters, ...params };
     setFilters(updatedFilters);
-    fetchAllSchedules();
+    fetchAllSchedules(updatedFilters);
   }, []);
 
-  const fetchAllSchedules = async () => {
+  const fetchAllSchedules = async (params = filters) => {
     try {
-      const response = await getAllSchedules();
+      const response = await getAllSchedules(params);
       setSchedules(response.data?.reverse());
     } catch (error) {
       console.error("Failed to fetch scheduled quizzes:", error);
@@ -122,13 +124,7 @@ const Dashboard = () => {
   };
 
   const applyFilter = async () => {
-    try {
-      const response = await getAllSchedules(filters);
-      setSchedules(response.data?.reverse());
-    } catch (error) {
-      console.error("Failed to apply filters:", error);
-      toast.error("Failed to apply filters");
-    }
+    fetchAllSchedules();
   };
 
   return (
@@ -197,38 +193,45 @@ const Dashboard = () => {
                     {schedule.statusText}
                   </span>
                 </td>
-                <td className="text-en">
-                  <button
-                    className="btn btn-success btn-sm me-2"
-                    onClick={() => copyScheduleAttendUrl(schedule?.id)}
-                  >
-                    Copy Link
-                  </button>
-                  <button
-                    className="btn btn-primary btn-sm ms-2"
-                    disabled={["ACTIVE", "COMPLETED"].includes(
-                      schedule?.status
-                    )}
-                    onClick={() =>
-                      !["ACTIVE", "COMPLETED"].includes(schedule?.status) &&
-                      handleReschedule(schedule?.id)
-                    }
-                  >
-                    Re-Schedule
-                  </button>
+                <td>
+                  <div class="tooltip-container">
+                    <MdContentCopy
+                      className="action-btn text-success"
+                      onClick={() => copyScheduleAttendUrl(schedule?.id)}
+                    />
+                    <span class="tooltip-text">Copy Quiz URL</span>
+                  </div>
 
-                  <button
-                    className={`btn btn-outline-danger btn-sm ms-2`}
-                    disabled={["CANCELLED", "COMPLETED"]?.includes(
-                      schedule?.status
-                    )}
-                    onClick={() =>
-                      !["CANCELLED", "COMPLETED"]?.includes(schedule?.status) &&
-                      handleCancel(schedule.id)
-                    }
-                  >
-                    Cancel
-                  </button>
+                  <div class="tooltip-container">
+                    <MdEditCalendar
+                      className={`action-btn text-primary ms-3 ${
+                        ["ACTIVE", "COMPLETED"].includes(schedule?.status)
+                          ? "btn-disabled"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        !["ACTIVE", "COMPLETED"].includes(schedule?.status) &&
+                        handleReschedule(schedule?.id)
+                      }
+                    />
+                    <span class="tooltip-text">Re-Schedule</span>
+                  </div>
+
+                  <div class="tooltip-container">
+                    <FaRegCircleStop
+                      className={`action-btn text-danger ms-3 ${
+                        ["CANCELLED", "COMPLETED"]?.includes(schedule?.status)
+                          ? "btn-disabled"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        !["CANCELLED", "COMPLETED"]?.includes(
+                          schedule?.status
+                        ) && handleCancel(schedule.id)
+                      }
+                    />
+                    <span class="tooltip-text">Cancel Schedule</span>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -236,7 +239,7 @@ const Dashboard = () => {
             {!data?.length && (
               <tr>
                 <td colSpan="5" className="text-center">
-                  No scheduled quizzes found.
+                  No Data Found, try changing filters.
                 </td>
               </tr>
             )}
