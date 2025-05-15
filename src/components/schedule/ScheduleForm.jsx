@@ -93,8 +93,8 @@ const ScheduleForm = ({ isEdit = false }) => {
   const schedule = async () => {
     try {
       await createSchedule({
-        startDateTime,
-        endDateTime,
+        quizStartDateTime: startDateTime,
+        quizEndDateTime: endDateTime,
         quizId: selectedOption.value,
       });
       const confirm = await Swal.fire({
