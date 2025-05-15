@@ -7,7 +7,7 @@ const QuizFilter = ({
 }) => {
   return (
     <div className="row mt-3 filters bg-light p-2">
-      {/* <div className="col-md-3">
+      <div className="col-md-3">
         <label htmlFor="status" className="form-label">
           Status
         </label>
@@ -42,9 +42,12 @@ const QuizFilter = ({
           >
             Completed
           </option>
+          <option value="ACTIVE" selected={filters["status"] === "ACTIVE"}>
+            Active
+          </option>
         </select>
-      </div> */}
-      <div className="col-md-3">
+      </div>
+      {/* <div className="col-md-3">
         <label htmlFor="date" className="form-label">
           Created Within
         </label>
@@ -81,23 +84,19 @@ const QuizFilter = ({
             Before 6 months
           </option>
         </select>
-      </div>
+      </div> */}
       {/* Scheduled? Filter */}
+
       <div className="col-md-3">
-        <label htmlFor="isScheduled" className="form-label">
-          Scheduled?
+        <label htmlFor="startDate" className="form-label">
+          Start Date
         </label>
-        <select
-          id="isScheduled"
-          name="isScheduled"
-          className="form-select"
-          value={filters?.isScheduled}
-          onChange={(e) => handleFilterChange("isScheduled", e.target.value)}
-        >
-          <option value={-1}>Select Scheduled or Not</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
+        <input className="form-control"
+          type="date"
+          name="startDate"
+          value={filters?.startDate}
+          onChange={(e) => handleFilterChange("startDate", e.target.value)}
+        />
       </div>
 
       <div className="col-12 mt-4">
