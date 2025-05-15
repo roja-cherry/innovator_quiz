@@ -23,7 +23,7 @@ export const getQuiz = (quizId) => {
 };
 
 export const getQuizList = (params) => {
-  return axiosInstance.get("api/admin/quiz/quizzes", { params });
+  return axiosInstance.get("api/quiz/quizzes", { params });
 };
 
 export const searchQuiz = (keyword) => {
@@ -39,7 +39,7 @@ export const statusActivate = (quizId, newStatus) => {
 };
 
 export const deleteQuiz = (quizId) => {
-  return axiosInstance.delete(`/api/schedule/${quizId}`);
+  return axiosInstance.delete(`/api/quiz/${quizId}`);
 };
 
 export const getQuizWithQuestions = async (id) => {
