@@ -23,8 +23,8 @@ export const ScheduleFilter = ({
           onChange={(e) => handleFilterChange("status", e.target.value)}
         >
           <option value={-1}>Select Status</option>
-          <option value="SCHEDULED">Scheduled</option>
-          <option value="LIVE">Live</option>
+          <option value="PUBLISHED">Published</option>
+          <option value="ACTIVE">Active</option>
           <option value="COMPLETED">Completed</option>
           <option value="CANCELLED">Cancelled</option>
         </select>
