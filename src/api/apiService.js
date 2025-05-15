@@ -64,7 +64,7 @@ export const getScheduledQuizzes = async () => {
 };
 
 export const getAllSchedules = async (params) => {
-  return await axiosInstance.get("/api/schedule/schedules", {
+  return await axiosInstance.get("/api/schedule", {
     params,
     paramsSerializer: (params) =>
       qs.stringify(params, { arrayFormat: "repeat" }), // handles arrays like ?status=SCHEDULED&status=LIVE
