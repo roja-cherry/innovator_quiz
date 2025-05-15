@@ -43,7 +43,7 @@ export const deleteQuiz = (quizId) => {
 };
 
 export const getQuizWithQuestions = async (id) => {
-  return await axiosInstance.get(`/api/admin/quiz/quiz-with-questions/${id}`);
+  return await axiosInstance.get(`/api/quiz/${id}`);
 };
 
 export const createSchedule = async (data) => {

@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { QuizWithAnswer } from "../../components/QuizWithAnswer";
 import { getQuizWithQuestions } from "../../api/apiService";
-import { getSchedulesByQuizId } from "../../api/apiService";
-import { formatToDateTimeString, STATUS_CLASSNAME } from "../../utilities";
 
 export const ViewQuiz = () => {
   let { id } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [schedules, setSchedules] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuizAndSchedules = async () => {
       try {
-        const [quizWithQuestions, schedulesForQuiz] = await Promise.all([
-          getQuizWithQuestions(id),
-          getSchedulesByQuizId(id),
-        ]);
-
+        const quizWithQuestions = await getQuizWithQuestions(id);
         setQuizData(quizWithQuestions?.data);
-        setSchedules(schedulesForQuiz?.data);
       } catch (error) {
         console.error("Error fetching quiz or schedules:", error);
       } finally {
@@ -52,7 +43,6 @@ export const ViewQuiz = () => {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
