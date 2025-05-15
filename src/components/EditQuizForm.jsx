@@ -17,7 +17,7 @@ const EditQuizForm = () => {
     const fetchQuiz = async () => {
       try {
         const { data } = await getQuiz(id);
-        if(data.status === "COMPLETED"){
+        if (data.status === "COMPLETED") {
           toast.error("Can't edit the quiz, Quiz already exists");
           navigate(`/admin/quiz-management`);
         }
@@ -42,7 +42,7 @@ const EditQuizForm = () => {
     const inputValue = e.target.value;
 
     if (inputValue.length > 50) {
-      setErrors({quizName: "Quiz Title can't exceed 50 characters"});
+      setErrors({ quizName: "Quiz Title can't exceed 50 characters" });
       return;
     } else {
       setErrors({});
@@ -109,7 +109,9 @@ const EditQuizForm = () => {
           required
           onChange={handleInputChange}
         />
-        {errors?.quizName && <small style={{ color: "red" }}>{errors?.quizName}</small>}
+        {errors?.quizName && (
+          <small style={{ color: "red" }}>{errors?.quizName}</small>
+        )}
       </div>
 
       <div className="d-flex align-items-center mb-2">

@@ -3,7 +3,6 @@ import FileUpload from "./file-upload/FileUpload";
 import { createQuiz } from "../api/apiService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { GiSmallFire } from "react-icons/gi";
 
 const CreateQuizForm = () => {
   const [excelFile, setExcelFile] = useState(null);
@@ -72,7 +71,7 @@ const CreateQuizForm = () => {
         navigate("/admin/quiz-management");
     } catch (err) {
       // console.log(err);
-      const errorMessage = err.response?.data?.message;
+      const errorMessage = err.response?.data?.message ?? err?.message;
 
       Swal.fire({
         icon: "error",
