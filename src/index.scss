@@ -79,7 +79,7 @@ input[type="range"] {
     color: #14532d;
   }
 
-  &.is-scheduled {
+  &.created {
     background-color: rgba(255, 157, 0, 0.1); // emerald-600, more visible
     color: rgba(255, 157, 0); // white text for contrast
   }
