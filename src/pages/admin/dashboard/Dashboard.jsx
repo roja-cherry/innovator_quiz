@@ -118,8 +118,16 @@ const Dashboard = () => {
     setSearchParams(searchParams);
   };
 
-  const applyFilter = () => {};
-
+  const applyFilter = async () => {
+    try {
+      const response = await getAllSchedules(filters);
+      setSchedules(response.data?.reverse());
+    } catch (error) {
+      console.error("Failed to apply filters:", error);
+      toast.error("Failed to apply filters");
+    }
+  };
+  
   return (
     <section className="container-fluid quiz-management-container p-5">
       <h2>Dashboard</h2>
