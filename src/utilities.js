@@ -1,3 +1,7 @@
+import toast from "react-hot-toast";
+
+export const QUIZ_ATTEND_URL = "/quiz/:id/attend"
+
 export const APP_URLS = {
   publish: {
     text: "Schedule",
@@ -40,3 +44,16 @@ export const STATUS_CLASSNAME = {
   true: "status-badge is-scheduled",
   false: "status-badge unscheduled",
 };
+
+export const copyScheduleAttendUrl = async (scheduleId) => {
+  const baseUrl = window.location.origin
+  const path = QUIZ_ATTEND_URL.replace(":id", scheduleId)
+
+  try {
+    await navigator.clipboard.writeText(`${baseUrl}${path}`);
+    toast.success("Quiz url copied")
+  } catch (error) {
+    toast.error("Failed to copy quiz url")
+  }
+
+}

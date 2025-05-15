@@ -8,8 +8,9 @@ import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
-import { APP_URLS } from "./utilities";
+import { APP_URLS, QUIZ_ATTEND_URL } from "./utilities";
 import { EditPublish } from "./pages/admin/publish/EditPublish";
+import { AttendQuiz } from "./pages/user/AttendQuiz";
 
 export const App = () => {
   return (
@@ -25,6 +26,7 @@ export const App = () => {
           <Route path="/admin/schedule/:id/re-schedule" element={<EditPublish />} />
           <Route path="/admin/quiz-management/quiz/:id" element={<ViewQuiz />} /> 
         </Route>
+        <Route path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
       </Routes>
     </BrowserRouter>
   );
