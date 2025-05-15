@@ -23,7 +23,7 @@ export const getQuiz = (quizId) => {
 };
 
 export const getQuizList = (params) => {
-  return axiosInstance.get("api/quiz/quizzes", { params });
+  return axiosInstance.get("api/quiz", { params });
 };
 
 export const searchQuiz = (keyword) => {
@@ -51,7 +51,7 @@ export const createSchedule = async (data) => {
 };
 
 export const reScheduleQuiz = async (id, data) => {
-  return await axiosInstance.patch(`/api/schedule/${id}/reschedule`, data);
+  return await axiosInstance.patch(`/api/schedule/${scheduleId}/reschedule`, data);
 };
 
 export const getSchedule = async (id) => {
@@ -77,7 +77,7 @@ export const getSchedulesByQuizId = async (quizId) => {
 };
 
 export const cancelById = async (id) => {
-  return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
+  return await axiosInstance.patch(`/api/schedule/${scheduleId}/cancel`);
 };
 
 

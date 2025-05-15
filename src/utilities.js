@@ -33,10 +33,9 @@ export const getStatusClassName = (status) => {
 };
 
 export const STATUS_CLASSNAME = {
+  CREATED: "status-badge created",
   COMPLETED: "status-badge completed",
-  SCHEDULED: "status-badge scheduled",
+  PUBLISHED: "status-badge scheduled",
   CANCELLED: "status-badge cancelled",
-  LIVE: "status-badge live",
-  true: "status-badge is-scheduled",
-  false: "status-badge unscheduled",
+  ACTIVE: "status-badge live",
 };
