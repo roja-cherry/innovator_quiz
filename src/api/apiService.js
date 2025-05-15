@@ -77,7 +77,7 @@ export const getSchedulesByQuizId = async (quizId) => {
 };
 
 export const cancelById = async (id) => {
-  return await axiosInstance.patch(`/api/schedule/${scheduleId}/cancel`);
+  return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
 };
 
 

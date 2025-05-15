@@ -30,7 +30,7 @@ export const ScheduleFilter = ({
         </select>
       </div>
 
-      <div className="col-md-3">
+      {/* <div className="col-md-3">
         <label htmlFor="date-range" className="form-label">
           Created Within
         </label>
@@ -47,7 +47,7 @@ export const ScheduleFilter = ({
             // withPortal
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="col-12 mt-4">
         <button className="btn btn-primary ms-auto" onClick={applyFilter}>
