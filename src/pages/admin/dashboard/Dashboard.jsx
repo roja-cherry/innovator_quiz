@@ -191,9 +191,9 @@ const Dashboard = () => {
                 <td className="text-end">
                   <button
                     className="btn btn-primary btn-sm ms-2"
-                    disabled={["LIVE"].includes(schedule?.status)}
+                    disabled={["ACTIVE","COMPLETED"].includes(schedule?.status)}
                     onClick={() =>
-                      !["LIVE"].includes(schedule?.status) &&
+                      !["ACTIVE","COMPLETED"].includes(schedule?.status) &&
                       handleReschedule(schedule?.id)
                     }
                   >
