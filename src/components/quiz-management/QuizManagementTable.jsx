@@ -41,7 +41,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
       console.error("Failed to delete quiz:", error);
       const errorMessage =
         error?.response?.data?.message || "Failed to delete quiz.";
-    
+
       Swal.fire("Error", errorMessage, "error");
     }
   };
@@ -94,23 +94,28 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
-                  <span className={STATUS_CLASSNAME[quiz?.status]}>{quiz?.statusText}</span>
+                  <span className={STATUS_CLASSNAME[quiz?.status]}>
+                    {quiz?.statusText}
+                  </span>
                 </td>
                 <td>
                   <LiaEdit
                     className={`action-btn me-3 text-black ${
-                      quiz?.isScheduled ? "btn-disabled" : ""
+                      !["PUBLISHED", "CREATED"].includes(quiz?.status)
+                        ? "btn-disabled"
+                        : ""
                     }`}
                     onClick={() => {
-                      if (!quiz?.isScheduled) handleEdit(quiz.quizId);
+                      if (["PUBLISHED", "CREATED"].includes(quiz?.status))
+                        handleEdit(quiz.quizId);
                     }}
                   />
                   <LiaTrashAltSolid
                     className={`ms-2 action-btn text-danger ${
-                      quiz?.isScheduled ? "btn-disabled" : ""
+                      !["COMPLETED", "CREATED"].includes(quiz?.status) ? "btn-disabled" : ""
                     }`}
                     onClick={() => {
-                      if (!quiz?.isScheduled) handleDelete(quiz.quizId);
+                      if (["COMPLETED", "CREATED"].includes(quiz?.status)) handleDelete(quiz.quizId);
                     }}
                   />
                 </td>

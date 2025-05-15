@@ -7,11 +7,10 @@ const Layout = () => {
     <AppSidebar>
       <main className="flex-1">
         {/* <Navbar /> */}
-        <Outlet />
+      <Outlet />
       </main>
     </AppSidebar>
   );
-  return <></>;
 };
 
 export default Layout;

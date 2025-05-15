@@ -189,6 +189,7 @@ const Dashboard = () => {
                   </span>
                 </td>
                 <td className="text-end">
+                  <button className="btn btn-success btn-sm me-2">Copy Link</button>
                   <button
                     className="btn btn-primary btn-sm ms-2"
                     disabled={["ACTIVE","COMPLETED"].includes(schedule?.status)}
