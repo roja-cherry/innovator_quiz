@@ -23,7 +23,7 @@ export const getQuiz = (quizId) => {
 };
 
 export const getQuizList = (params) => {
-  return axiosInstance.get("api/admin/quiz/quizzes", { params });
+  return axiosInstance.get("api/quiz", { params });
 };
 
 export const searchQuiz = (keyword) => {

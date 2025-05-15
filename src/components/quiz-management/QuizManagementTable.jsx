@@ -63,7 +63,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               Created At
             </th>
             <th scope="col" className="bg-light">
-              Scheduled
+              Status
             </th>
             <th scope="col" className="bg-light">
               Action
@@ -91,12 +91,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                 <td>{quiz.timer} min</td>
                 <td>{formatToDateTimeString(quiz.createdAt)}</td>
                 <td>
-                  <span className={STATUS_CLASSNAME[quiz?.isScheduled]}>{quiz?.isScheduled ? "Yes" : "No"}</span>
-                  {/* {quiz.isScheduled ? (
-                    <span className="badge bg-warning text-dark">Yes</span>
-                  ) : (
-                    <span className="badge bg-secondary">No</span>
-                  )} */}
+                  <span className={STATUS_CLASSNAME[quiz?.status]}>{quiz?.statusText}</span>
                 </td>
                 <td>
                   <LiaEdit
