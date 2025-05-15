@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./dashboard.scss";
 import { cancelById, getAllSchedules } from "../../../api/apiService";
-import { formatToDateTimeString, STATUS_CLASSNAME } from "../../../utilities";
+import {
+  copyScheduleAttendUrl,
+  formatToDateTimeString,
+  STATUS_CLASSNAME,
+} from "../../../utilities";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CiFilter } from "react-icons/ci";
@@ -33,7 +37,6 @@ const Dashboard = () => {
       toast.error("Failed to load scheduled quizzes");
     }
   };
-  
 
   const handleCancel = async (id) => {
     try {
@@ -127,7 +130,7 @@ const Dashboard = () => {
       toast.error("Failed to apply filters");
     }
   };
-  
+
   return (
     <section className="container-fluid quiz-management-container p-5">
       <h2>Dashboard</h2>
@@ -171,9 +174,8 @@ const Dashboard = () => {
               <th className="bg-light">Quiz Title</th>
               <th className="bg-light">Start Time</th>
               <th className="bg-light">End Time</th>
-              <th className="bg-light">Updated At</th>
               <th className="bg-light">Status</th>
-              <th className="action bg-light text-end">Action</th>
+              <th className="action bg-light text-en">Action</th>
             </tr>
           </thead>
 
@@ -190,19 +192,25 @@ const Dashboard = () => {
                 </td>
                 <td>{formatToDateTimeString(schedule.startDateTime)}</td>
                 <td>{formatToDateTimeString(schedule.endDateTime)}</td>
-                <td>{formatToDateTimeString(schedule.updatedAt)}</td>
                 <td>
                   <span className={STATUS_CLASSNAME[schedule?.status]}>
                     {schedule.statusText}
                   </span>
                 </td>
-                <td className="text-end">
-                  <button className="btn btn-success btn-sm me-2">Copy Link</button>
+                <td className="text-en">
+                  <button
+                    className="btn btn-success btn-sm me-2"
+                    onClick={() => copyScheduleAttendUrl(schedule?.id)}
+                  >
+                    Copy Link
+                  </button>
                   <button
                     className="btn btn-primary btn-sm ms-2"
-                    disabled={["ACTIVE","COMPLETED"].includes(schedule?.status)}
+                    disabled={["ACTIVE", "COMPLETED"].includes(
+                      schedule?.status
+                    )}
                     onClick={() =>
-                      !["ACTIVE","COMPLETED"].includes(schedule?.status) &&
+                      !["ACTIVE", "COMPLETED"].includes(schedule?.status) &&
                       handleReschedule(schedule?.id)
                     }
                   >
