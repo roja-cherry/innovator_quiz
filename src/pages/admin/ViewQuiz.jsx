@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { QuizWithAnswer } from "../../components/QuizWithAnswer";
 import { getQuizWithQuestions } from "../../api/apiService";
+import { useAppContext } from "../../context/AppContext";
 
 export const ViewQuiz = () => {
   let { id } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const { setTitle } = useAppContext();
+
+  useEffect(() => {
+    setTitle(quizData?.quiz?.quizName);
+    return () => setTitle("");
+  }, [quizData?.quiz]);
 
   useEffect(() => {
     const fetchQuizAndSchedules = async () => {
@@ -29,7 +37,7 @@ export const ViewQuiz = () => {
 
   return (
     <section className="container-fluid py-5 px-5">
-      <h2 className="text-center">{quizData?.quiz?.quizName} Questions</h2>
+      {/* <h2 className="text-center">{quizData?.quiz?.quizName} Questions</h2> */}
       <div className="d-flex justify-content-center mt-6 ">
         {/* Left column: Quiz Questions */}
         <div className="w-75">

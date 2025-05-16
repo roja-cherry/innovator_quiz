@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useAppContext } from "../../context/AppContext";
 
 export const adminUrls = [
   {
@@ -19,8 +20,11 @@ export const adminUrls = [
 
 export function AppSidebar({ children }) {
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
+  const { title } = useAppContext();
 
   useEffect(() => {
+    console.log(title);
+    
     const handleResize = () => {
       setIsOpen(window.innerWidth >= 768);
     };
@@ -63,15 +67,18 @@ export function AppSidebar({ children }) {
       </div>
 
       {/* Main content */}
-      <div className="main-content flex-grow-1 flex-1 w-100">
-        <div className="d-flex align-items-center bg-light p-3 shadow-sm" style={{height: '5rem'}}>
+      <div className="main-content flex-grow-1_ flex-1 w-100">
+        <div
+          className="d-flex align-items-center bg-light p-3 shadow-sm"
+          style={{ height: "5rem" }}
+        >
           <button
             className="btn btn-outline-primary d-md-none ms-4"
             onClick={toggleSidebar}
           >
             <RxHamburgerMenu />
           </button>
-          {/* <h4 className="m-0 ms-4">Hello, Guest</h4> */}
+          <h4 className="m-0 ms-4">{title}</h4>
         </div>
 
         {/* Body */}

@@ -52,7 +52,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 table-responsive">
       <table className="table table-hover">
         <thead>
           <tr>
@@ -63,7 +63,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
               Timer
             </th>
             <th scope="col" className="bg-light">
-              Created At
+              Created Date
             </th>
             <th scope="col" className="bg-light">
               Status

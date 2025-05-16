@@ -7,6 +7,7 @@ import QuizFilter from "../../../components/quiz-management/QuizFilter";
 import { getQuizList } from "../../../api/apiService";
 import Swal from "sweetalert2";
 import "./QuizManagement.scss";
+import { useAppContext } from "../../../context/AppContext";
 
 const QuizManagement = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +15,12 @@ const QuizManagement = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [quizList, setQuizList] = useState([]);
+  const {setTitle} = useAppContext()
+
+  useEffect(() => {
+    setTitle("Quiz Management")
+    return () => setTitle("")
+  }, [])
 
   const data = useMemo(() => {
     if (!search) return quizList;
@@ -76,7 +83,6 @@ const QuizManagement = () => {
 
   return (
     <section className="container-fluid quiz-management-container p-5">
-      <h2>Quiz Management</h2>
       <div className="mt-4">
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">

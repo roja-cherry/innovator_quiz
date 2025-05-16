@@ -14,9 +14,11 @@ import Swal from "sweetalert2";
 import { ScheduleFilter } from "../../../components/schedule/ScheduleFilter";
 import { MdContentCopy, MdEditCalendar, MdOutlineRepeat } from "react-icons/md";
 import { FaRegCircleStop } from "react-icons/fa6";
+import { useAppContext } from "../../../context/AppContext";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { setTitle } = useAppContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const [schedules, setSchedules] = useState([]);
   const [showFilter, setShowFilter] = useState(searchParams?.size > 0);
@@ -24,10 +26,13 @@ const Dashboard = () => {
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
+    setTitle("Dashboard")
     const params = Object.fromEntries(searchParams.entries());
     const updatedFilters = { ...filters, ...params };
     setFilters(updatedFilters);
     fetchAllSchedules(updatedFilters);
+
+    return () => setTitle("")
   }, []);
 
   const fetchAllSchedules = async (params = filters) => {
@@ -129,8 +134,6 @@ const Dashboard = () => {
 
   return (
     <section className="container-fluid quiz-management-container p-5">
-      <h2>Dashboard</h2>
-
       <div className="d-flex justify-content-between mt-4">
         <div className="d-flex align-items-center">
           <div className="position-relative">

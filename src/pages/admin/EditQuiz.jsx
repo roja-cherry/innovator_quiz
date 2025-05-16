@@ -1,7 +1,16 @@
+import { useEffect } from "react";
 import EditQuizForm from "../../components/EditQuizForm";
+import { useAppContext } from "../../context/AppContext";
 import "./QuizFormPage.scss";
 
 const EditQuiz = () => {
+  const { setTitle } = useAppContext();
+
+  useEffect(() => {
+    setTitle("Update Quiz");
+    return () => setTitle("");
+  }, []);
+
   return (
     <section className="container-fluid p-5">
       <h2>Edit Quiz</h2>
