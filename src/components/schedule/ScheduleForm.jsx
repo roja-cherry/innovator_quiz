@@ -64,6 +64,11 @@ const ScheduleForm = ({ isEdit = false }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (new Date(endDateTime) <= new Date(startDateTime)) {
+      alert("End Date & Time must be after Start Date & Time");
+      return;
+    }
+
     if (isEdit) await reSchedule();
     else await schedule();
   };
@@ -86,7 +91,7 @@ const ScheduleForm = ({ isEdit = false }) => {
       if (confirm.isDismissed || confirm.isConfirmed)
         navigate("/admin/quiz-management");
     } catch (error) {
-      toast.error(error?.response?.data?.message ?? "Error in creating quiz");
+      toast.error(error?.response?.data?.message ?? error?.message);
     }
   };
 
@@ -125,12 +130,11 @@ const ScheduleForm = ({ isEdit = false }) => {
       getSchedule(id)
         .then((res) => {
           const option = {
-            label: res?.data?.quizTitle,
-            value: res?.data?.quizId,
+            label: res?.data?.quiz?.quizName,
+            value: res?.data?.quiz?.quizId,
           };
           setSelectedOption(option);
           console.log(option);
-          console.log(selectedOption);
 
           setStartDateTime(res?.data?.startDateTime);
           setEndDateTime(res?.data?.endDateTime);
@@ -158,6 +162,7 @@ const ScheduleForm = ({ isEdit = false }) => {
           onChange={(option) => setSelectedOption(option)}
           loadOptions={handleSearch}
           styles={customStyles}
+          isDisabled={isEdit}
         />
       </div>
 
@@ -177,6 +182,7 @@ const ScheduleForm = ({ isEdit = false }) => {
               setEndDateTime(""); // clear end time if it's invalid now
             }
           }}
+          required
         />
       </div>
 
@@ -189,9 +195,10 @@ const ScheduleForm = ({ isEdit = false }) => {
           className="form-control"
           name="endDateTime"
           value={endDateTime}
-          min={startDateTime || now}
+          min={startDateTime}
           onChange={(e) => setEndDateTime(e.target.value)}
           disabled={!startDateTime}
+          required
         />
       </div>
 
