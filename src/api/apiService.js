@@ -51,7 +51,7 @@ export const createSchedule = async (data) => {
 };
 
 export const reScheduleQuiz = async (id, data) => {
-  return await axiosInstance.patch(`/api/schedule/${scheduleId}/reschedule`, data);
+  return await axiosInstance.patch(`/api/schedule/${id}/reschedule`, data);
 };
 
 export const getSchedule = async (id) => {
