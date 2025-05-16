@@ -4,5 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
+import { AppContextProvider } from "./context/AppContext.jsx";
 
-createRoot(document.getElementById("root")).render(<App />);
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <AppContextProvider>
+    <App />
+  </AppContextProvider>
+);
