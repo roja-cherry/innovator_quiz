@@ -39,7 +39,7 @@ export function AppSidebar({ children }) {
       <div
         className={`sidebar ${isOpen ? "open" : "closed"} d-flex flex-column`}
       >
-        <div className="p-3 border-bottom d-flex align-items-center">
+        <div className="p-3 d-flex align-items-center">
           <Link className="navbar-brand" to="/">
             <img
               src="/logo.png"
@@ -69,7 +69,7 @@ export function AppSidebar({ children }) {
       {/* Main content */}
       <div className="main-content flex-grow-1_ flex-1 w-100">
         <div
-          className="d-flex align-items-center bg-light p-3 shadow-sm"
+          className="d-flex align-items-center p-3 shadow-sm"
           style={{ height: "5rem" }}
         >
           <button
