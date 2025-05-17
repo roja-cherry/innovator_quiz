@@ -36,7 +36,7 @@
       &.text-dark {
         &:hover {
           color: $primary !important;
-          background-color: with-opacity($primary, 0.25);
+          background-color: with-opacity($primary, 0.1);
         }
       }
     }
