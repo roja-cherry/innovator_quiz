@@ -9,6 +9,16 @@ body {
   color: #fff !important;
 }
 
+.btn-secondary {
+  border: none;
+  background-color: with-opacity($primary, 0.25);
+  color: $primary !important;
+
+  &:hover {
+    background-color: with-opacity($primary, 0.35);
+  }
+}
+
 .btn-disabled {
   cursor: not-allowed !important;
 }
