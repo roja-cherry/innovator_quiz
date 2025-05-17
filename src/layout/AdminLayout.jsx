@@ -32,7 +32,7 @@ export const AdminLayout = () => {
         className={`sidebar shadow-sm bg-white ${isSidebarOpen ? "open" : ""}`}
       >
         <div className="d-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-2 ps-3">
             <img src="/logo.png" alt="logo" style={{ width: "3rem" }} />
             <h4 className="d-none d-md-block mt-2">IQ Quiz</h4>
           </div>
