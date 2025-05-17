@@ -2,12 +2,7 @@ import toast from "react-hot-toast";
 
 export const QUIZ_ATTEND_URL = "/quiz/:id/attend"
 
-export const APP_URLS = {
-  publish: {
-    text: "Schedule",
-    url: "/admin/schedule",
-  },
-};
+
 
 export const formatToDateTimeString = (dateTime) => {
   if (!dateTime) {

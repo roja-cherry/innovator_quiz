@@ -133,7 +133,7 @@ const Dashboard = () => {
   };
 
   return (
-    <section className="container-fluid quiz-management-container p-5">
+    <section className="quiz-management-container">
       <div className="d-flex justify-content-between mt-4">
         <div className="d-flex align-items-center">
           <div className="position-relative">
@@ -197,15 +197,15 @@ const Dashboard = () => {
                   </span>
                 </td>
                 <td>
-                  <div class="tooltip-container">
+                  <div className="tooltip-container">
                     <MdContentCopy
                       className="action-btn text-success"
                       onClick={() => copyScheduleAttendUrl(schedule?.id)}
                     />
-                    <span class="tooltip-text">Copy Quiz URL</span>
+                    <span className="tooltip-text">Copy Quiz URL</span>
                   </div>
 
-                  <div class="tooltip-container">
+                  <div className="tooltip-container">
                     <MdEditCalendar
                       className={`action-btn text-primary ms-3 ${
                         ["ACTIVE", "COMPLETED"].includes(schedule?.status)
@@ -217,10 +217,10 @@ const Dashboard = () => {
                         handleReschedule(schedule?.id)
                       }
                     />
-                    <span class="tooltip-text">Re-Schedule</span>
+                    <span className="tooltip-text">Re-Schedule</span>
                   </div>
 
-                  <div class="tooltip-container">
+                  <div className="tooltip-container">
                     <FaRegCircleStop
                       className={`action-btn text-danger ms-3 ${
                         ["CANCELLED", "COMPLETED"]?.includes(schedule?.status)
@@ -233,7 +233,7 @@ const Dashboard = () => {
                         ) && handleCancel(schedule.id)
                       }
                     />
-                    <span class="tooltip-text">Cancel Schedule</span>
+                    <span className="tooltip-text">Cancel Schedule</span>
                   </div>
                 </td>
               </tr>

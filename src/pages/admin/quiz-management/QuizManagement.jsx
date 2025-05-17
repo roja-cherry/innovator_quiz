@@ -82,7 +82,7 @@ const QuizManagement = () => {
   };
 
   return (
-    <section className="container-fluid quiz-management-container p-5">
+    <section className="quiz-management-container">
       <div className="mt-4">
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">

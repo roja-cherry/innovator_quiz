@@ -4,12 +4,12 @@ import { AppSidebar } from "../components/navbar/AppSidebar";
 
 const Layout = () => {
   return (
-    <AppSidebar>
+    // <AppSidebar>
       <main className="flex-1">
         {/* <Navbar /> */}
       <Outlet />
       </main>
-    </AppSidebar>
+    // </AppSidebar>
   );
 };
 

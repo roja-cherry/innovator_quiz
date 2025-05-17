@@ -12,10 +12,8 @@ const CreateQuiz = () => {
   }, []);
 
   return (
-    <section className="container-fluid p-5">
-      <div className="quiz-form-container p-5 mt-4">
-        <CreateQuizForm />
-      </div>
+    <section className="quiz-form-container p-5 mt-4">
+      <CreateQuizForm />
     </section>
   );
 };

@@ -11,8 +11,8 @@ export const Publish = () => {
       return () => setTitle("")
     }, [])
   return (
-    <section className="container-fluid p-5 publish-page">
-      <div className="quiz-form-container p-5 mt-4">
+    <section className="publish-page">
+      <div className="quiz-form-container mt-4">
         <ScheduleForm />
       </div>
     </section>

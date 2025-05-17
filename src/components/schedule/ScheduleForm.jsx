@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { APP_URLS } from "../../utilities";
 import {
   createSchedule,
   getSchedule,

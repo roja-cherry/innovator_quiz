@@ -1,0 +1,56 @@
+@import "../variables.scss";
+
+.admin-layout {
+  // .navbar {
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //     right: 0;
+  //     z-index: 1050;
+  // }
+
+  .navbar {
+    height: 5rem;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 0rem);
+    padding: 1rem;
+    z-index: 1040;
+    transition: left 0.3s ease-in-out;
+
+    @media (max-width: 768px) {
+      left: -250px;
+
+      &.open {
+        left: 0;
+      }
+    }
+
+    .nav-link {
+      transition: background-color 250ms linear, color 250ms linear;
+
+      &.text-dark {
+        &:hover {
+          color: $primary !important;
+          background-color: with-opacity($primary, 0.25);
+        }
+      }
+    }
+  }
+
+  .content {
+    // margin-top: 56px;
+    margin-left: 250px;
+    // padding: 1rem;
+    min-height: calc(100vh - 56px);
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+}

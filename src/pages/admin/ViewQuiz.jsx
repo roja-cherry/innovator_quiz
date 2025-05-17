@@ -36,10 +36,8 @@ export const ViewQuiz = () => {
   }
 
   return (
-    <section className="container-fluid py-5 px-5">
-      {/* <h2 className="text-center">{quizData?.quiz?.quizName} Questions</h2> */}
-      <div className="d-flex justify-content-center mt-6 ">
-        {/* Left column: Quiz Questions */}
+    <section>
+      <div className="d-flex- justify-content-center mt-6 ">
         <div className="w-75">
           <div className="quiz-list">
             {quizData?.questions.map((question, index) => (

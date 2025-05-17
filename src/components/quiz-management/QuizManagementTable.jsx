@@ -99,7 +99,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                   </span>
                 </td>
                 <td>
-                  <div class="tooltip-container">
+                  <div className="tooltip-container">
                     <LiaEdit
                       className={`action-btn me-3 text-black ${
                         !["PUBLISHED", "CREATED"].includes(quiz?.status)
@@ -111,9 +111,9 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                           handleEdit(quiz.quizId);
                       }}
                     />
-                    <span class="tooltip-text">Edit Quiz</span>
+                    <span className="tooltip-text">Edit Quiz</span>
                   </div>
-                  <div class="tooltip-container">
+                  <div className="tooltip-container">
                     <LiaTrashAltSolid
                       className={`ms-2 action-btn text-danger ${
                         !["COMPLETED", "CREATED"].includes(quiz?.status)
@@ -125,7 +125,7 @@ const QuizManagementTable = ({ data = [], onDelete = () => {} }) => {
                           handleDelete(quiz.quizId);
                       }}
                     />
-                    <span class="tooltip-text">Delete Quiz</span>
+                    <span className="tooltip-text">Delete Quiz</span>
                   </div>
                 </td>
               </tr>
