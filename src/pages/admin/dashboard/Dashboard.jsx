@@ -23,7 +23,7 @@ const Dashboard = () => {
   const [schedules, setSchedules] = useState([]);
   const [showFilter, setShowFilter] = useState(searchParams?.size > 0);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({status: "ACTIVE"});
 
   useEffect(() => {
     setTitle("Dashboard")
