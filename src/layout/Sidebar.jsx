@@ -3,6 +3,7 @@ import { LuCalendarClock } from "react-icons/lu";
 import { RiListCheck3 } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
+
 export const adminUrls = [
   {
     text: "Dashboard",
@@ -34,7 +35,7 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
               className={({ isActive }) =>
                 `nav-link fw-normal d-block px-4 py-3 mt-1 text-nowrap rounded font-medium text-decoration-none ${
                   isActive
-                    ? "bg-primary_ text-primary text-white_"
+                    ? "active text-primary"
                     : "text-dark"
                 }`
               }

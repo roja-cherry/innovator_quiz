@@ -33,7 +33,7 @@ export const AdminLayout = () => {
       >
         <div className="d-flex align-items-center justify-content-between">
           <div className="d-flex align-items-center gap-2 ps-3">
-            <img src="/logo.png" alt="logo" style={{ width: "3rem" }} />
+            <img src="/logo.png" alt="logo" style={{ width: "2rem" }} />
             <h4 className="d-none d-md-block mt-2">IQ Quiz</h4>
           </div>
           <IoMdClose
@@ -57,7 +57,7 @@ export const AdminLayout = () => {
               <h2 className="ms-4 ms-md-5 text-grey">{title}</h2>
             </div>
             <div className="d-md-none">
-              <img src="/logo.png" alt="logo" style={{ width: "3rem" }} />
+              <img src="/logo.png" alt="logo" style={{ width: "2rem" }} />
             </div>
           </div>
         </nav>
