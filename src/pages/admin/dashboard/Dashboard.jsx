@@ -199,7 +199,12 @@ const Dashboard = () => {
                 <td>
                   <div className="tooltip-container">
                     <MdContentCopy
-                      className="action-btn text-success"
+                      className={`action-btn text-success 
+                        ${["CANCELLED","COMPLETED"].includes(schedule?.status)
+                          ? "btn-disabled"
+                          :""
+                        }
+                        `}
                       onClick={() => copyScheduleAttendUrl(schedule?.id)}
                     />
                     <span className="tooltip-text">Copy Quiz URL</span>
