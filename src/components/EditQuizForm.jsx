@@ -144,11 +144,9 @@ const EditQuizForm = () => {
         handleFileChange={handleFileChange}
       />
 
-      <div className="text-center">
-        <button className="btn btn-primary mt-3" type="submit">
+        <button className="btn btn-primary w-100 mt-5" type="submit">
           Update
         </button>
-      </div>
     </form>
   );
 };
