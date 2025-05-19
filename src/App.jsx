@@ -43,7 +43,7 @@ export const App = () => {
 
         {/* user routes here... */}
         <Route element={<UserLayout />}>
-          <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+          <Route  path={"/user/attend-quiz"} element={<AttendQuiz />} />
         </Route>
       </Routes>
     </BrowserRouter>
