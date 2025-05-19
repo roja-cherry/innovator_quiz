@@ -12,39 +12,52 @@ import { EditPublish } from "./pages/admin/publish/EditPublish";
 import { AttendQuiz } from "./pages/user/AttendQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
+import { NotFoundPage } from "./pages/common/not-found/NotFound";
+import { PrivateRoute } from "./components/auth/PrivateRoute";
+import { Login } from "./components/auth/Login";
+import { Unauthorized } from "./components/auth/Unauthorized";
 
 export const App = () => {
   return (
     <BrowserRouter>
       <Toaster />
       <Routes>
-        {/* admin routes here... */}
-        <Route path="/" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="admin/quiz-management" element={<QuizManagement />} />
-          <Route
-            path="/admin/quiz-management/create-quiz"
-            element={<CreateQuiz />}
-          />
-          <Route
-            path="/admin/quiz-management/edit/:id"
-            element={<EditQuiz />}
-          />
-          <Route path="/admin/schedule" element={<Publish />} />
-          <Route
-            path="/admin/schedule/:id/re-schedule"
-            element={<EditPublish />}
-          />
-          <Route
-            path="/admin/quiz-management/quiz/:id"
-            element={<ViewQuiz />}
-          />
+        {/* Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+
+        {/* User routes */}
+        <Route element={<UserLayout />}>
+          <Route path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
         </Route>
 
-        {/* user routes here... */}
-        <Route element={<UserLayout />}>
-          <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+        {/* Admin routes - protected */}
+        <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="admin/quiz-management" element={<QuizManagement />} />
+            <Route
+              path="admin/quiz-management/create-quiz"
+              element={<CreateQuiz />}
+            />
+            <Route
+              path="admin/quiz-management/edit/:id"
+              element={<EditQuiz />}
+            />
+            <Route path="admin/schedule" element={<Publish />} />
+            <Route
+              path="admin/schedule/:id/re-schedule"
+              element={<EditPublish />}
+            />
+            <Route
+              path="admin/quiz-management/quiz/:id"
+              element={<ViewQuiz />}
+            />
+          </Route>
         </Route>
+
+        {/* Catch-all route */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
