@@ -25,11 +25,7 @@ export const App = () => {
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
-
-        {/* User routes */}
-        <Route element={<UserLayout />}>
-          <Route path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
-        </Route>
+        <Route path="*" element={<NotFoundPage />} />
 
         {/* Admin routes - protected */}
         <Route element={<PrivateRoute roles={["ADMIN"]} />}>
@@ -56,8 +52,12 @@ export const App = () => {
           </Route>
         </Route>
 
+        {/* User routes */}
+        <Route element={<UserLayout />}>
+          <Route path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+        </Route>
+
         {/* Catch-all route */}
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
