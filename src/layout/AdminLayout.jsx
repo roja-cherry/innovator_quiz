@@ -46,7 +46,7 @@ export const AdminLayout = () => {
       </aside>
 
       <div className="content">
-        <nav className="navbar py-3 pe-5">
+        <nav className="navbar py-3 pe-5 shadow-sm">
           <div className="container-fluid px-0">
             <div className="d-flex align-items-center">
               <CgMenuRight

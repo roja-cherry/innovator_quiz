@@ -89,7 +89,7 @@ const QuizFilter = ({
 
       <div className="col-md-3">
         <label htmlFor="startDate" className="form-label">
-          Created Date
+          Created From
         </label>
         <input className="form-control"
           type="date"
