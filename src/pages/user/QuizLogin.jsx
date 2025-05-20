@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
 import {
   getScheduleForParticipant,
@@ -7,10 +7,11 @@ import {
 } from "../../api/apiService";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import { STATUS_CLASSNAME } from "../../utilities";
+import { formatToDateTimeString, STATUS_CLASSNAME } from "../../utilities";
 
 export const QuizLogin = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -56,6 +57,7 @@ export const QuizLogin = () => {
       setLoading(true);
       const response = await loginForSchedule(id, { email, username });
       localStorage.setItem("user", JSON.stringify(response?.data));
+      navigate(`/start/${schedule?.id}`)
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
@@ -132,7 +134,7 @@ export const QuizLogin = () => {
 
               <button
                 type="submit"
-                disabled={isLoading || schedule?.status === "COMPLETED"}
+                disabled={isLoading}
                 className="btn btn-primary w-100 py-2 fw-semibold d-flex align-items-center justify-content-center"
               >
                 <span className="me-3">Login</span>

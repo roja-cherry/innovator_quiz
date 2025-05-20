@@ -4,6 +4,12 @@ export const QUIZ_LOGIN_URL = "/quiz/:id/login"
 export const QUIZ_ATTEND_URL = "/quiz/:id/attend"
 
 
+export const USER_ROLES = {
+  ADMIN: "ADMIN",
+  PARTICIPANT: "PARTICIPANT"
+}
+
+
 
 export const formatToDateTimeString = (dateTime) => {
   if (!dateTime) {
