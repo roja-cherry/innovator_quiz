@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "./TakeQuiz.scss";
 
 function TakeQuiz() {
   const { quizId } = useParams();
@@ -26,36 +27,38 @@ function TakeQuiz() {
   if (!quizData) return <div>quiz not found</div>;
 
   return (
-    <div>
-      <h2>{quizData.quiz.quizName}</h2>
-      <h3>TIMER:{quizData.quiz.timer}</h3>
-
+    <div className="take-quiz">
+        
+      <div className="quiz-header">
+        <h2 className="quiz-title">{quizData.quiz.quizName}</h2>
+        <div className="quiz-timer-fixed">TIMER: {quizData.quiz.timer}</div>
+      </div>
       {quizData.questions.map((questionObject, questionIndex) => (
-        <div key={questionObject.questionId}>
-          <h4>
+        <div key={questionObject.questionId} className="question-block">
+          <h4 className="question-text">
             Q{questionIndex + 1}. {questionObject.question}
           </h4>
-          {[
-            questionObject.option1,
-            questionObject.option2,
-            questionObject.option3,
-            questionObject.option4,
-          ].map((optionText, optionIndex) => (
-            <label
-              key={optionIndex}
-              style={{ display: "block", marginBottom: "4px" }}
-            >
-              <input
-                type="radio"
-                name={questionObject.questionId} 
-                value={optionText} 
-              />
-              {optionText} 
-            </label>
-          ))}
+          <div className="options-row">
+            {[
+              questionObject.option1,
+              questionObject.option2,
+              questionObject.option3,
+              questionObject.option4,
+            ].map((optionText, optionIndex) => (
+              <label key={optionIndex} className="option-label">
+                <input
+                  type="radio"
+                  name={questionObject.questionId}
+                  value={optionText}
+                />
+                {optionText}
+              </label>
+            ))}
+          </div>
         </div>
       ))}
-      <button>submit</button>
+
+      <button className="submit-button">Submit</button>
     </div>
   );
 }

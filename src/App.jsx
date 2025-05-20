@@ -9,7 +9,6 @@ import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
 import { QUIZ_ATTEND_URL, QUIZ_LOGIN_URL } from "./utilities";
 import { EditPublish } from "./pages/admin/publish/EditPublish";
-import AttendQuiz from "./pages/user/AttendQuiz";
 import TakeQuiz from "./pages/user/TakeQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
