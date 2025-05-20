@@ -12,6 +12,7 @@ import { EditPublish } from "./pages/admin/publish/EditPublish";
 import { AttendQuiz } from "./pages/user/AttendQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
+import StartQuiz from './pages/user/StartQuiz';
 
 export const App = () => {
   return (
@@ -44,6 +45,8 @@ export const App = () => {
         {/* user routes here... */}
         <Route element={<UserLayout />}>
           <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+          <Route path="/start/:quizId" element={<StartQuiz />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
