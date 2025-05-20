@@ -5,11 +5,14 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 2rem;
+      margin-top: 50px;
+      padding-top: 2rem; 
+      
       padding-top: 1rem; /* Reduced top padding since header is sticky */
       margin-top: 10rem;
 
       .question-block {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         padding: 1rem;
         border: 1px solid #e0e0e0;
         border-radius: 10px;
