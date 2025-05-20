@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getScheduleForParticipant } from "../../api/apiService";
-import { goFullScreen } from "../../utilities";
 
 const StartQuiz = () => {
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ const StartQuiz = () => {
 
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
-      goFullScreen();
       navigate(`/take-quiz/${scheduleId}`);
     }
   };
@@ -65,6 +63,7 @@ const StartQuiz = () => {
             <ul className="text-secondary fs-5 ps-3">
               <li>Choose a quiet space before starting.</li>
               <li>Some questions may be timed.</li>
+              <li>Exiting fullscreen at any time will automatically submit your quiz.</li>
               <li>Do not refresh or close the window.</li>
               <li>Progress is not saved partway.</li>
               <li>Start only when you’re ready.</li>

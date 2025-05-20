@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./TakeQuiz.scss";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
 
 import { useAppContext } from "../../context/AppContext";
+import { goFullScreen } from "../../utilities";
 
 function TakeQuiz() {
   const { scheduleId } = useParams();
@@ -13,10 +14,11 @@ function TakeQuiz() {
   const { setTitle } = useAppContext();
 
   const handleTimeUp = () => {
-    alert("Time is up!")
-  }
+    alert("Time is up!");
+  };
 
   useEffect(() => {
+    goFullScreen();
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {

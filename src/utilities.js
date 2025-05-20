@@ -59,7 +59,7 @@ export const goFullScreen = async (elem = document.documentElement) => {
   try {
     elem = document.documentElement;
     if (elem.requestFullscreen) {
-      elem.requestFullscreen()
+      elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
       /* Safari */
       elem.webkitRequestFullscreen();
