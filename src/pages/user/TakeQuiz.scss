@@ -1,0 +1,96 @@
+.take-quiz {
+    position: relative;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  
+    .quiz-timer-fixed {
+        font-size: 1rem;
+        font-weight: 600;
+        background-color: #f2f2f2;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        color: #333;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+    
+  
+    .quiz-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #222;
+      }
+    .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+    .question-block {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      background-color: #fdfdfd;
+    }
+  
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+  
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f4f6f8;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #444;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+  
+      input {
+        accent-color: #14a0a0;
+      }
+  
+      &:hover {
+        background: #e6f0ff;
+        border-color: #14a0a0;
+      }
+    }
+  
+    .submit-button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.75rem 2rem;
+      background-color: #14a0a0;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #117d7d;
+      }
+    }
+  }
+  
