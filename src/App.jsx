@@ -58,11 +58,11 @@ export const App = () => {
         {/* User routes */}
         <Route element={<UserLayout />}>
           {/* <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} /> */}
-          <Route path="/start/:scheduleId" element={<StartQuiz />} />        
-          <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
+          <Route path="/start/:scheduleId" element={<StartQuiz />} />
           <Route path="/quiz-score" element={<QuizScore />} />
-          <Route path="/take-quiz/:scheduleId" element={<TakeQuiz />} />
-         
+          <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
+          <Route path="/attend-quiz/:quizId" element={<TakeQuiz />} />
+
         </Route>
 
         {/* Catch-all route */}
