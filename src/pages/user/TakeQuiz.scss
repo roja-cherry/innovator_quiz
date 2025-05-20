@@ -105,3 +105,17 @@
       }
     }
   }
+
+
+  .countdown-wrapper {
+    position: fixed;
+    top: 6rem;
+    right: 3rem;
+
+    .quiz-timer {
+      span {
+        font-size: 3rem;
+        padding: 1rem;
+      }
+    }
+  }

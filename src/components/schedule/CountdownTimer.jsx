@@ -34,12 +34,16 @@ const CountdownTimer = ({ timer = 0.5, onTimeUp = () => {} }) => {
   };
 
   return (
-    <div className="quiz-timer bg-light p-2 rounded d-inline-block">
-      CountDown
-      <span className={`h4 font-weight-bold ${timeLeft <= 10 ? 'text-danger' : 'text-primary'}`}>
+    <div className="quiz-timer p-2 d-inline-block">
+      <span
+        className={`font-weight-bold rounded ${
+          timeLeft <= 10
+            ? "text-danger"
+            : "text-primary"
+        }`}
+      >
         {formatTime(minutes)}:{formatTime(seconds)}
       </span>
-      {timeLeft === 0 && <span className="ml-2 text-danger">Time's up!</span>}
     </div>
   );
 };
