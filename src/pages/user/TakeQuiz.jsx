@@ -4,15 +4,16 @@ import axios from "axios";
 import "./TakeQuiz.scss";
 
 function TakeQuiz() {
-  const { quizId } = useParams();
+  const { scheduleId } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/quiz/${quizId}`)
+      .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {
-        console.log(response.data);
+        console.log("quizData response:", response.data);
+
         setQuizData(response.data);
         setLoading(false);
       })
@@ -20,46 +21,51 @@ function TakeQuiz() {
         console.error("Error fetching quiz data", error);
         setLoading(false);
       });
-  }, [quizId]);
-  if (loading) {
-    return <div>Loading Quiz </div>;
-  }
-  if (!quizData) return <div>quiz not found</div>;
+  }, [scheduleId]);
+  
+  if (loading) return <div>Loading Quiz...</div>;
+  if (!quizData) return <div>Quiz not found</div>;
 
   return (
-    <div className="take-quiz">
-        
-      <div className="quiz-header">
-        <h2 className="quiz-title">{quizData.quiz.quizName}</h2>
-        <div className="quiz-timer-fixed">TIMER: {quizData.quiz.timer}</div>
-      </div>
-      {quizData.questions.map((questionObject, questionIndex) => (
-        <div key={questionObject.questionId} className="question-block">
-          <h4 className="question-text">
-            Q{questionIndex + 1}. {questionObject.question}
-          </h4>
-          <div className="options-row">
-            {[
-              questionObject.option1,
-              questionObject.option2,
-              questionObject.option3,
-              questionObject.option4,
-            ].map((optionText, optionIndex) => (
-              <label key={optionIndex} className="option-label">
-                <input
-                  type="radio"
-                  name={questionObject.questionId}
-                  value={optionText}
-                />
-                {optionText}
-              </label>
-            ))}
-          </div>
+    <div className="take-quiz-container">
+      {/* Sticky header below navbar */}
+      <div className="quiz-header-sticky">
+        <div className="quiz-header-content">
+          <h2 className="quiz-title">{quizData.schedule.quizTitle}</h2>
+          <div className="quiz-timer">TIMER: {quizData.schedule.timer}</div>
         </div>
-      ))}
-
-      <button className="submit-button">Submit</button>
+      </div>
+      
+      {/* Scrollable questions section */}
+      <div className="questions-container">
+        {quizData.questions.map((questionObject, questionIndex) => (
+          <div key={questionObject.questionId} className="question-block">
+            <h4 className="question-text">
+              Q{questionIndex + 1}. {questionObject.question}
+            </h4>
+            <div className="options-row">
+              {[
+                questionObject.option1,
+                questionObject.option2,
+                questionObject.option3,
+                questionObject.option4,
+              ].map((optionText, optionIndex) => (
+                <label key={optionIndex} className="option-label">
+                  <input
+                    type="radio"
+                    name={questionObject.questionId}
+                    value={optionText}
+                  />
+                  {optionText}
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+        <button className="submit-button">Submit</button>
+      </div>
     </div>
   );
 }
+
 export default TakeQuiz;
