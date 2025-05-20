@@ -23,6 +23,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getScheduleForParticipant } from "../../api/apiService";
+import { goFullScreen } from "../../utilities";
 
 const StartQuiz = () => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const StartQuiz = () => {
 
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
+      goFullScreen();
       navigate(`/quiz/${schedule.quizId}`);
     }
   };
@@ -76,7 +78,6 @@ const StartQuiz = () => {
 
   return (
     <div className="start-quiz-container bg-light min-vh-100 d-flex flex-column justify-content-center align-items-center p-4">
-      
       {/* Instructions Section */}
       <div
         className="instructions bg-white p-4 mb-4 rounded shadow-sm"
@@ -84,8 +85,13 @@ const StartQuiz = () => {
       >
         <h3 className="text-primary mb-3">Instructions</h3>
         <ul className="text-muted">
-          <li>Make sure you are in a quiet environment before starting the quiz.</li>
-          <li>Each question may have a time limit, so read carefully and respond quickly.</li>
+          <li>
+            Make sure you are in a quiet environment before starting the quiz.
+          </li>
+          <li>
+            Each question may have a time limit, so read carefully and respond
+            quickly.
+          </li>
           <li>Do not refresh or close the browser tab once the quiz starts.</li>
           <li>Your progress will not be saved if you exit mid-way.</li>
           <li>Click "Start Quiz" only when you are ready to begin.</li>

@@ -1,15 +1,12 @@
 import toast from "react-hot-toast";
 
-export const QUIZ_LOGIN_URL = "/quiz/:id/login"
-export const QUIZ_ATTEND_URL = "/quiz/:id/attend"
-
+export const QUIZ_LOGIN_URL = "/quiz/:id/login";
+export const QUIZ_ATTEND_URL = "/quiz/:id/attend";
 
 export const USER_ROLES = {
   ADMIN: "ADMIN",
-  PARTICIPANT: "PARTICIPANT"
-}
-
-
+  PARTICIPANT: "PARTICIPANT",
+};
 
 export const formatToDateTimeString = (dateTime) => {
   if (!dateTime) {
@@ -47,14 +44,30 @@ export const STATUS_CLASSNAME = {
 };
 
 export const copyScheduleAttendUrl = async (scheduleId) => {
-  const baseUrl = window.location.origin
-  const path = QUIZ_LOGIN_URL.replace(":id", scheduleId)
+  const baseUrl = window.location.origin;
+  const path = QUIZ_LOGIN_URL.replace(":id", scheduleId);
 
   try {
     await navigator.clipboard.writeText(`${baseUrl}${path}`);
-    toast.success("Quiz url copied")
+    toast.success("Quiz url copied");
   } catch (error) {
-    toast.error("Failed to copy quiz url")
+    toast.error("Failed to copy quiz url");
   }
+};
 
-}
+export const goFullScreen = async (elem = document.documentElement) => {
+  try {
+    elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen()
+    } else if (elem.webkitRequestFullscreen) {
+      /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

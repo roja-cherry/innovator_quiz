@@ -7,11 +7,11 @@ import {
 } from "../../api/apiService";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import { formatToDateTimeString, STATUS_CLASSNAME } from "../../utilities";
+import { STATUS_CLASSNAME } from "../../utilities";
 
 export const QuizLogin = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -57,7 +57,7 @@ export const QuizLogin = () => {
       setLoading(true);
       const response = await loginForSchedule(id, { email, username });
       localStorage.setItem("user", JSON.stringify(response?.data));
-      navigate(`/start/${schedule?.id}`, {replace: true})
+      navigate(`/start/${schedule?.id}`, { replace: true });
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
@@ -76,7 +76,7 @@ export const QuizLogin = () => {
       .catch((err) => {
         const errorMessage = err.response?.data?.message ?? err?.message;
         toast.error(errorMessage);
-      });
+      })
   }, []);
 
   return (
@@ -85,10 +85,16 @@ export const QuizLogin = () => {
         <div className="card shadow-sm border-0">
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
-              <h2 className="fw-bold text-primary m-0">{schedule?.quiz?.quizName}</h2>
+              <h2 className="fw-bold text-primary m-0">
+                {schedule?.quiz?.quizName}
+              </h2>
               <p className="mt-2">
-                <span className="text-muted">Duration: {schedule?.quiz?.timer} mins</span>
-                <span className={`ms-4 ${STATUS_CLASSNAME[schedule?.status]}`}>{schedule?.statusText}</span>
+                <span className="text-muted">
+                  Duration: {schedule?.quiz?.timer} mins
+                </span>
+                <span className={`ms-4 ${STATUS_CLASSNAME[schedule?.status]}`}>
+                  {schedule?.statusText}
+                </span>
               </p>
               <p className="text-muted m-0">
                 You're just a step away from the challenge!
