@@ -35,7 +35,7 @@ const StartQuiz = () => {
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
       goFullScreen();
-      navigate(`/quiz/${schedule.quizId}`);
+      navigate(`/take-quiz/${scheduleId}`);
     }
   };
 
