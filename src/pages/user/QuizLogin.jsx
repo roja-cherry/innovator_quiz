@@ -1,15 +1,22 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
-import { loginForSchedule } from "../../api/apiService";
+import {
+  getScheduleForParticipant,
+  loginForSchedule,
+} from "../../api/apiService";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import { STATUS_CLASSNAME } from "../../utilities";
 
 export const QuizLogin = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
+  const [schedule, setSchedule] = useState({});
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -50,7 +57,8 @@ export const QuizLogin = () => {
       setLoading(true);
       const response = await loginForSchedule(id, { email, username });
       localStorage.setItem("user", JSON.stringify(response?.data));
-    } catch (err) { 
+      navigate(`/start/${schedule?.id}`, { replace: true });
+    } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
         icon: "error",
@@ -62,14 +70,32 @@ export const QuizLogin = () => {
     }
   };
 
+  useEffect(() => {
+    getScheduleForParticipant(id)
+      .then((res) => setSchedule(res?.data))
+      .catch((err) => {
+        const errorMessage = err.response?.data?.message ?? err?.message;
+        toast.error(errorMessage);
+      })
+  }, []);
+
   return (
     <div className="d-flex bg-light" style={{ height: "90vh" }}>
       <div className="m-auto" style={{ maxWidth: "35rem", width: "100%" }}>
         <div className="card shadow-sm border-0">
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
-              <h2 className="fw-bold text-primary m-0">Agile Quiz</h2>
-              <p className="text-muted">Duration: 10 mins</p>
+              <h2 className="fw-bold text-primary m-0">
+                {schedule?.quiz?.quizName}
+              </h2>
+              <p className="mt-2">
+                <span className="text-muted">
+                  Duration: {schedule?.quiz?.timer} mins
+                </span>
+                <span className={`ms-4 ${STATUS_CLASSNAME[schedule?.status]}`}>
+                  {schedule?.statusText}
+                </span>
+              </p>
               <p className="text-muted m-0">
                 You're just a step away from the challenge!
               </p>
