@@ -13,15 +13,12 @@ import AttendQuiz from "./pages/user/AttendQuiz";
 import TakeQuiz from "./pages/user/TakeQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
-<<<<<<< HEAD
 import StartQuiz from './pages/user/StartQuiz';
-=======
 import { NotFoundPage } from "./pages/common/not-found/NotFound";
 import { PrivateRoute } from "./components/auth/PrivateRoute";
 import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
->>>>>>> 88ab760f3fd6d7a71c12b1ca6a6e162a3c2e188c
 
 export const App = () => {
   return (
