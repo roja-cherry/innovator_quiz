@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
+import { loginForSchedule } from "../../api/apiService";
+import Swal from "sweetalert2";
 
 export const QuizLogin = () => {
   const { id } = useParams();
@@ -36,18 +38,32 @@ export const QuizLogin = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
 
     if (!validateFields()) {
       return;
     }
-    alert("Success");
+
+    try {
+      setLoading(true);
+      const response = await loginForSchedule(id, { email, username });
+      localStorage.setItem("user", JSON.stringify(response?.data));
+    } catch (err) { 
+      const errorMessage = err.response?.data?.message ?? err?.message;
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMessage,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="d-flex bg-light" style={{height: "90vh"}}>
+    <div className="d-flex bg-light" style={{ height: "90vh" }}>
       <div className="m-auto" style={{ maxWidth: "35rem", width: "100%" }}>
         <div className="card shadow-sm border-0">
           <div className="card-body p-4 p-md-5">
