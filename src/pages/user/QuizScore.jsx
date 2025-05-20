@@ -28,8 +28,8 @@ const QuizScore = () => {
   };
 
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
+    <div className="container py-5 mt-5">
+      <div className="row justify-content-center mt-5">
         <div className="col-lg-8">
           <div
             className={`card border-0 shadow-lg mb-4 ${
