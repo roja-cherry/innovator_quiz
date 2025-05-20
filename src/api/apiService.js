@@ -86,3 +86,11 @@ export const getScheduleForParticipant = async (id) => {
 export const loginForSchedule = async (scheduleId, data) => {
   return await axiosInstance.post(`/api/auth/login-for-quiz/${scheduleId}`, data);
 };
+
+
+export const submitQuiz = async (userId, scheduleId, answers) => {
+  return await axiosInstance.post(`/submit`, answers, {
+    params: { userId, scheduleId },
+  });
+};
+
