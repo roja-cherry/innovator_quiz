@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./TakeQuiz.scss";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
 
+import { useAppContext } from "../../context/AppContext"; 
+ 
 function TakeQuiz() {
-  const { scheduleId } = useParams();
+  const { scheduleId,} = useParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { setTitle } = useAppContext();
 
   useEffect(() => {
     axios
@@ -16,14 +19,15 @@ function TakeQuiz() {
         console.log("quizData response:", response.data);
 
         setQuizData(response.data);
+        setTitle(response.data.schedule.quizTitle);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching quiz data", error);
         setLoading(false);
       });
-  }, [scheduleId]);
-
+  }, [scheduleId,setTitle]);
+  
   if (loading) return <div>Loading Quiz...</div>;
   if (!quizData) return <div>Quiz not found</div>;
 
