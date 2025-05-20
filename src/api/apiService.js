@@ -79,10 +79,10 @@ export const cancelById = async (id) => {
   return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
 };
 
-
 export const getScheduleForParticipant = async (id) => {
   return await axiosInstance.get(`/api/participant/schedule/${id}`);
 };
+
 export const loginForSchedule = async (scheduleId, data) => {
   return await axiosInstance.post(`/api/auth/login-for-quiz/${scheduleId}`, data);
 };

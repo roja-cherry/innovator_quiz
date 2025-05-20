@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getScheduleForParticipant } from "../../api/apiService";
+import { goFullScreen } from "../../utilities";
 
 const StartQuiz = () => {
   const navigate = useNavigate();
@@ -33,7 +34,8 @@ const StartQuiz = () => {
 
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
-      navigate(`/attend-quiz/${schedule.id}`);
+      goFullScreen();
+      navigate(`/quiz/${schedule.quizId}`);
     }
   };
 
