@@ -9,7 +9,7 @@ import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
 import { QUIZ_ATTEND_URL } from "./utilities";
 import { EditPublish } from "./pages/admin/publish/EditPublish";
-import { AttendQuiz } from "./pages/user/AttendQuiz";
+import AttendQuiz from "./pages/user/AttendQuiz"
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
 
@@ -43,7 +43,7 @@ export const App = () => {
 
         {/* user routes here... */}
         <Route element={<UserLayout />}>
-          <Route  path={"/user/attend-quiz"} element={<AttendQuiz />} />
+          <Route  path={"/user/attend-quiz/:quizId"} element={<AttendQuiz />} />
         </Route>
       </Routes>
     </BrowserRouter>
