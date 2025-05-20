@@ -57,7 +57,7 @@ export const QuizLogin = () => {
       setLoading(true);
       const response = await loginForSchedule(id, { email, username });
       localStorage.setItem("user", JSON.stringify(response?.data));
-      navigate(`/start/${schedule?.id}`)
+      navigate(`/start/${schedule?.id}`, {replace: true})
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
