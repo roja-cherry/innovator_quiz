@@ -1,7 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react'
 
 export const AttendQuiz = () => {
-  const { id } = useParams();
-  return <div>Attend Quiz : {id}</div>;
-};
+  return (
+    <div>AttendQuiz</div>
+  )
+}

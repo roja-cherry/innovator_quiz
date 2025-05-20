@@ -7,7 +7,7 @@ import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
-import { QUIZ_ATTEND_URL } from "./utilities";
+import { QUIZ_ATTEND_URL, QUIZ_LOGIN_URL } from "./utilities";
 import { EditPublish } from "./pages/admin/publish/EditPublish";
 import { AttendQuiz } from "./pages/user/AttendQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
@@ -16,6 +16,7 @@ import { NotFoundPage } from "./pages/common/not-found/NotFound";
 import { PrivateRoute } from "./components/auth/PrivateRoute";
 import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
+import { QuizLogin } from "./pages/user/QuizLogin";
 
 export const App = () => {
   return (
@@ -55,6 +56,7 @@ export const App = () => {
         {/* User routes */}
         <Route element={<UserLayout />}>
           <Route path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+          <Route path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
         </Route>
 
         {/* Catch-all route */}

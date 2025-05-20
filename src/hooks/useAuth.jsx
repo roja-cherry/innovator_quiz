@@ -29,7 +29,7 @@ export const useAuth = () => {
         setAuthState({
           user: {
             id: "123",
-            name: "Admin User",
+            username: "Admin User",
             role: "ADMIN",
             token: token,
           },

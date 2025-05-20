@@ -1,12 +1,13 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { LoadingScreen } from "../common/LoadingScreen";
 
 export const PrivateRoute = ({ roles = [] }) => {
   const { user, loading, isAuthenticated, hasRole } = useAuth();
   const location = useLocation();
 
   if (loading) {
-    return <p>Loading...</p>; // Show while checking auth state
+    return <LoadingScreen /> // Show while checking auth state
   }
 
   if (!isAuthenticated()) {
