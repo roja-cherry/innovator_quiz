@@ -12,6 +12,7 @@ import { EditPublish } from "./pages/admin/publish/EditPublish";
 import TakeQuiz from "./pages/user/TakeQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
+import StartQuiz from './pages/user/StartQuiz';
 import { NotFoundPage } from "./pages/common/not-found/NotFound";
 import { PrivateRoute } from "./components/auth/PrivateRoute";
 import { Login } from "./components/auth/Login";
@@ -55,8 +56,9 @@ export const App = () => {
 
         {/* User routes */}
         <Route element={<UserLayout />}>
-          <Route path={"/user/take-quiz/:quizId"} element={<TakeQuiz />} />
-          <Route path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
+          <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
+          <Route path="/start/:quizId" element={<StartQuiz />} />
+
         </Route>
 
         {/* Catch-all route */}
