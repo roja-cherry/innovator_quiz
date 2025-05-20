@@ -60,14 +60,9 @@ export const App = () => {
 
         {/* User routes */}
         <Route element={<UserLayout />}>
-<<<<<<< HEAD
           <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} />
           <Route path="/start/:quizId" element={<StartQuiz />} />
 
-=======
-          <Route path={"/user/take-quiz/:quizId"} element={<TakeQuiz />} />
-          <Route path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
->>>>>>> 88ab760f3fd6d7a71c12b1ca6a6e162a3c2e188c
         </Route>
 
         {/* Catch-all route */}
