@@ -1,16 +1,20 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./TakeQuiz.scss";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
 
-import { useAppContext } from "../../context/AppContext"; 
- 
+import { useAppContext } from "../../context/AppContext";
+
 function TakeQuiz() {
-  const { scheduleId,} = useParams();
+  const { scheduleId } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { setTitle } = useAppContext();
+
+  const handleTimeUp = () => {
+    alert("Time is up!")
+  }
 
   useEffect(() => {
     axios
@@ -26,14 +30,14 @@ function TakeQuiz() {
         console.error("Error fetching quiz data", error);
         setLoading(false);
       });
-  }, [scheduleId,setTitle]);
-  
+  }, [scheduleId, setTitle]);
+
   if (loading) return <div>Loading Quiz...</div>;
   if (!quizData) return <div>Quiz not found</div>;
 
   return (
     <>
-      <div className="row min-vh-100 take-quiz-container pt-5 mt-5">
+      <div className="row min-vh-100 take-quiz-container">
         <div className="cold-md-9 questions-container">
           {quizData.questions.map((questionObject, questionIndex) => (
             <div key={questionObject.questionId} className="question-block">
@@ -62,9 +66,11 @@ function TakeQuiz() {
           <button className="submit-button">Submit</button>
         </div>
       </div>
-      <div className="countdown-wrapper">
-        <CountdownTimer />
-      </div>
+      {quizData?.timer && (
+        <div className="countdown-wrapper">
+          <CountdownTimer timer={quizData?.timer} onTimeUp={handleTimeUp} />
+        </div>
+      )}
     </>
   );
 }
