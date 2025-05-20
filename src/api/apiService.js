@@ -57,6 +57,7 @@ export const reScheduleQuiz = async (id, data) => {
 export const getSchedule = async (id) => {
   return await axiosInstance.get(`/api/schedule/${id}`);
 };
+
 export const getScheduledQuizzes = async () => {
   return await axiosInstance.get("/api/schedule/status", {
     params: { status: "SCHEDULED" },
@@ -81,3 +82,6 @@ export const cancelById = async (id) => {
 };
 
 
+export const getScheduleForParticipant = async (id) => {
+  return await axiosInstance.get(`/api/participant/schedule/${id}`);
+};
