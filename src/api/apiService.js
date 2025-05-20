@@ -1,7 +1,6 @@
 import { axiosInstance } from "./axiosInstance";
 import qs from "qs";
 
-
 export const createQuiz = (formData) => {
   return axiosInstance.post("/api/quiz", formData, {
     headers: {
@@ -71,7 +70,6 @@ export const getAllSchedules = async (params) => {
   });
 };
 
-
 export const getSchedulesByQuizId = async (quizId) => {
   return await axiosInstance.get(`/api/schedule/quiz/${quizId}`);
 };
@@ -80,4 +78,6 @@ export const cancelById = async (id) => {
   return await axiosInstance.patch(`/api/schedule/${id}/cancel`);
 };
 
-
+export const loginForSchedule = async (scheduleId, data) => {
+  return await axiosInstance.post(`/api/auth/login-for-quiz/${scheduleId}`, data);
+};

@@ -57,6 +57,7 @@ export const App = () => {
         {/* User routes */}
         <Route element={<UserLayout />}>
           
+          <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/start/:quizId" element={<StartQuiz />} />
           <Route path="/attend/:quizId" element={<TakeQuiz />} />
 
