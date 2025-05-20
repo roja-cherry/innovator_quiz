@@ -201,11 +201,9 @@ const ScheduleForm = ({ isEdit = false }) => {
         />
       </div>
 
-      <div className="text-center mt-5">
-        <button className="btn btn-primary mt-3" type="submit">
-          {isEdit ? "Re-Schedule" : "Schedule"}
-        </button>
-      </div>
+      <button className="btn btn-primary w-100 mt-5" type="submit">
+        {isEdit ? "Re-Schedule" : "Schedule"}
+      </button>
     </form>
   );
 };

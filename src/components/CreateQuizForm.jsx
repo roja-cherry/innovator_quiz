@@ -131,11 +131,9 @@ const CreateQuizForm = () => {
         label="Upload File"
         handleFileChange={handleFileChange}
       />
-      <div className="text-center">
-        <button className="btn btn-primary mt-3" type="submit">
-          Upload
-        </button>
-      </div>
+      <button className="btn w-100 btn-primary mt-5" type="submit">
+        Upload
+      </button>
     </form>
   );
 };

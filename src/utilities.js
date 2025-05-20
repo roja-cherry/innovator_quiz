@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 
+export const QUIZ_LOGIN_URL = "/quiz/:id/login"
 export const QUIZ_ATTEND_URL = "/quiz/:id/attend"
 
 
@@ -41,7 +42,7 @@ export const STATUS_CLASSNAME = {
 
 export const copyScheduleAttendUrl = async (scheduleId) => {
   const baseUrl = window.location.origin
-  const path = QUIZ_ATTEND_URL.replace(":id", scheduleId)
+  const path = QUIZ_LOGIN_URL.replace(":id", scheduleId)
 
   try {
     await navigator.clipboard.writeText(`${baseUrl}${path}`);
