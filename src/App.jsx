@@ -18,6 +18,7 @@ import { PrivateRoute } from "./components/auth/PrivateRoute";
 import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
+import QuizScore from "./pages/user/QuizScore";
 
 export const App = () => {
   return (
@@ -57,11 +58,10 @@ export const App = () => {
         {/* User routes */}
         <Route element={<UserLayout />}>
           {/* <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} /> */}
-          <Route path="/start/:scheduleId" element={<StartQuiz />} />
-          
+          <Route path="/start/:scheduleId" element={<StartQuiz />} />        
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
-          <Route path="/start/:quizId" element={<StartQuiz />} />
           <Route path="/attend-quiz/:quizId" element={<TakeQuiz />} />
+          <Route path="/quiz-score" element={<QuizScore />} />
 
         </Route>
 
