@@ -59,7 +59,7 @@ export const App = () => {
         <Route element={<UserLayout />}>
           {/* <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} /> */}
           <Route path="/start/:scheduleId" element={<StartQuiz />} />
-          <Route path="/quiz-score" element={<QuizScore />} />
+          <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
 
