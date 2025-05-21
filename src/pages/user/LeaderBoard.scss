@@ -1,0 +1,24 @@
+/* Add subtle hover effect */
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Custom table borders */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    border-bottom: 1px solid #e9ecef;
+    border-top: none;
+}
+
+/* Remove bottom border from last row */
+.table tbody tr:last-child td {
+    border-bottom: none;
+}

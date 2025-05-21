@@ -19,6 +19,7 @@ import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
+import Leaderboard from "./pages/user/Leaderboard";
 
 export const App = () => {
   return (
@@ -62,6 +63,7 @@ export const App = () => {
           <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
+          <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
 
         </Route>
 

@@ -100,3 +100,7 @@ export const getAttempt = async (id) => {
 export const getAttemptByUserIdAndScheduleId = async (userId, scheduleId) => {
   return await axiosInstance.get(`/api/participant/attempts/${userId}/${scheduleId}`)
 }
+
+export const getLeaderBoard = async(scheduleId) => {
+  return await axiosInstance.get(`/api/leaderboard/schedule/${scheduleId}`)
+}
