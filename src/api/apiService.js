@@ -96,3 +96,7 @@ export const submitQuiz = async (userId, scheduleId, answers) => {
 export const getAttempt = async (id) => {
   return await axiosInstance.get(`/${id}`)
 }
+
+export const getAttemptByUserIdAndScheduleId = async (userId, scheduleId) => {
+  return await axiosInstance.get(`/api/participant/attempts/${userId}/${scheduleId}`)
+}

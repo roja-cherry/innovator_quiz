@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
 import {
+  getAttemptByUserIdAndScheduleId,
   getScheduleForParticipant,
   loginForSchedule,
 } from "../../api/apiService";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import { STATUS_CLASSNAME } from "../../utilities";
+import { STATUS_CLASSNAME, USER_ROLES } from "../../utilities";
+import QuizAlreadyAttempted from "./QuizAlreadyAttempted";
 
 export const QuizLogin = () => {
   const { id } = useParams();
@@ -17,6 +19,7 @@ export const QuizLogin = () => {
   const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
   const [schedule, setSchedule] = useState({});
+  const [quizAttempted, setQuizAttempted] = useState(false);
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -57,7 +60,7 @@ export const QuizLogin = () => {
       setLoading(true);
       const response = await loginForSchedule(id, { email, username });
       localStorage.setItem("user", JSON.stringify(response?.data));
-      navigate(`/start/${schedule?.id}`, { replace: true });
+      checkQuizAttemptedOrNot(response?.data);
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
@@ -70,14 +73,36 @@ export const QuizLogin = () => {
     }
   };
 
+  const checkQuizAttemptedOrNot = async (user) => {
+    try {
+      const response = await getAttemptByUserIdAndScheduleId(user?.userId, id);
+      if (response?.data) {
+        setQuizAttempted(response?.data);
+        toast.error("Already attempted quiz");
+        return;
+      }
+      navigate(`/start/${schedule?.id}`, { replace: true });
+    } catch (error) {
+      if (error?.status === 404) {
+        navigate(`/start/${schedule?.id}`, { replace: true });
+      }
+      if (error?.status != 404) {
+        const errorMessage = err.response?.data?.message ?? err?.message;
+        toast.error(errorMessage);
+      }
+    }
+  };
+
   useEffect(() => {
     getScheduleForParticipant(id)
       .then((res) => setSchedule(res?.data))
       .catch((err) => {
         const errorMessage = err.response?.data?.message ?? err?.message;
         toast.error(errorMessage);
-      })
+      });
   }, []);
+
+  if (quizAttempted) return <QuizAlreadyAttempted attemptId={quizAttempted?.id} />;
 
   return (
     <div className="d-flex bg-light" style={{ height: "90vh" }}>
@@ -91,9 +116,6 @@ export const QuizLogin = () => {
               <p className="mt-2">
                 <span className="text-muted">
                   Duration: {schedule?.quiz?.timer} mins
-                </span>
-                <span className={`ms-4 ${STATUS_CLASSNAME[schedule?.status]}`}>
-                  {schedule?.statusText}
                 </span>
               </p>
             </div>
