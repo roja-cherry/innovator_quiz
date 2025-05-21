@@ -33,7 +33,7 @@ const StartQuiz = () => {
 
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
-      navigate(`/take-quiz/${scheduleId}`);
+      navigate(`/attend-quiz/${scheduleId}`);
     }
   };
 
