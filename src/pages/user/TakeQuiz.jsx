@@ -24,7 +24,7 @@ function TakeQuiz() {
     try {
       const response = await submitQuiz(user?.userId, scheduleId, answers);
       const { id } = response.data;
-      navigate(`/quiz-score/${id}`);
+      navigate(`/quiz-score/${id}`, { replace: true });
     } catch (error) {
       console.error("Error submitting quiz:", error);
       alert("There was an error submitting your quiz.");
@@ -32,7 +32,7 @@ function TakeQuiz() {
   };
 
   const handleTimeUp = () => {
-    handleSubmit()
+    handleSubmit();
   };
 
   useEffect(() => {
@@ -40,10 +40,10 @@ function TakeQuiz() {
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {
-        const data=response.data;
-        
-        if(data.schedule.status !== "ACTIVE"){
-          navigate(`/start/${scheduleId}`)
+        const data = response.data;
+
+        if (data.schedule.status !== "ACTIVE") {
+          navigate(`/start/${scheduleId}`);
         }
         setQuizData(response.data);
         setTitle(response.data.schedule.quizTitle);
