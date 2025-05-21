@@ -96,9 +96,6 @@ export const QuizLogin = () => {
                   {schedule?.statusText}
                 </span>
               </p>
-              <p className="text-muted m-0">
-                You're just a step away from the challenge!
-              </p>
             </div>
 
             <form onSubmit={handleSubmit}>
