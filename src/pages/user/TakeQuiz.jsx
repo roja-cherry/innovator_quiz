@@ -57,7 +57,7 @@ function TakeQuiz() {
     <>
       <div className="row min-vh-100 take-quiz-container">
         <div className="cold-md-9 questions-container">
-          <pre>{JSON.stringify(answers, undefined, 4)}</pre>
+          {/* <pre>{JSON.stringify(answers, undefined, 4)}</pre> */}
           {quizData.questions.map((questionObject, questionIndex) => (
             <div key={questionObject.questionId} className="question-block">
               <h4 className="question-text">

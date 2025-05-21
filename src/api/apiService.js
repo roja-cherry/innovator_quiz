@@ -94,7 +94,7 @@ export const submitQuiz = async (userId, scheduleId, answers) => {
 };
 
 export const getAttempt = async (id) => {
-  return await axiosInstance.get(`/${id}`)
+  return await axiosInstance.get(`/api/participant/attempt/${id}`);
 }
 
 export const getAttemptByUserIdAndScheduleId = async (userId, scheduleId) => {
