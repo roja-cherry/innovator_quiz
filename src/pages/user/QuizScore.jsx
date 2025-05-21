@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaTrophy, FaAward } from "react-icons/fa";
 import { useAppContext } from "../../context/AppContext";
+import { getAttempt } from "../../api/apiService";
 
 const QuizScore = () => {
   const navigate = useNavigate();
@@ -16,36 +17,38 @@ const QuizScore = () => {
   useEffect(() => {
     const fetchQuizAttempt = async () => {
       try {
-        const response = await ;
-        if (!response.ok) {
-          throw new Error("Failed to fetch quiz attempt data");
-        }
-        const data = await response.json();
+        const resp = await getAttempt(attemptId);
+        const data = resp.data;
+
         setQuizData({
           score: data.score,
           maxScore: data.maxScore,
           quizName: data.quizName,
         });
+
         setTitle(data.quizName);
       } catch (error) {
-        console.error("Error fetching quiz attempt:", error);
-        // Optionally navigate to an error page or show a message
+        const errorMessage = error.response?.data?.message ?? error?.message;
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: errorMessage,
+        });
+      } finally {
+        // Optionally handle loading here
+        // setLoading(false);
       }
     };
-  
+
     if (attemptId) {
       fetchQuizAttempt();
     }
   }, [attemptId]);
-  
 
   const { score, maxScore, quizName } = quizData;
   const percentage = Math.round((score / maxScore) * 100);
   const passed = percentage >= 60;
 
-  const handleRetake = () => {
-    navigate("/quizzes");
-  };
 
   return (
     <div className="container py-5 mt-5">
