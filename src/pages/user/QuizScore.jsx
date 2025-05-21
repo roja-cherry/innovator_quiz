@@ -14,10 +14,30 @@ const QuizScore = () => {
   });
 
   useEffect(() => {
-    const fetchQuizAttempt = async () => {};
-    fetchQuizAttempt();
-    setTitle(quizData?.quizName);
+    const fetchQuizAttempt = async () => {
+      try {
+        const response = await ;
+        if (!response.ok) {
+          throw new Error("Failed to fetch quiz attempt data");
+        }
+        const data = await response.json();
+        setQuizData({
+          score: data.score,
+          maxScore: data.maxScore,
+          quizName: data.quizName,
+        });
+        setTitle(data.quizName);
+      } catch (error) {
+        console.error("Error fetching quiz attempt:", error);
+        // Optionally navigate to an error page or show a message
+      }
+    };
+  
+    if (attemptId) {
+      fetchQuizAttempt();
+    }
   }, [attemptId]);
+  
 
   const { score, maxScore, quizName } = quizData;
   const percentage = Math.round((score / maxScore) * 100);

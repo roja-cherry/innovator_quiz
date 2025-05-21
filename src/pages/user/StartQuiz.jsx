@@ -53,6 +53,7 @@ const StartQuiz = () => {
     }
   };
 
+
   return (
     <div className="container-fluid min-vh-100 bg-light d-flex justify-content-center align-items-center px-3 px-md-5">
       <div className="row w-100" style={{ maxWidth: "1100px" }}>
