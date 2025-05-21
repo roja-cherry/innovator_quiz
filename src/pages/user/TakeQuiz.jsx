@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./TakeQuiz.scss";
+import { useNavigate } from "react-router-dom";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
 
 import { useAppContext } from "../../context/AppContext";
@@ -9,9 +10,27 @@ import { goFullScreen } from "../../utilities";
 
 function TakeQuiz() {
   const { scheduleId } = useParams();
+  const [answers, setAnswers] = useState({});
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { setTitle } = useAppContext();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/participant/schedule/${scheduleId}/submit`,
+        { answers }
+      );
+
+      const { attemptId } = response.data; // Assuming backend returns this
+      navigate(`/quiz-result/${attemptId}`);
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+      alert("There was an error submitting your quiz.");
+    }
+  };
 
   const handleTimeUp = () => {
     alert("Time is up!");
@@ -65,7 +84,9 @@ function TakeQuiz() {
               </div>
             </div>
           ))}
-          <button className="submit-button">Submit</button>
+          <button className="submit-button" onClick={handleSubmit}>
+            Submit
+          </button>
         </div>
       </div>
       {quizData?.timer && (
