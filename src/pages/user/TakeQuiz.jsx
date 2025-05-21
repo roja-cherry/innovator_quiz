@@ -40,8 +40,6 @@ function TakeQuiz() {
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {
-        console.log("quizData response:", response.data);
-
         setQuizData(response.data);
         setTitle(response.data.schedule.quizTitle);
         setLoading(false);
