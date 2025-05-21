@@ -40,6 +40,11 @@ function TakeQuiz() {
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {
+        const data=response.data;
+        
+        if(data.schedule.status !== "ACTIVE"){
+          navigate(`/start/${scheduleId}`)
+        }
         setQuizData(response.data);
         setTitle(response.data.schedule.quizTitle);
         setLoading(false);

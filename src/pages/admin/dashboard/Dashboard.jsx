@@ -205,7 +205,9 @@ const Dashboard = () => {
                           :""
                         }
                         `}
-                      onClick={() => { if (!["CANCELLED", "COMPLETED"].includes(schedule?.status)) { copyScheduleAttendUrl(schedule?.id); }}}
+                      // onClick={() => { if (!["CANCELLED", "COMPLETED"].includes(schedule?.status)) { copyScheduleAttendUrl(schedule?.id); }}}
+                      onClick={() => { copyScheduleAttendUrl(schedule?.id); }}
+
                     />
                     <span className="tooltip-text">Copy Quiz URL</span>
                   </div>
