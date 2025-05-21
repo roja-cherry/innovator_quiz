@@ -60,30 +60,39 @@ function TakeQuiz() {
     <>
       <div className="row min-vh-100 take-quiz-container">
         <div className="cold-md-9 questions-container">
+          <pre>{JSON.stringify(answers, undefined, 4)}</pre>
           {quizData.questions.map((questionObject, questionIndex) => (
-            <div key={questionObject.questionId} className="question-block">
-              <h4 className="question-text">
-                Q{questionIndex + 1}. {questionObject.question}
-              </h4>
-              <div className="options-row">
-                {[
-                  questionObject.option1,
-                  questionObject.option2,
-                  questionObject.option3,
-                  questionObject.option4,
-                ].map((optionText, optionIndex) => (
-                  <label key={optionIndex} className="option-label">
-                    <input
-                      type="radio"
-                      name={questionObject.questionId}
-                      value={optionText}
-                    />
-                    {optionText}
-                  </label>
-                ))}
-              </div>
-            </div>
-          ))}
+  <div key={questionObject.questionId} className="question-block">
+    <h4 className="question-text">
+      Q{questionIndex + 1}. {questionObject.question}
+    </h4>
+    <div className="options-row">
+      {[
+        questionObject.option1,
+        questionObject.option2,
+        questionObject.option3,
+        questionObject.option4,
+      ].map((optionText, optionIndex) => (
+        <label key={optionIndex} className="option-label">
+          <input
+            type="radio"
+            name={questionObject.questionId}
+            value={optionText}
+            onChange={() =>
+              setAnswers((prev) => ({
+                ...prev,
+                [questionObject.questionId]: optionText,
+              }))
+            }
+            checked={answers[questionObject.questionId] === optionText}
+          />
+          {optionText}
+        </label>
+      ))}
+    </div>
+  </div>
+))}
+
           <button className="submit-button" onClick={handleSubmit}>
             Submit
           </button>
