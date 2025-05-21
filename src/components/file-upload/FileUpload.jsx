@@ -54,6 +54,11 @@ const FileUpload = ({ handleFileChange, file, label }) => {
         <p className="text-sm text-secondary mt-1">
           Accept: .xlsx, .xls files (Max 10MB)
         </p>
+        {file?.name && (
+          <div>
+            <p>Uploaded: {file?.name}</p>
+          </div>
+        )}
       </div>
 
       {/* <div className="file-name-file-condition">
