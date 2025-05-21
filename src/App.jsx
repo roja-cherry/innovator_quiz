@@ -32,7 +32,7 @@ export const App = () => {
         <Route path="*" element={<NotFoundPage />} />
 
         {/* Admin routes - protected */}
-        {/* <Route element={<PrivateRoute roles={["ADMIN"]} />}> */}
+        <Route element={<PrivateRoute roles={["ADMIN"]} />}>
           <Route element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="admin/quiz-management" element={<QuizManagement />} />
@@ -54,7 +54,7 @@ export const App = () => {
               element={<ViewQuiz />}
             />
           </Route>
-        {/* </Route> */}
+        </Route>
 
         {/* User routes */}
         <Route element={<UserLayout />}>

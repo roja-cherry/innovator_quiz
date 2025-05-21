@@ -1,6 +1,11 @@
 import { axiosInstance } from "./axiosInstance";
 import qs from "qs";
 
+
+export const login = (data) => {
+  return axiosInstance.post("/api/auth/login", data);
+};
+
 export const createQuiz = (formData) => {
   return axiosInstance.post("/api/quiz", formData, {
     headers: {
@@ -103,4 +108,8 @@ export const getAttemptByUserIdAndScheduleId = async (userId, scheduleId) => {
 
 export const getLeaderBoard = async(scheduleId) => {
   return await axiosInstance.get(`/api/leaderboard/schedule/${scheduleId}`)
+}
+
+export const getProfile = () => {
+  return axiosInstance.get("/api/users/profile")
 }
