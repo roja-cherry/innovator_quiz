@@ -1,15 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getScheduleForParticipant } from "../../api/apiService";
+import {
+  getAttemptByUserIdAndScheduleId,
+  getScheduleForParticipant,
+} from "../../api/apiService";
+import { useAuth } from "../../hooks/useAuth";
+import { USER_ROLES } from "../../utilities";
+import QuizAlreadyAttempted from "./QuizAlreadyAttempted";
 
 const StartQuiz = () => {
   const navigate = useNavigate();
   const { scheduleId } = useParams();
   const [schedule, setSchedule] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [attempt, setAttempt] = useState();
+
+  const { user } = useAuth(USER_ROLES.PARTICIPANT);
+
+  const checkQuizAttemptedOrNot = async () => {
+    if (!user?.userId) return;
+    try {
+      const response = await getAttemptByUserIdAndScheduleId(
+        user?.userId,
+        scheduleId
+      );
+      if (response?.data) {
+        setAttempt(response?.data);
+        toast.error("Already attempted quiz");
+      }
+    } catch (error) {
+      if (error?.status != 404) {
+        const errorMessage = err.response?.data?.message ?? err?.message;
+        toast.error(errorMessage);
+      }
+    }
+  };
 
   useEffect(() => {
+    checkQuizAttemptedOrNot();
+    if (attempt?.id) return;
+
     const fetchSchedule = async () => {
       try {
         const resp = await getScheduleForParticipant(scheduleId);
@@ -29,7 +60,7 @@ const StartQuiz = () => {
     if (scheduleId) {
       fetchSchedule();
     }
-  }, [scheduleId]);
+  }, [scheduleId, user]);
 
   const handleStart = () => {
     if (schedule?.status === "ACTIVE") {
@@ -53,6 +84,8 @@ const StartQuiz = () => {
     }
   };
 
+  if (attempt) return <QuizAlreadyAttempted attemptId={attempt?.id} />;
+
   return (
     <div className="container-fluid min-vh-100 bg-light d-flex justify-content-center align-items-center px-3 px-md-5">
       <div className="row w-100" style={{ maxWidth: "1100px" }}>
@@ -63,7 +96,10 @@ const StartQuiz = () => {
             <ul className="text-secondary fs-5 ps-3">
               <li>Choose a quiet space before starting.</li>
               <li>Some questions may be timed.</li>
-              <li>Exiting fullscreen at any time will automatically submit your quiz.</li>
+              <li>
+                Exiting fullscreen at any time will automatically submit your
+                quiz.
+              </li>
               <li>Do not refresh or close the window.</li>
               <li>Progress is not saved partway.</li>
               <li>Start only when you’re ready.</li>
@@ -74,7 +110,9 @@ const StartQuiz = () => {
         {/* Right: Quiz Info */}
         <div className="col-12 col-md-6">
           <div className="p-5 bg-white shadow rounded-3 h-100 d-flex flex-column justify-content-center align-items-center text-center">
-            <h1 className="text-primary mb-3">{schedule?.quiz.quizName || "Quiz Title"}</h1>
+            <h1 className="text-primary mb-3">
+              {schedule?.quiz.quizName || "Quiz Title"}
+            </h1>
             <p className="lead mb-4">{getStatusMessage()}</p>
             <button
               className="btn btn-primary btn-lg px-4"
