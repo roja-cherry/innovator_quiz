@@ -89,7 +89,7 @@ const ExcelTemplatePopup = () => {
             <div className="container mt-4 p-5">
               <div className="table-responsive">
                 <table
-                  className="table table-bordered table-hover"
+                  className="table table-bordered"
                   style={{
                     minWidth: "800px",
                     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
