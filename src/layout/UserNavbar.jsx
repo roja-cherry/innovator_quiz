@@ -1,9 +1,9 @@
 import { FaUserCircle } from "react-icons/fa";
-import { useAuth } from "../hooks/UseAuth";
+import { useAuth } from "../hooks/useAuth";
 import { USER_ROLES } from "../utilities";
 import { useAppContext } from "../context/AppContext";
 
-export const UserNavbar = ({ userEmail = "user@example.com" }) => {
+export const UserNavbar = () => {
   const { user } = useAuth(USER_ROLES.PARTICIPANT);
   const { title } = useAppContext();
 
@@ -14,8 +14,7 @@ export const UserNavbar = ({ userEmail = "user@example.com" }) => {
           <span className="navbar-brand fw-bold fs-4 me-md-4 mb-0">
             {title}
           </span>
-
-          {userEmail && (
+          {user?.email && (
             <div className="ms-md-auto d-flex align-items-center gap-3">
               <div className="d-flex align-items-center">
                 <FaUserCircle className="text-primary" size={24} />

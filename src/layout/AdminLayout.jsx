@@ -5,6 +5,8 @@ import { Sidebar } from "./Sidebar";
 import { useAppContext } from "../context/AppContext";
 import { CgMenuRight } from "react-icons/cg";
 import { IoMdClose } from "react-icons/io";
+import { AuthProvider } from "../hooks/useAuth";
+import { USER_ROLES } from "../utilities";
 
 export const AdminLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -27,6 +29,7 @@ export const AdminLayout = () => {
   }, []);
 
   return (
+    <AuthProvider role={USER_ROLES.ADMIN}>
     <div className="admin-layout">
       <aside
         className={`sidebar shadow-sm bg-white ${isSidebarOpen ? "open" : ""}`}
@@ -66,5 +69,6 @@ export const AdminLayout = () => {
         </main>
       </div>
     </div>
+    </AuthProvider>
   );
 };

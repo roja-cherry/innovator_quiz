@@ -1,16 +1,18 @@
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { USER_ROLES } from "../utilities";
-import { getProfile } from "../api/apiService";
+// authContext.js
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { USER_ROLES } from '../utilities';
+import { getProfile } from '../api/apiService';
 
-export const useAuth = (role = "ADMIN") => {
-  const navigate = useNavigate()
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children, role = "ADMIN" }) => {
+  const navigate = useNavigate();
   const [authState, setAuthState] = useState({
     user: null,
-    loading: true, // Start with loading true
+    loading: true,
   });
 
-  // Simplified check for token
   const isAuthenticated = useCallback(() => {
     return !!authState.user;
   }, [authState.user]);
@@ -22,12 +24,10 @@ export const useAuth = (role = "ADMIN") => {
     [authState.user]
   );
 
-  // Initialize auth state
   useEffect(() => {
     const loadAuthData = async () => {
       const baseState = { loading: false };
 
-      // Admin flow
       if (role === USER_ROLES.ADMIN) {
         const token = localStorage.getItem("token");
         if (!token) return setAuthState((prev) => ({ ...prev, ...baseState }));
@@ -40,7 +40,6 @@ export const useAuth = (role = "ADMIN") => {
         }
       }
 
-      // Participant flow
       if (role === USER_ROLES.PARTICIPANT) {
         const user = JSON.parse(localStorage.getItem("user"));
         return setAuthState({ user, ...baseState, error: false });
@@ -48,7 +47,7 @@ export const useAuth = (role = "ADMIN") => {
     };
 
     loadAuthData();
-  }, [role]); // Add role as dependency
+  }, [role]);
 
   const getUserProfile = async () => {
     try {
@@ -59,18 +58,37 @@ export const useAuth = (role = "ADMIN") => {
     }
   };
 
+  const setUser = (user) => {
+    setAuthState(prev => ({
+      ...prev,
+      user,
+      loading: false
+    }));
+  };
+
   const logout = () => {
     const isConfirmed = confirm("Are you sure to logout?");
     if (!isConfirmed) return;
     setAuthState({ user: null, loading: false });
     localStorage.clear();
-    navigate("/login", {replace: true})
+    navigate("/login", { replace: true });
   };
 
-  return {
-    ...authState,
-    isAuthenticated,
-    hasRole,
-    logout
-  };
+  return (
+    <AuthContext.Provider
+      value={{
+        ...authState,
+        isAuthenticated,
+        hasRole,
+        logout,
+        setUser
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
 };
