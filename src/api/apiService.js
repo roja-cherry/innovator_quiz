@@ -113,3 +113,7 @@ export const getLeaderBoard = async(scheduleId) => {
 export const getProfile = () => {
   return axiosInstance.get("/api/users/profile")
 }
+
+export const getUserHomePageQuizzes = (userId) => {
+  return axiosInstance.get(`/api/user/${userId}/homepage`);
+};

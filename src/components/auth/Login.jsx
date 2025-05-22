@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
 import { login } from "../../api/apiService";
+import { useParams } from "react-router-dom";
+
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -9,6 +11,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { scheduleId } = useParams();
+
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -37,7 +41,15 @@ export const Login = () => {
       setLoading(true);
       const response = await login({ email, password });
       localStorage.setItem("token", response.data);
-      navigate("/", {replace: true})
+
+
+      if (scheduleId) {
+        navigate(`/start/${scheduleId}`, { replace: true });
+      } else {
+        navigate("/home", { replace: true });
+      }
+
+
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       setErrors((prev) => ({ ...prev, loginError: errorMessage }));
@@ -103,6 +115,8 @@ export const Login = () => {
                 <span className="me-3">Login</span>
                 {isLoading && <Spinner size="20px" />}
               </button>
+
+              
             </form>
           </div>
         </div>

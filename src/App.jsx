@@ -21,6 +21,7 @@ import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
 import Leaderboard from "./pages/user/Leaderboard";
 import { AuthProvider } from "./hooks/useAuth";
+import UserHome from "./pages/user/UserHome";
 
 export const App = () => {
   return (
@@ -28,9 +29,10 @@ export const App = () => {
       <Toaster />
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/login" element={<QuizLogin />} />
+        <Route path="/admin-login" element={<Login />} />
 
         <Route
           element={
@@ -69,6 +71,7 @@ export const App = () => {
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
           <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+          <Route path="/userhome" element={<UserHome />} />
         </Route>
       </Routes>
     </BrowserRouter>
