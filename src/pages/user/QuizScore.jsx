@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { FaTrophy, FaAward } from "react-icons/fa";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaTrophy, FaAward, FaThumbsUp } from "react-icons/fa";
 import { useAppContext } from "../../context/AppContext";
 import { getAttempt } from "../../api/apiService";
 
@@ -47,8 +47,19 @@ const QuizScore = () => {
 
   const { score, maxScore, quizName } = quizData;
   const percentage = Math.round((score / maxScore) * 100);
-  const passed = percentage >= 60;
+  const passed = percentage >= 50;
 
+  const result = useMemo(() => {
+    if (percentage < 10) {
+      return "Better Luck Next Time";
+    } else if (percentage < 50) {
+      return "Keep Trying!!";
+    } else if (percentage < 90) {
+      return "Good Job";
+    } else {
+      return "Excellent Performance";
+    }
+  }, [percentage]);
 
   return (
     <div className="container py-5 mt-5">
@@ -64,30 +75,33 @@ const QuizScore = () => {
                 passed ? "bg-success text-white" : "bg-warning text-dark"
               } py-4`}
             >
-              <div className="d-flex align-items-center justify-content-center">
+              <div className="d-flex flex-column align-items-center justify-content-center">
                 {passed ? (
                   <FaTrophy className="display-4 me-3" />
                 ) : (
-                  <FaAward className="display-4 me-3" />
+                  <FaThumbsUp className="display-4 me-3" />
                 )}
-                <div>
-                  <h2 className="mb-1">
-                    {passed ? "Congratulations!" : "Good Try!"}
+                <div className="quiz-result-container p-4 bg-gray-100 rounded shadow-md text-center max-w-md mx-auto">
+                  <h2 className="text-2xl font-semibold mb-2 text-indigo-700">
+                    {result}
                   </h2>
-                  <p className="mb-0">You completed {quizName}</p>
+                  <p className="text-gray-700 text-lg">
+                    🎉 You’ve successfully completed the quiz:{" "}
+                    <strong>{quizName}</strong>!
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="card-body p-4">
               <div className="text-center mb-4">
-                <div className="display-4 fw-bold text-primary">
+                <div className="display-4 fw-bold text-dark">
                   {percentage}%
                 </div>
                 <div className="text-muted">Overall Score</div>
               </div>
 
-              <div className="progress mb-4" style={{ height: "20px" }}>
+              {/* <div className="progress mb-4" style={{ height: "20px" }}>
                 <div
                   className={`progress-bar ${
                     passed ? "bg-success" : "bg-warning"
@@ -100,20 +114,16 @@ const QuizScore = () => {
                 >
                   {percentage}%
                 </div>
-              </div>
+              </div> */}
 
-              <div
-                className={`alert ${
-                  passed ? "alert-success" : "alert-warning"
-                } text-center`}
-              >
-                {passed ? (
-                  <span>You passed the quiz! Excellent work!</span>
-                ) : (
-                  <span>
-                    You scored {percentage}%. Keep practicing to improve!
-                  </span>
-                )}
+              <div className={`text-center my-3`}>
+                <Link
+                  to={"leaderboard/${scheduleId}"}
+                  className={`btn btn-outline-dark`}
+                  role="button"
+                >
+                  Leadership Board
+                </Link>
               </div>
             </div>
           </div>
