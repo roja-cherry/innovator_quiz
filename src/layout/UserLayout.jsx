@@ -1,26 +1,19 @@
 import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, replace, useNavigate } from "react-router-dom";
 import { UserNavbar } from "./UserNavbar";
 import { useAuth } from "../context/AuthContext";
+import { USER_ROLES } from "../utilities";
 
 export const UserLayout = () => {
-  const { user, setUser } = useAuth();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
-    const getProfile = () => {
-      const userFromLocal = JSON.parse(localStorage.getItem("user"));
-      if (userFromLocal?.email && userFromLocal?.userId) {
-        setUser(userFromLocal);
-      } else {
-        navigate("/login");
-      }
-    };
-    
-    if (!user) {
-      getProfile();
-    }
-  }, []);
+    if (user && user?.role !== USER_ROLES.PARTICIPANT)
+      return navigate("/", { replace: true });
+  }, [user?.role]);
+
+  if(user?.role === USER_ROLES.PARTICIPANT)
   return (
     <>
       <UserNavbar />

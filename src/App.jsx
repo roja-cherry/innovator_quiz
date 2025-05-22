@@ -21,6 +21,7 @@ import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
 import Leaderboard from "./pages/user/Leaderboard";
 import UserHome from "./pages/user/UserHome";
+import { OtpLogin } from "./components/auth/OtpLogin";
 
 export const App = () => {
   return (
@@ -30,12 +31,12 @@ export const App = () => {
         {/* public routes */}
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/login" element={<QuizLogin />} />
+        <Route path="/login" element={<OtpLogin />} />
         <Route path="/admin-login" element={<Login />} />
         <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
 
         {/* admin routes */}
-        <Route path="/" element={<PrivateRoute role={USER_ROLES.ADMIN} />}>
+        <Route path="/" element={<PrivateRoute />}>
           <Route element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="admin/quiz-management" element={<QuizManagement />} />
@@ -57,12 +58,10 @@ export const App = () => {
               element={<ViewQuiz />}
             />
           </Route>
-        </Route>
 
-        {/* participant routes */}
-        <Route element={<PrivateRoute role={USER_ROLES.PARTICIPANT} />}>
+          {/* user routes */}
           <Route element={<UserLayout />}>
-            <Route index path="/userhome" element={<UserHome />} />
+            <Route path="/userhome" element={<UserHome />} />
             <Route path="/start/:scheduleId" element={<StartQuiz />} />
             <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
             <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />

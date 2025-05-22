@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
+import { truncate } from "../utilities";
 
 export const adminUrls = [
   {
@@ -24,6 +25,7 @@ export const adminUrls = [
     icon: LuCalendarClock,
   },
 ];
+
 
 export const Sidebar = ({ onMenuClick = () => {} }) => {
   const { user, logout } = useAuth();
@@ -56,7 +58,7 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
         })}
       </ul>
 
-      <div className="dropdown">
+      <div className="dropdown dropend">
         <button
           className="btn btn-primary w-100 py-3 dropdown-toggle d-flex align-items-center justify-content-between text-decoration-none"
           type="button"
@@ -66,14 +68,15 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
         >
           <span>
             <FaUserCircle className="me-2" size={20} />
-            <span className="d-none d-sm-inline">{user?.username}</span>
+            <span className="d-none d-sm-inline ">{truncate(user?.username)}</span>
           </span>
           <FiChevronDown className="ms-1" size={16} />
         </button>
 
         <ul
-          className="dropdown-menu dropdown-menu-end shadow-sm w-100 px-2 mb-2"
+          className="dropdown-menu dropdown-menu-end shadow-sm px-2 mb-2"
           aria-labelledby="userDropdown"
+          style={{width: "20rem"}}
         >
           <li className="px- py-2">
             <div className="d-flex align-items-center">

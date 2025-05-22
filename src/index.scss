@@ -151,6 +151,13 @@ input[type="range"] {
   }
 }
 
+.text-ellipsis {
+  white-space: nowrap;        /* Keep text in a single line */
+  overflow: hidden;           /* Hide anything beyond container */
+  text-overflow: ellipsis;    /* Show "..." at the end */
+}
+
+
 
 // for loading
 @keyframes breath {

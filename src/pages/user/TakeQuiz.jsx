@@ -112,7 +112,7 @@ function TakeQuiz() {
 
       {quizData?.timer && (
         <div className="countdown-wrapper">
-          <CountdownTimer timer={quizData.timer} onTimeUp={handleTimeUp} />
+          <CountdownTimer timer={quizData.timer} key={quizData?.timer} onTimeUp={handleTimeUp} />
         </div>
       )}
     </>

@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 import "./AdminLayout.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { useAppContext } from "../context/AppContext";
 import { CgMenuRight } from "react-icons/cg";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "../context/AuthContext";
+import { USER_ROLES } from "../utilities";
 
 export const AdminLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { title } = useAppContext();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
+  useEffect(() => {
+    if (user && user?.role !== USER_ROLES.ADMIN)
+      return navigate("/userhome", { replace: true });
+  }, [user?.role]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,8 +35,9 @@ export const AdminLayout = () => {
     };
   }, []);
 
-  return (
-    // <AuthProvider role={USER_ROLES.ADMIN}>
+  if (user?.role === USER_ROLES.ADMIN)
+    return (
+      // <AuthProvider role={USER_ROLES.ADMIN}>
       <div className="admin-layout">
         <aside
           className={`sidebar shadow-sm bg-white ${
@@ -69,6 +79,6 @@ export const AdminLayout = () => {
           </main>
         </div>
       </div>
-    // </AuthProvider>
-  );
+      // </AuthProvider>
+    );
 };

@@ -121,3 +121,11 @@ export const getProfile = () => {
 export const getUserHomePageQuizzes = (userId) => {
   return axiosInstance.get(`/api/participant/${userId}/homepage`);
 };
+
+export const otpRequest = (email) => {
+  return axiosInstance.post('/api/auth/otp', {email})
+}
+
+export const verifyOtp = (verifyBody) => {
+  return axiosInstance.post('/api/auth/otp/verify', verifyBody)
+}

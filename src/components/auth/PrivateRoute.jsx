@@ -1,61 +1,72 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useEffect } from "react";
 import { getProfile } from "../../api/apiService";
 import toast from "react-hot-toast";
 import { USER_ROLES } from "../../utilities";
+import { LoadingScreen } from "../common/LoadingScreen";
 
-export const PrivateRoute = ({ role = "" }) => {
+export const PrivateRoute = () => {
   const { user, setUser } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
-    const authenticateUser = async () => {
-      if (role === USER_ROLES.ADMIN) {
-        const token = localStorage.getItem("token");
-        if (!token) return;
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login")
+      setIsCheckingAuth(false);
+      return;
+    }
 
-        try {
-          const response = await getProfile();
-          setUser(response?.data);
-        } catch (error) {
-          toast.error("Failed to fetch admin details");
-          localStorage.removeItem("token");
+    const authenticateUser = async () => {
+      try {
+        const response = await getProfile();
+        const userData = response?.data;
+        setUser(userData);
+        if(userData?.role === USER_ROLES.ADMIN && location.pathname === "/userhome") {
+          return navigate("/", {replace: true})
+        } else if (userData?.role === USER_ROLES.PARTICIPANT && location.pathname === "/") {
+          return navigate("/")
         }
+      } catch (error) {
+        toast.error(error.message || "Session expired. Please log in again.");
+        localStorage.removeItem("token");
+        setUser(null);
+        navigate("/login")
+      } finally {
+        setIsCheckingAuth(false);
       }
     };
 
-    // Only fetch admin profile if no user exists and route requires admin
-    if (!user && role === USER_ROLES.ADMIN) {
+    // Only fetch if we don't already have a user
+    if (!user) {
       authenticateUser();
-    }
-  }, [role, setUser, user]);
+    } 
+  }, [user, setUser, navigate]);
 
-  // Get participant from localStorage if exists
-  const participant = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
+  // if (isCheckingAuth) {
+  //   return <LoadingScreen />;
+  // }
 
-  // If route requires admin but no token exists
-  if (role === USER_ROLES.ADMIN && !localStorage.getItem("token")) {
-    return <Navigate to="/admin-login" state={{ from: location }} replace />;
-  }
+  // if (!localStorage.getItem("token")) {
+  //   return <Navigate to="/login" state={{ from: location }} replace />;
+  // }
 
-  // If route requires participant but no user in localStorage
-  if (role === USER_ROLES.PARTICIPANT && !participant) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+  // Additional protection for direct URL access
+  // if (user) {
+  //   if (user.role === USER_ROLES.ADMIN && !location.pathname === "/") {
+  //     return <Navigate to="/" replace />;
+  //   }
+  //   if (user.role === USER_ROLES.PARTICIPANT && !location.pathname === "/userhome") {
+  //     return <Navigate to="/userhome" replace />;
+  //   }
+  // }
 
-  // If user exists but role doesn't match required role
-  if (user?.role && user.role !== role) {
-    return <Navigate to="/unauthorized" replace />;
-  }
+  if(isCheckingAuth)
+    return <LoadingScreen />
 
-  // For participant routes, use the localStorage user if no user in context
-  if (role === USER_ROLES.PARTICIPANT && !user && participant) {
+  if(!isCheckingAuth) 
     return <Outlet />;
-  }
-
-  // For all valid cases
-  return <Outlet />;
 };

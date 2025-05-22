@@ -71,3 +71,7 @@ export const goFullScreen = async (elem = document.documentElement) => {
     console.log(error);
   }
 };
+
+export const truncate = (str, min = 14) => {
+  return str?.length > min ? str?.slice(0, 14) + "..." : str;
+};
