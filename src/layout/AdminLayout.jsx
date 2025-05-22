@@ -21,54 +21,56 @@ export const AdminLayout = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
-    <AuthProvider role={USER_ROLES.ADMIN}>
-    <div className="admin-layout">
-      <aside
-        className={`sidebar shadow-sm bg-white ${isSidebarOpen ? "open" : ""}`}
-      >
-        <div className="d-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center gap-2 ps-3">
-            <img src="/logo.png" alt="logo" style={{ width: "2rem" }} />
-            <h4 className="d-none d-md-block mt-2">IQ Quiz</h4>
-          </div>
-          <IoMdClose
-            className="d-md-none cursor-pointer"
-            style={{ fontSize: "2rem" }}
-            onClick={() => setSidebarOpen(false)}
-          />
-        </div>
-        <Sidebar onMenuClick={() => setSidebarOpen(false)} />
-      </aside>
-
-      <div className="content">
-        <nav className="navbar py-3 pe-5 shadow-sm">
-          <div className="container-fluid px-0">
-            <div className="d-flex align-items-center">
-              <CgMenuRight
-                onClick={toggleSidebar}
-                className="d-md-none ms-5 cursor-pointer"
-                style={{ fontSize: "1.5rem" }}
-              />
-              <h2 className="ms-4 ms-md-5 text-grey">{title}</h2>
-            </div>
-            <div className="d-md-none">
+    // <AuthProvider role={USER_ROLES.ADMIN}>
+      <div className="admin-layout">
+        <aside
+          className={`sidebar shadow-sm bg-white ${
+            isSidebarOpen ? "open" : ""
+          }`}
+        >
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center gap-2 ps-3">
               <img src="/logo.png" alt="logo" style={{ width: "2rem" }} />
+              <h4 className="d-none d-md-block mt-2">IQ Quiz</h4>
             </div>
+            <IoMdClose
+              className="d-md-none cursor-pointer"
+              style={{ fontSize: "2rem" }}
+              onClick={() => setSidebarOpen(false)}
+            />
           </div>
-        </nav>
-        <main className="px-5 py-3">
-          <Outlet />
-        </main>
+          <Sidebar onMenuClick={() => setSidebarOpen(false)} />
+        </aside>
+
+        <div className="content">
+          <nav className="navbar py-3 pe-5 shadow-sm">
+            <div className="container-fluid px-0">
+              <div className="d-flex align-items-center">
+                <CgMenuRight
+                  onClick={toggleSidebar}
+                  className="d-md-none ms-5 cursor-pointer"
+                  style={{ fontSize: "1.5rem" }}
+                />
+                <h2 className="ms-4 ms-md-5 text-grey">{title}</h2>
+              </div>
+              <div className="d-md-none">
+                <img src="/logo.png" alt="logo" style={{ width: "2rem" }} />
+              </div>
+            </div>
+          </nav>
+          <main className="px-5 py-3">
+            <Outlet />
+          </main>
+        </div>
       </div>
-    </div>
-    </AuthProvider>
+    // </AuthProvider>
   );
 };
