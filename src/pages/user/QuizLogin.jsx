@@ -169,6 +169,17 @@ export const QuizLogin = () => {
                 <span className="me-3">Login</span>
                 {isLoading && <Spinner size="20px" />}
               </button>
+
+              <div className="text-center mt-3">
+  <button
+    type="button"
+    className="btn btn-link text-primary fw-semibold p-0"
+    onClick={() => navigate("/admin-login")}
+  >
+    🔐 Go to Admin Login
+  </button>
+</div>
+
             </form>
           </div>
         </div>
