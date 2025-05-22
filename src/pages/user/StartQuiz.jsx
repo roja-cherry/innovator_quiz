@@ -5,9 +5,8 @@ import {
   getAttemptByUserIdAndScheduleId,
   getScheduleForParticipant,
 } from "../../api/apiService";
-import { useAuth } from "../../hooks/useAuth";
-import { USER_ROLES } from "../../utilities";
 import QuizAlreadyAttempted from "./QuizAlreadyAttempted";
+import { useAuth } from "../../context/AuthContext";
 
 const StartQuiz = () => {
   const navigate = useNavigate();
@@ -15,22 +14,21 @@ const StartQuiz = () => {
   const [schedule, setSchedule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [attempt, setAttempt] = useState();
-
-  const { user } = useAuth(USER_ROLES.PARTICIPANT);
+  const { user } = useAuth();
 
   // ⛔️ Redirect if user is not logged in
-  useEffect(() => {
-    if (!user) {
-      Swal.fire({
-        icon: "warning",
-        title: "Unauthorized",
-        text: "You need to log in to access the quiz.",
-        confirmButtonText: "Go to Login",
-      }).then(() => {
-        navigate(`/quiz/${scheduleId}/login`); // 👈 Adjust login route as needed
-      });
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     Swal.fire({
+  //       icon: "warning",
+  //       title: "Unauthorized",
+  //       text: "You need to log in to access the quiz.",
+  //       confirmButtonText: "Go to Login",
+  //     }).then(() => {
+  //       navigate(`/quiz/${scheduleId}/login`); // 👈 Adjust login route as needed
+  //     });
+  //   }
+  // }, []);
 
   const checkQuizAttemptedOrNot = async () => {
     if (!user?.userId) return;

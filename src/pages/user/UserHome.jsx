@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { STATUS_CLASSNAME } from "../../utilities";
 import { getUserHomePageQuizzes } from "../../api/apiService";
-import { useAuth } from "../../hooks/useAuth";
 import "./UserHome.scss";
+import { useAuth } from "../../context/AuthContext";
 
 const UserHome = () => {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
-    if (!user || loading) return;
+    if (!user) return;
 
     getUserHomePageQuizzes(user.userId)
       .then((response) => {
@@ -35,7 +35,7 @@ const UserHome = () => {
       .catch((error) => {
         console.error("Failed to fetch user quizzes:", error);
       });
-  }, [user, loading]);
+  }, [user,]);
 
   const handleTakeQuiz = (scheduleId) => navigate(`/start/${scheduleId}`);
   const handleViewSummary = (scheduleId) => navigate(`/summary/${scheduleId}`);
@@ -45,7 +45,7 @@ const UserHome = () => {
 //   if (!user) return <div>Please log in</div>;
 
   return (
-    <div className="user-home-container">
+    <div className="user-home-container" style={{paddingTop: "8rem"}}>
       <header className="user-home-header">
         <h1>My Quizzes</h1>
         <button

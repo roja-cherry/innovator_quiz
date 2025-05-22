@@ -3,10 +3,9 @@ import { LuCalendarClock } from "react-icons/lu";
 import { RiListCheck3 } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { USER_ROLES } from "../utilities";
 import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
+import { useAuth } from "../context/AuthContext";
 
 export const adminUrls = [
   {
@@ -27,7 +26,7 @@ export const adminUrls = [
 ];
 
 export const Sidebar = ({ onMenuClick = () => {} }) => {
-  // const { user, logout } = useAuth(USER_ROLES.ADMIN);
+  const { user } = useAuth();
 
   return (
     <div>

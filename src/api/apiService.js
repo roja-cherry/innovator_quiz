@@ -119,5 +119,5 @@ export const getProfile = () => {
 }
 
 export const getUserHomePageQuizzes = (userId) => {
-  return axiosInstance.get(`/api/user/${userId}/homepage`);
+  return axiosInstance.get(`/api/participant/${userId}/homepage`);
 };

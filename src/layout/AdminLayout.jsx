@@ -5,8 +5,6 @@ import { Sidebar } from "./Sidebar";
 import { useAppContext } from "../context/AppContext";
 import { CgMenuRight } from "react-icons/cg";
 import { IoMdClose } from "react-icons/io";
-import { AuthProvider } from "../hooks/useAuth";
-import { USER_ROLES } from "../utilities";
 
 export const AdminLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);

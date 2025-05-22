@@ -20,7 +20,6 @@ import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
 import Leaderboard from "./pages/user/Leaderboard";
-import { AuthProvider } from "./hooks/useAuth";
 import UserHome from "./pages/user/UserHome";
 
 export const App = () => {
@@ -33,6 +32,7 @@ export const App = () => {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/login" element={<QuizLogin />} />
         <Route path="/admin-login" element={<Login />} />
+        <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
 
         {/* admin routes */}
         <Route path="/" element={<PrivateRoute role={USER_ROLES.ADMIN} />}>
@@ -60,11 +60,13 @@ export const App = () => {
         </Route>
 
         {/* participant routes */}
-        <Route path="/start/:scheduleId" element={<StartQuiz />} />
-        <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
-        <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
-        <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
-        <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+        <Route element={<UserLayout />}>
+          <Route index path="/userhome" element={<UserHome />} />
+          <Route path="/start/:scheduleId" element={<StartQuiz />} />
+          <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
+          <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
+          <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

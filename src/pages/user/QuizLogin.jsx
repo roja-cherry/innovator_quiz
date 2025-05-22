@@ -92,7 +92,7 @@ export const QuizLogin = () => {
     } catch (error) {
       if (error?.status === 404) {
         // setUser(user);
-        navigate(`/start/${schedule?.id}`, { replace: true });
+        navigate(`/start/${id}`, { replace: true });
       }
       if (error?.status != 404) {
         const errorMessage = err.response?.data?.message ?? err?.message;

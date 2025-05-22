@@ -6,7 +6,7 @@ import CountdownTimer from "../../components/schedule/CountDownTimer";
 import { useAppContext } from "../../context/AppContext";
 import { goFullScreen, USER_ROLES } from "../../utilities";
 import { submitQuiz } from "../../api/apiService";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../context/AuthContext";
 
 function TakeQuiz() {
   const { scheduleId } = useParams();
@@ -14,15 +14,15 @@ function TakeQuiz() {
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { setTitle } = useAppContext();
-  const { user } = useAuth(USER_ROLES.PARTICIPANT);
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   // ✅ Redirect if user is not logged in or role is not PARTICIPANT
-  useEffect(() => {
-    if (!user || user.role !== USER_ROLES.PARTICIPANT) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user || user.role !== USER_ROLES.PARTICIPANT) {
+  //     navigate("/login", { replace: true });
+  //   }
+  // }, [user, navigate]);
 
   const handleSubmit = async () => {
     try {

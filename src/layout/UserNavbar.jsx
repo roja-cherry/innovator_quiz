@@ -1,10 +1,10 @@
 import { FaUserCircle } from "react-icons/fa";
-import { useAuth } from "../hooks/useAuth";
 import { USER_ROLES } from "../utilities";
 import { useAppContext } from "../context/AppContext";
+import { useAuth } from "../context/AuthContext";
 
 export const UserNavbar = () => {
-  const { user } = useAuth(USER_ROLES.PARTICIPANT);
+  const { user } = useAuth();
   const { title } = useAppContext();
 
   return (
