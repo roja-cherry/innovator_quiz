@@ -21,7 +21,7 @@ export const QuizLogin = () => {
   const [errors, setErrors] = useState({});
   const [schedule, setSchedule] = useState({});
   const [quizAttempted, setQuizAttempted] = useState(false);
-  const {setUser} = useAuth(USER_ROLES.PARTICIPANT)
+  const { setUser } = useAuth(USER_ROLES.PARTICIPANT);
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -86,7 +86,7 @@ export const QuizLogin = () => {
       // navigate(`/start/${schedule?.id}`, { replace: true });
     } catch (error) {
       if (error?.status === 404) {
-        setUser(user)
+        setUser(user);
         navigate(`/start/${schedule?.id}`, { replace: true });
       }
       if (error?.status != 404) {
@@ -97,7 +97,7 @@ export const QuizLogin = () => {
   };
 
   useEffect(() => {
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     getScheduleForParticipant(id)
       .then((res) => setSchedule(res?.data))
       .catch((err) => {
@@ -106,7 +106,8 @@ export const QuizLogin = () => {
       });
   }, []);
 
-  if (quizAttempted) return <QuizAlreadyAttempted attemptId={quizAttempted?.id} />;
+  if (quizAttempted)
+    return <QuizAlreadyAttempted attemptId={quizAttempted?.id} />;
 
   return (
     <div className="d-flex bg-light" style={{ height: "90vh" }}>
@@ -170,16 +171,17 @@ export const QuizLogin = () => {
                 {isLoading && <Spinner size="20px" />}
               </button>
 
-              <div className="text-center mt-3">
-  <button
-    type="button"
-    className="btn btn-link text-primary fw-semibold p-0"
-    onClick={() => navigate("/admin-login")}
-  >
-    🔐 Go to Admin Login
-  </button>
-</div>
-
+              {!id && (
+                <div className="text-center mt-3">
+                  <button
+                    type="button"
+                    className="btn btn-link text-primary fw-semibold p-0"
+                    onClick={() => navigate("/admin-login")}
+                  >
+                    Go to Admin Login
+                  </button>
+                </div>
+              )}
             </form>
           </div>
         </div>

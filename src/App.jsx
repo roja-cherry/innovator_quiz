@@ -28,9 +28,10 @@ export const App = () => {
       <Toaster />
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/login" element={<QuizLogin />} />
+        <Route path="/admin-login" element={<Login />} />
 
         <Route
           element={
@@ -69,7 +70,6 @@ export const App = () => {
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
           <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
-          <Route path="/admin-login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
