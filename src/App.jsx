@@ -21,7 +21,6 @@ import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
 import Leaderboard from "./pages/user/Leaderboard";
 import UserHome from "./pages/user/UserHome";
-import { useAuth } from "./context/AuthContext";
 
 export const App = () => {
   return (
@@ -61,7 +60,7 @@ export const App = () => {
         </Route>
 
         {/* participant routes */}
-        {/* <Route element={<PrivateRoute role={USER_ROLES.PARTICIPANT} />}> */}
+        <Route element={<PrivateRoute role={USER_ROLES.PARTICIPANT} />}>
           <Route element={<UserLayout />}>
             <Route index path="/userhome" element={<UserHome />} />
             <Route path="/start/:scheduleId" element={<StartQuiz />} />
@@ -69,7 +68,7 @@ export const App = () => {
             <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
             <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
           </Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

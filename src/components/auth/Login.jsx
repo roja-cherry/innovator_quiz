@@ -30,6 +30,7 @@ export const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    localStorage.clear()
     e.preventDefault();
     setErrors({});
 
@@ -63,7 +64,7 @@ export const Login = () => {
         <div className="card shadow-sm border-0">
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
-              <h2 className="fw-bold text-primary m-0">Login</h2>
+              <h2 className="fw-bold text-primary m-0">Admin Login</h2>
               <p className="text-muted mt-1">Welcome Back!</p>
             </div>
 

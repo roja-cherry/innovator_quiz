@@ -51,6 +51,7 @@ export const QuizLogin = () => {
   };
 
   const handleSubmit = async (e) => {
+    localStorage.clear()
     e.preventDefault();
     setErrors({});
 
@@ -122,7 +123,7 @@ export const QuizLogin = () => {
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
               <h2 className="fw-bold text-primary m-0">
-                {id ? schedule?.quiz?.quizName : "Login"}
+                {id ? schedule?.quiz?.quizName : "Participant Login"}
               </h2>
               {id && (
                 <p className="mt-2">

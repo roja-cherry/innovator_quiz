@@ -1,18 +1,61 @@
-import { createContext, useContext, useState } from "react";
+// AuthContext.js
+import { createContext, useContext, useState, useEffect } from 'react';
+import { USER_ROLES } from '../utilities';
 
-const AuthContext = createContext({});
+const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState();
-  const [loading, SetLoading] = useState(false);
+  const [authState, setAuthState] = useState({
+    user: null,
+    loading: true
+  });
+
+  useEffect(() => {
+    // Check for participant in localStorage on initial load
+    const participant = localStorage.getItem('user');
+    if (participant) {
+      setAuthState({
+        user: JSON.parse(participant),
+        loading: false
+      });
+    } else {
+      setAuthState(prev => ({ ...prev, loading: false }));
+    }
+  }, []);
+
+  const setUser = (userData) => {
+    setAuthState({
+      user: userData,
+      loading: false
+    });
+    // For admin, token is already in localStorage
+  };
 
   const logout = () => {
-    localStorage.clear()
-    window.location.href ="/login"
-  }
+    if (authState.user?.role === USER_ROLES.ADMIN) {
+      localStorage.removeItem('token');
+    } else {
+      localStorage.removeItem('user');
+    }
+    setAuthState({ user: null, loading: false });
+  };
+
+  const isAuthenticated = () => {
+    if (authState.user?.role === USER_ROLES.ADMIN) {
+      return !!localStorage.getItem('token');
+    }
+    return !!authState.user;
+  };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider
+      value={{
+        ...authState,
+        setUser,
+        logout,
+        isAuthenticated
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
