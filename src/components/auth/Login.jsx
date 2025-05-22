@@ -71,13 +71,13 @@ export const Login = () => {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
-                  IBS Email
+                  Email
                 </label>
                 <input
                   type="email"
                   className="form-control"
                   id="email"
-                  placeholder="name@ibsplc.com"
+                  placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -94,7 +94,7 @@ export const Login = () => {
                   type="password"
                   className="form-control"
                   id="password"
-                  placeholder="Your password"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

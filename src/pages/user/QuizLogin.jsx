@@ -137,13 +137,13 @@ export const QuizLogin = () => {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
-                  IBS Email
+                  Email
                 </label>
                 <input
                   type="email"
                   className="form-control"
                   id="email"
-                  placeholder="name@ibsplc.com"
+                  placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -161,7 +161,7 @@ export const QuizLogin = () => {
                   type="text"
                   className="form-control"
                   id="username"
-                  placeholder="Your username"
+                  placeholder="Enter your username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
