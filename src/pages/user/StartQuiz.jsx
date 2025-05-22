@@ -27,7 +27,7 @@ const StartQuiz = () => {
         text: "You need to log in to access the quiz.",
         confirmButtonText: "Go to Login",
       }).then(() => {
-        navigate("/login"); // 👈 Adjust login route as needed
+        navigate(`/quiz/${scheduleId}/login`); // 👈 Adjust login route as needed
       });
     }
   }, [user, navigate]);
