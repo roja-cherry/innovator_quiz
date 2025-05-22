@@ -18,26 +18,41 @@ const StartQuiz = () => {
 
   const { user } = useAuth(USER_ROLES.PARTICIPANT);
 
+  // ⛔️ Redirect if user is not logged in
+  useEffect(() => {
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Unauthorized",
+        text: "You need to log in to access the quiz.",
+        confirmButtonText: "Go to Login",
+      }).then(() => {
+        navigate(`/quiz/${scheduleId}/login`); // 👈 Adjust login route as needed
+      });
+    }
+  }, [user, navigate]);
+
   const checkQuizAttemptedOrNot = async () => {
     if (!user?.userId) return;
     try {
       const response = await getAttemptByUserIdAndScheduleId(
-        user?.userId,
+        user.userId,
         scheduleId
       );
       if (response?.data) {
-        setAttempt(response?.data);
-        toast.error("Already attempted quiz");
+        setAttempt(response.data);
       }
     } catch (error) {
-      if (error?.status != 404) {
-        const errorMessage = err.response?.data?.message ?? err?.message;
-        toast.error(errorMessage);
+      if (error?.status !== 404) {
+        const errorMessage = error.response?.data?.message ?? error?.message;
+        Swal.fire("Error", errorMessage, "error");
       }
     }
   };
 
   useEffect(() => {
+    if (!user) return;
+
     checkQuizAttemptedOrNot();
     if (attempt?.id) return;
 
@@ -68,6 +83,11 @@ const StartQuiz = () => {
     }
   };
 
+  const viewLeaderboard = () => {
+    console.log(scheduleId)
+      navigate(`/leaderboard/${scheduleId}`);
+  };
+
   const getStatusMessage = () => {
     if (loading || !schedule) return "Checking quiz status...";
     switch (schedule.status) {
@@ -83,6 +103,8 @@ const StartQuiz = () => {
         return "Unable to determine quiz status";
     }
   };
+
+  if (!user || loading) return null; // prevent flash of content
 
   if (attempt) return <QuizAlreadyAttempted attemptId={attempt?.id} />;
 
@@ -126,6 +148,12 @@ const StartQuiz = () => {
                 Please wait for the quiz to become active.
               </p>
             )}
+            <button
+              className="btn btn-warning btn-lg mt-4 "
+              onClick={viewLeaderboard}
+            >
+              Current Leaderboard
+            </button>
           </div>
         </div>
       </div>

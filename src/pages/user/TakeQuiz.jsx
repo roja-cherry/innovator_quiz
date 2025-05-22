@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./TakeQuiz.scss";
-import { useNavigate } from "react-router-dom";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
-
 import { useAppContext } from "../../context/AppContext";
 import { goFullScreen, USER_ROLES } from "../../utilities";
 import { submitQuiz } from "../../api/apiService";
@@ -17,8 +15,14 @@ function TakeQuiz() {
   const [loading, setLoading] = useState(true);
   const { setTitle } = useAppContext();
   const { user } = useAuth(USER_ROLES.PARTICIPANT);
-
   const navigate = useNavigate();
+
+  // ✅ Redirect if user is not logged in or role is not PARTICIPANT
+  useEffect(() => {
+    if (!user || user.role !== USER_ROLES.PARTICIPANT) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async () => {
     try {
@@ -36,7 +40,10 @@ function TakeQuiz() {
   };
 
   useEffect(() => {
+    if (!user || !scheduleId) return;
+
     goFullScreen();
+
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
       .then((response) => {
@@ -45,16 +52,17 @@ function TakeQuiz() {
         if (data.schedule.status !== "ACTIVE") {
           navigate(`/start/${scheduleId}`);
         }
-        setQuizData(response.data);
-        setTitle(response.data.schedule.quizTitle);
+        setQuizData(data);
+        setTitle(data.schedule.quizTitle);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching quiz data", error);
         setLoading(false);
       });
-  }, [scheduleId, setTitle]);
+  }, [scheduleId, user, setTitle]);
 
+  if (!user) return null; // Prevent rendering before redirect
   if (loading) return <div>Loading Quiz...</div>;
   if (!quizData) return <div>Quiz not found</div>;
 
@@ -62,7 +70,6 @@ function TakeQuiz() {
     <>
       <div className="row min-vh-100 take-quiz-container">
         <div className="cold-md-9 questions-container">
-          {/* <pre>{JSON.stringify(answers, undefined, 4)}</pre> */}
           {quizData.questions.map((questionObject, questionIndex) => (
             <div key={questionObject.questionId} className="question-block">
               <h4 className="question-text">
@@ -102,9 +109,10 @@ function TakeQuiz() {
           </button>
         </div>
       </div>
+
       {quizData?.timer && (
         <div className="countdown-wrapper">
-          <CountdownTimer timer={quizData?.timer} onTimeUp={handleTimeUp} />
+          <CountdownTimer timer={quizData.timer} onTimeUp={handleTimeUp} />
         </div>
       )}
     </>

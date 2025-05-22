@@ -23,7 +23,7 @@ const Dashboard = () => {
   const [schedules, setSchedules] = useState([]);
   const [showFilter, setShowFilter] = useState(searchParams?.size > 0);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({status: "ACTIVE"});
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     setTitle("Dashboard")
@@ -205,8 +205,7 @@ const Dashboard = () => {
                           :""
                         }
                         `}
-                      // onClick={() => { if (!["CANCELLED", "COMPLETED"].includes(schedule?.status)) { copyScheduleAttendUrl(schedule?.id); }}}
-                      onClick={() => { copyScheduleAttendUrl(schedule?.id); }}
+                      onClick={() => { if (!["CANCELLED", "COMPLETED"].includes(schedule?.status)) { copyScheduleAttendUrl(schedule?.id); }}}
 
                     />
                     <span className="tooltip-text">Copy Quiz URL</span>

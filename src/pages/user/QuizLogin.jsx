@@ -8,8 +8,9 @@ import {
 } from "../../api/apiService";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import { STATUS_CLASSNAME, USER_ROLES } from "../../utilities";
 import QuizAlreadyAttempted from "./QuizAlreadyAttempted";
+import { useAuth } from "../../hooks/useAuth";
+import { USER_ROLES } from "../../utilities";
 
 export const QuizLogin = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ export const QuizLogin = () => {
   const [errors, setErrors] = useState({});
   const [schedule, setSchedule] = useState({});
   const [quizAttempted, setQuizAttempted] = useState(false);
+  const {setUser} = useAuth(USER_ROLES.PARTICIPANT)
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -81,9 +83,10 @@ export const QuizLogin = () => {
         toast.error("Already attempted quiz");
         return;
       }
-      navigate(`/start/${schedule?.id}`, { replace: true });
+      // navigate(`/start/${schedule?.id}`, { replace: true });
     } catch (error) {
       if (error?.status === 404) {
+        setUser(user)
         navigate(`/start/${schedule?.id}`, { replace: true });
       }
       if (error?.status != 404) {
@@ -94,6 +97,7 @@ export const QuizLogin = () => {
   };
 
   useEffect(() => {
+    localStorage.removeItem("user")
     getScheduleForParticipant(id)
       .then((res) => setSchedule(res?.data))
       .catch((err) => {

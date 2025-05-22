@@ -1,15 +1,18 @@
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { USER_ROLES } from "../utilities";
+// authContext.js
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { USER_ROLES } from '../utilities';
+import { getProfile } from '../api/apiService';
 
-export const useAuth = (role = "ADMIN") => {
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children, role = "ADMIN" }) => {
+  const navigate = useNavigate();
   const [authState, setAuthState] = useState({
     user: null,
-    loading: true, // Start with loading true
-    error: null,
+    loading: true,
   });
 
-  // Simplified check for token
   const isAuthenticated = useCallback(() => {
     return !!authState.user;
   }, [authState.user]);
@@ -21,40 +24,71 @@ export const useAuth = (role = "ADMIN") => {
     [authState.user]
   );
 
-  // Initialize auth state
   useEffect(() => {
-    if (role === USER_ROLES.ADMIN) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        // Simulate token validation
-        setTimeout(() => {
-          setAuthState({
-            user: {
-              id: "123",
-              username: "Admin User",
-              role: "ADMIN",
-              token: token,
-            },
-            loading: false,
-            error: null,
-          });
-        }, 500);
-      } else {
-        setAuthState((prev) => ({ ...prev, loading: false }));
-      }
-    } else if (role === USER_ROLES.PARTICIPANT) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      setAuthState({
-        user: user,
-        loading: false,
-        error: false,
-      });
-    }
-  }, []);
+    const loadAuthData = async () => {
+      const baseState = { loading: false };
 
-  return {
-    ...authState,
-    isAuthenticated,
-    hasRole,
+      if (role === USER_ROLES.ADMIN) {
+        const token = localStorage.getItem("token");
+        if (!token) return setAuthState((prev) => ({ ...prev, ...baseState }));
+
+        try {
+          const user = await getUserProfile();
+          return setAuthState({ user, ...baseState });
+        } catch {
+          return setAuthState((prev) => ({ ...prev, ...baseState }));
+        }
+      }
+
+      if (role === USER_ROLES.PARTICIPANT) {
+        const user = JSON.parse(localStorage.getItem("user"));
+        return setAuthState({ user, ...baseState, error: false });
+      }
+    };
+
+    loadAuthData();
+  }, [role]);
+
+  const getUserProfile = async () => {
+    try {
+      const response = await getProfile();
+      return response.data;
+    } catch (error) {
+      return null;
+    }
   };
+
+  const setUser = (user) => {
+    setAuthState(prev => ({
+      ...prev,
+      user,
+      loading: false
+    }));
+  };
+
+  const logout = () => {
+    const isConfirmed = confirm("Are you sure to logout?");
+    if (!isConfirmed) return;
+    setAuthState({ user: null, loading: false });
+    localStorage.clear();
+    navigate("/login", { replace: true });
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        ...authState,
+        isAuthenticated,
+        hasRole,
+        logout,
+        setUser
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

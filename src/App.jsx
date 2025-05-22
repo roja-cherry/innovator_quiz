@@ -7,18 +7,20 @@ import QuizManagement from "./pages/admin/quiz-management/QuizManagement";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import { Publish } from "./pages/admin/publish/Publish";
 import { ViewQuiz } from "./pages/admin/ViewQuiz";
-import { QUIZ_ATTEND_URL, QUIZ_LOGIN_URL } from "./utilities";
+import { QUIZ_ATTEND_URL, QUIZ_LOGIN_URL, USER_ROLES } from "./utilities";
 import { EditPublish } from "./pages/admin/publish/EditPublish";
 import TakeQuiz from "./pages/user/TakeQuiz";
 import { AdminLayout } from "./layout/AdminLayout";
 import { UserLayout } from "./layout/UserLayout";
-import StartQuiz from './pages/user/StartQuiz';
+import StartQuiz from "./pages/user/StartQuiz";
 import { NotFoundPage } from "./pages/common/not-found/NotFound";
 import { PrivateRoute } from "./components/auth/PrivateRoute";
 import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
+import Leaderboard from "./pages/user/Leaderboard";
+import { AuthProvider } from "./hooks/useAuth";
 
 export const App = () => {
   return (
@@ -30,8 +32,7 @@ export const App = () => {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />
 
-        {/* Admin routes - protected */}
-        {/* <Route element={<PrivateRoute roles={["ADMIN"]} />}> */}
+        <Route element={<PrivateRoute roles={["ADMIN"]} />}>
           <Route element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="admin/quiz-management" element={<QuizManagement />} />
@@ -53,7 +54,7 @@ export const App = () => {
               element={<ViewQuiz />}
             />
           </Route>
-        {/* </Route> */}
+        </Route>
 
         {/* User routes */}
         <Route element={<UserLayout />}>
@@ -62,7 +63,7 @@ export const App = () => {
           <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
-
+          <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
         </Route>
 
         {/* Catch-all route */}

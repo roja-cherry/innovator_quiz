@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { LoadingScreen } from "../common/LoadingScreen";
-import { useAuth } from "../../hooks/UseAuth";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
 
 export const PrivateRoute = ({ roles = [] }) => {
   const { user, loading, isAuthenticated, hasRole } = useAuth();

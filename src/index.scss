@@ -151,3 +151,9 @@ input[type="range"] {
   }
 }
 
+
+// for loading
+@keyframes breath {
+  0%, 100% { transform: scaleY(1); opacity: 0.6; }
+  50% { transform: scaleY(1.8); opacity: 1; background-color: rgba(13, 148, 134, 0.3); }
+}

@@ -40,8 +40,11 @@
       &:hover {
         color: $primary !important;
       }
+    }
 
-
+    /* Hide the default Bootstrap dropdown caret */
+    .dropdown-toggle::after {
+      display: none !important;
     }
   }
 
