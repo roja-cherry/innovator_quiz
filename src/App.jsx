@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import CreateQuiz from "./pages/admin/CreateQuiz";
 import EditQuiz from "./pages/admin/EditQuiz";
 import { Toaster } from "react-hot-toast";
@@ -21,6 +21,7 @@ import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
 import Leaderboard from "./pages/user/Leaderboard";
 import UserHome from "./pages/user/UserHome";
+import { useAuth } from "./context/AuthContext";
 
 export const App = () => {
   return (
@@ -60,13 +61,15 @@ export const App = () => {
         </Route>
 
         {/* participant routes */}
-        <Route element={<UserLayout />}>
-          <Route index path="/userhome" element={<UserHome />} />
-          <Route path="/start/:scheduleId" element={<StartQuiz />} />
-          <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
-          <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
-          <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
-        </Route>
+        {/* <Route element={<PrivateRoute role={USER_ROLES.PARTICIPANT} />}> */}
+          <Route element={<UserLayout />}>
+            <Route index path="/userhome" element={<UserHome />} />
+            <Route path="/start/:scheduleId" element={<StartQuiz />} />
+            <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
+            <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
+            <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+          </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,32 +1,41 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LoadingScreen } from "../common/LoadingScreen";
 import { useAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { getProfile } from "../../api/apiService";
+import toast from "react-hot-toast";
 
 export const PrivateRoute = ({ role = "" }) => {
-  const { user } = useAuth();
-  const location = useLocation();
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  // if (loading) {
-  //   return <LoadingScreen /> // Show while checking auth state
-  // }
+  useEffect(() => {
+    const getUser = async () => {
+      setLoading(true);
 
-  // if (!isAuthenticated()) {
-  //   return <Navigate to="/login" state={{ from: location }} replace />;
-  // }
+      try {
+        const response = await getProfile();
+        setUser(response?.data);
+      } catch (error) {
+        toast.error("Failed to fetch user details");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUser();
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
-  if (user && user?.role !== role) {
-    return (
-      <Navigate
-        to="/unauthorized"
-        state={{ from: location, requiredRole: role }}
-        replace
-      />
-    );
+  if (loading) {
+    return <LoadingScreen />; 
   }
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <Outlet />;
+  if(!loading && user)
+    return <Outlet />
 };

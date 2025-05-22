@@ -102,7 +102,6 @@ export const QuizLogin = () => {
   };
 
   useEffect(() => {
-    localStorage.removeItem("user");
     if (id) {
       getScheduleForParticipant(id)
         .then((res) => setSchedule(res?.data))
