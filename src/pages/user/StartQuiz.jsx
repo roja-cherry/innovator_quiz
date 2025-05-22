@@ -116,10 +116,10 @@ const StartQuiz = () => {
             <ul className="text-secondary fs-5 ps-3">
               <li>Choose a quiet space before starting.</li>
               <li>Some questions may be timed.</li>
-              <li>
+              {/* <li>
                 Exiting fullscreen at any time will automatically submit your
                 quiz.
-              </li>
+              </li> */}
               <li>Do not refresh or close the window.</li>
               <li>Progress is not saved partway.</li>
               <li>Start only when you’re ready.</li>
