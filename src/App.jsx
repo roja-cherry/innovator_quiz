@@ -32,7 +32,13 @@ export const App = () => {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />
 
-        <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+        <Route
+          element={
+            <AuthProvider role={USER_ROLES.ADMIN}>
+              <PrivateRoute roles={[USER_ROLES.ADMIN]} />
+            </AuthProvider>
+          }
+        >
           <Route element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="admin/quiz-management" element={<QuizManagement />} />
@@ -58,15 +64,12 @@ export const App = () => {
 
         {/* User routes */}
         <Route element={<UserLayout />}>
-          {/* <Route index path={QUIZ_ATTEND_URL} element={<AttendQuiz />} /> */}
           <Route path="/start/:scheduleId" element={<StartQuiz />} />
           <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
           <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
         </Route>
-
-        {/* Catch-all route */}
       </Routes>
     </BrowserRouter>
   );
