@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
-import { login } from "../../api/apiService";
+import { getProfile, login } from "../../api/apiService";
 import { useParams } from "react-router-dom";
-
+import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { scheduleId } = useParams();
-
+  const { setUser } = useAuth();
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -41,15 +41,14 @@ export const Login = () => {
       setLoading(true);
       const response = await login({ email, password });
       localStorage.setItem("token", response.data);
-
+      const profileResponse = await getProfile();
+      setUser(profileResponse.data);
 
       if (scheduleId) {
         navigate(`/start/${scheduleId}`, { replace: true });
       } else {
-        navigate("/home", { replace: true });
+        navigate("/", { replace: true });
       }
-
-
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       setErrors((prev) => ({ ...prev, loginError: errorMessage }));
@@ -115,8 +114,6 @@ export const Login = () => {
                 <span className="me-3">Login</span>
                 {isLoading && <Spinner size="20px" />}
               </button>
-
-              
             </form>
           </div>
         </div>

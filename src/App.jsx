@@ -27,6 +27,51 @@ export const App = () => {
     <BrowserRouter>
       <Toaster />
       <Routes>
+        {/* public routes */}
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/login" element={<QuizLogin />} />
+        <Route path="/admin-login" element={<Login />} />
+
+        {/* admin routes */}
+        <Route path="/" element={<PrivateRoute role={USER_ROLES.ADMIN} />}>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="admin/quiz-management" element={<QuizManagement />} />
+            <Route
+              path="admin/quiz-management/create-quiz"
+              element={<CreateQuiz />}
+            />
+            <Route
+              path="admin/quiz-management/edit/:id"
+              element={<EditQuiz />}
+            />
+            <Route path="admin/schedule" element={<Publish />} />
+            <Route
+              path="admin/schedule/:id/re-schedule"
+              element={<EditPublish />}
+            />
+            <Route
+              path="admin/quiz-management/quiz/:id"
+              element={<ViewQuiz />}
+            />
+          </Route>
+        </Route>
+
+        {/* participant routes */}
+        <Route path="/start/:scheduleId" element={<StartQuiz />} />
+        <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
+        <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
+        <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
+        <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
+
+  return (
+    <BrowserRouter>
+      <Toaster />
+      <Routes>
         {/* Public routes */}
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFoundPage />} />

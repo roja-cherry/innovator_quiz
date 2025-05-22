@@ -4,7 +4,7 @@ import { FaLock, FaArrowLeft, FaHome, FaShieldAlt } from "react-icons/fa";
 export const Unauthorized = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const requiredRoles = location.state?.requiredRoles || [];
+  const requiredRole = location.state?.requiredRole || "";
   const attemptedPath = location.state?.from?.pathname || " this page";
 
   return (
@@ -37,30 +37,6 @@ export const Unauthorized = () => {
               </div>
             </div>
 
-            {/* Privileges Section */}
-            {requiredRoles.length > 0 && (
-              <div className="mb-4 bg-warning bg-opacity-10 p-3 rounded border">
-                <div className="d-flex align-items-center gap-2 mb-3">
-                  <div className="bg-primary_ bg-opacity-10 p-2 rounded">
-                    <FaShieldAlt className="text-primary" />
-                  </div>
-                  <h3 className="h6 mb-0 text-dark fw-bold">
-                    Required Privileges
-                  </h3>
-                </div>
-
-                <div className="px-2">
-                  {requiredRoles?.map((role, ind) => (
-                    <p
-                      key={ind}
-                      className="text-dark m-0 mb-2 form-label text-capitalize"
-                    >
-                      {role.toLowerCase()}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Action buttons */}
             <div className="d-grid gap-3 mt-4">

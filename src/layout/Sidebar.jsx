@@ -27,7 +27,7 @@ export const adminUrls = [
 ];
 
 export const Sidebar = ({ onMenuClick = () => {} }) => {
-  const { user, logout } = useAuth(USER_ROLES.ADMIN);
+  // const { user, logout } = useAuth(USER_ROLES.ADMIN);
 
   return (
     <div>
@@ -67,7 +67,7 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
         >
           <span>
             <FaUserCircle className="me-2" size={20} />
-            <span className="d-none d-sm-inline">{user?.username}</span>
+            {/* <span className="d-none d-sm-inline">{user?.username}</span> */}
           </span>
           <FiChevronDown className="ms-1" size={16} />
         </button>
@@ -80,7 +80,7 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
             <div className="d-flex align-items-center">
               <FaUserCircle className="me-2 text-primary" size={32} />
               <div>
-                <h6 className="mb-0">{user?.username}</h6>
+                {/* <h6 className="mb-0">{user?.username}</h6> */}
               </div>
             </div>
           </li>
@@ -90,12 +90,12 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
           <li>
             <div>
               <small className="text-muted">Email</small> <br />
-              <small className="text-primary fw-semibold">{user?.email}</small>
+              {/* <small className="text-primary fw-semibold">{user?.email}</small> */}
             </div>
             <div className="mt-2">
               <small className="text-muted">Role</small> <br />
               <small className="text-primary fw-semibold">
-                {user?.roleText}
+                {/* {user?.roleText} */}
               </small>
             </div>
           </li>
@@ -105,7 +105,7 @@ export const Sidebar = ({ onMenuClick = () => {} }) => {
           <li>
             <button
               className="dropdown-item d-flex align-items-center"
-              onClick={logout}
+              // onClick={logout}
             >
               <FaSignOutAlt className="me-2" />
               Logout

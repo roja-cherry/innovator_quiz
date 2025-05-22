@@ -4,13 +4,12 @@ import { Spinner } from "../../components/common/Spinner";
 import {
   getAttemptByUserIdAndScheduleId,
   getScheduleForParticipant,
-  loginForSchedule,
+  participantLogin,
 } from "../../api/apiService";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import QuizAlreadyAttempted from "./QuizAlreadyAttempted";
-import { useAuth } from "../../hooks/useAuth";
-import { USER_ROLES } from "../../utilities";
+import { useAuth } from "../../context/AuthContext";
 
 export const QuizLogin = () => {
   const { id } = useParams();
@@ -21,7 +20,8 @@ export const QuizLogin = () => {
   const [errors, setErrors] = useState({});
   const [schedule, setSchedule] = useState({});
   const [quizAttempted, setQuizAttempted] = useState(false);
-  const { setUser } = useAuth(USER_ROLES.PARTICIPANT);
+  const { setUser } = useAuth();
+  // const { setUser } = useAuth(USER_ROLES.PARTICIPANT);
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -60,9 +60,14 @@ export const QuizLogin = () => {
 
     try {
       setLoading(true);
-      const response = await loginForSchedule(id, { email, username });
+      const response = await participantLogin(id, { email, username });
+      setUser(response?.data);
       localStorage.setItem("user", JSON.stringify(response?.data));
-      checkQuizAttemptedOrNot(response?.data);
+      if (id) {
+        checkQuizAttemptedOrNot(response?.data);
+      } else {
+        navigate("/userhome");
+      }
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       Swal.fire({
@@ -86,7 +91,7 @@ export const QuizLogin = () => {
       // navigate(`/start/${schedule?.id}`, { replace: true });
     } catch (error) {
       if (error?.status === 404) {
-        setUser(user);
+        // setUser(user);
         navigate(`/start/${schedule?.id}`, { replace: true });
       }
       if (error?.status != 404) {
@@ -98,12 +103,14 @@ export const QuizLogin = () => {
 
   useEffect(() => {
     localStorage.removeItem("user");
-    getScheduleForParticipant(id)
-      .then((res) => setSchedule(res?.data))
-      .catch((err) => {
-        const errorMessage = err.response?.data?.message ?? err?.message;
-        toast.error(errorMessage);
-      });
+    if (id) {
+      getScheduleForParticipant(id)
+        .then((res) => setSchedule(res?.data))
+        .catch((err) => {
+          const errorMessage = err.response?.data?.message ?? err?.message;
+          toast.error(errorMessage);
+        });
+    }
   }, []);
 
   if (quizAttempted)
@@ -116,13 +123,15 @@ export const QuizLogin = () => {
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
               <h2 className="fw-bold text-primary m-0">
-                {schedule?.quiz?.quizName}
+                {id ? schedule?.quiz?.quizName : "Login"}
               </h2>
-              <p className="mt-2">
-                <span className="text-muted">
-                  Duration: {schedule?.quiz?.timer} mins
-                </span>
-              </p>
+              {id && (
+                <p className="mt-2">
+                  <span className="text-muted">
+                    Duration: {schedule?.quiz?.timer} mins
+                  </span>
+                </p>
+              )}
             </div>
 
             <form onSubmit={handleSubmit}>
