@@ -83,6 +83,11 @@ const StartQuiz = () => {
     }
   };
 
+  const viewLeaderboard = () => {
+    console.log(scheduleId)
+      navigate(`/leaderboard/${scheduleId}`);
+  };
+
   const getStatusMessage = () => {
     if (loading || !schedule) return "Checking quiz status...";
     switch (schedule.status) {
@@ -143,6 +148,12 @@ const StartQuiz = () => {
                 Please wait for the quiz to become active.
               </p>
             )}
+            <button
+              className="btn btn-warning btn-lg mt-4 "
+              onClick={viewLeaderboard}
+            >
+              Current Leaderboard
+            </button>
           </div>
         </div>
       </div>

@@ -29,7 +29,6 @@ const Leaderboard = () => {
       return <div className="leaderboard-status loading">Loading leaderboard...</div>;
     }
   
-
     if (!leaderboardData || leaderboardData.length === 0) {
       return <div className="leaderboard-status">No data available</div>;
     }
