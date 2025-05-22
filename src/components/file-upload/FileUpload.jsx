@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./FileUpload.scss";
+import ExcelTemplatePopup from "../../pages/admin/quiz-management/ExcelTemplatePopup";
 
 const FileUpload = ({ handleFileChange, file, label }) => {
   const handleChange = (e) => {
@@ -51,9 +52,10 @@ const FileUpload = ({ handleFileChange, file, label }) => {
         />
       </label>
       <div className="ps-1">
-        <p className="text-sm text-secondary mt-1">
+        <p className="text-sm text-secondary mt-1 mb-0">
           Accept: .xlsx, .xls files (Max 10MB)
         </p>
+        <ExcelTemplatePopup />
         {file?.name && (
           <div>
             <p>Uploaded: {file?.name}</p>
