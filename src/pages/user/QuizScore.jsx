@@ -118,7 +118,7 @@ const QuizScore = () => {
 
               <div className={`text-center my-3`}>
                 <Link
-                  to={"leaderboard/${scheduleId}"}
+                  to={`/leaderboard/${scheduleId}`}
                   className={`btn btn-outline-dark`}
                   role="button"
                 >
