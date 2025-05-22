@@ -19,7 +19,8 @@ import { Login } from "./components/auth/Login";
 import { Unauthorized } from "./components/auth/Unauthorized";
 import { QuizLogin } from "./pages/user/QuizLogin";
 import QuizScore from "./pages/user/QuizScore";
-import Leaderboard from "./pages/user/Leaderboard";
+import { ScheduleLeaderboard } from "./pages/user/ScheduleLeaderboard";
+import { GlobalLeaderboard } from "./pages/user/GlobalLeaderboard";
 import UserHome from "./pages/user/UserHome";
 import GlobalLeaderboard from "./pages/user/GlobalLeaderboard";
 
@@ -121,7 +122,8 @@ export const App = () => {
           <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
           <Route index path={QUIZ_LOGIN_URL} element={<QuizLogin />} />
           <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
-          <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+          <Route path="/schedule-leaderboard/:scheduleId" element={<ScheduleLeaderboard/>} />
+          <Route path="/global-leaderboard" element={<GlobalLeaderboard/>} />
           <Route path="/userhome" element={<UserHome />} />
         </Route>
       </Routes>

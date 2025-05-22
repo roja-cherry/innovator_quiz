@@ -118,10 +118,12 @@ export const getProfile = () => {
   return axiosInstance.get("/api/users/profile")
 }
 
+<<<<<<< HEAD
 export const getUserHomePageQuizzes = (userId) => {
-  return axiosInstance.get(`/api/participant/${userId}/homepage`);
-}
-
-export const getGlobalLeaderBoard = () => {
-  return axiosInstance.get("/api/leaderboard/global");
+  return axiosInstance.get(`/api/user/${userId}/homepage`);
 };
+=======
+export const getAllLeaderboard = async() => {
+  return await axiosInstance.get("/api/leaderboard/global")
+}
+>>>>>>> fa1a01c (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes)
