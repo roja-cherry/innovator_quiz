@@ -24,7 +24,7 @@ export const UserLayout = () => {
   return (
     <>
       <UserNavbar />
-      <main style={{ minHeight: "90vh" }}>
+      <main style={{ minHeight: "90vh", paddingTop: "6rem" }}>
         <Outlet />
       </main>
     </>

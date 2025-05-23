@@ -4,35 +4,35 @@ import { useParams } from "react-router-dom";
 import { getLeaderBoard } from "../../api/apiService";
 
 const Leaderboard = () => {
+  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { scheduleId } = useParams();
 
-    const [leaderboardData, setLeaderboardData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { scheduleId } = useParams();
-  
-    useEffect(() => {
-      const fetchLeaderboard = async () => {
-        try {
-          setLoading(true);
-          const response = await getLeaderBoard(scheduleId); // Added await here
-          setLeaderboardData(response.data);
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchLeaderboard();
-    }, [scheduleId]);
-  
-    if (loading) {
-      return <div className="leaderboard-status loading">Loading leaderboard...</div>;
-    }
-  
-    if (!leaderboardData || leaderboardData.length === 0) {
-      return <div className="leaderboard-status">No data available</div>;
-    }
-   
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        setLoading(true);
+        const response = await getLeaderBoard(scheduleId); // Added await here
+        setLeaderboardData(response.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+  }, [scheduleId]);
+
+  if (loading) {
+    return (
+      <div className="leaderboard-status loading">Loading leaderboard...</div>
+    );
+  }
+
+  // if (!leaderboardData || leaderboardData.length === 0) {
+  //   return <div className="leaderboard-status">No data available</div>;
+  // }
 
   return (
     <div className="container py-5" style={{ marginTop: "6rem" }}>
@@ -66,6 +66,13 @@ const Leaderboard = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {leaderboardData.length === 0 && (
+                    <tr>
+                      <td colSpan="5" className="text-center py-4">
+                        No data available
+                      </td>
+                    </tr>
+                  )}
                   {leaderboardData.map((user, index) => (
                     <tr
                       key={user.userId}
