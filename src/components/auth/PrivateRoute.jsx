@@ -38,7 +38,7 @@ export const PrivateRoute = ({ role = "" }) => {
 
   // If route requires admin but no token exists
   if (role === USER_ROLES.ADMIN && !localStorage.getItem("token")) {
-    return <Navigate to="/admin-login" state={{ from: location }} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // If route requires participant but no user in localStorage
