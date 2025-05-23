@@ -121,3 +121,6 @@ export const getProfile = () => {
 export const getUserHomePageQuizzes = (userId) => {
   return axiosInstance.get(`/api/participant/${userId}/homepage`);
 };
+export const getAllLeaderboard = async() => {
+  return await axiosInstance.get("/api/leaderboard/global")
+}

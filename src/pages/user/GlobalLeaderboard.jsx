@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { formatToDateTimeString } from "../../utilities";
-import { useParams } from "react-router-dom";
-import { getLeaderBoard } from "../../api/apiService";
+import { getAllLeaderboard } from "../../api/apiService"; // Add this API call
 
-const Leaderboard = () => {
+export const GlobalLeaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { scheduleId } = useParams();
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
         setLoading(true);
-        const response = await getLeaderBoard(scheduleId); // Added await here
+        const response = await getAllLeaderboard(); // Call global leaderboard API
         setLeaderboardData(response.data);
       } catch (err) {
         console.error(err);
@@ -22,7 +20,7 @@ const Leaderboard = () => {
     };
 
     fetchLeaderboard();
-  }, [scheduleId]);
+  }, []);
 
   if (loading) {
     return (
@@ -30,19 +28,15 @@ const Leaderboard = () => {
     );
   }
 
-  // if (!leaderboardData || leaderboardData.length === 0) {
-  //   return <div className="leaderboard-status">No data available</div>;
-  // }
-
   return (
     <div className="container py-5" style={{ marginTop: "6rem" }}>
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="text-center mb-4">
-            <h2 className="fw-light mb-1">Leaderboard</h2>
+            <h2 className="fw-light mb-1">Global Leaderboard</h2>
             <div
               className="border-top border-3 border-primary mx-auto"
-              style={{ width: "80px" }}
+              style={{ width: "100px" }}
             ></div>
           </div>
 
@@ -124,4 +118,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Leaderboard;
+export default GlobalLeaderboard;
