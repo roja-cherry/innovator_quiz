@@ -77,7 +77,7 @@ const UserHome = () => {
                 <td className="actions-cell">
                   {quiz.status === "ACTIVE" && !quiz.isAttempted && (
                     <button
-                      className="action-button take-quiz badge text-bg-success"
+                      className="btn btn-primary"
                       onClick={() => handleTakeQuiz(quiz.scheduleId)}
                     >
                       Take Quiz
@@ -85,7 +85,7 @@ const UserHome = () => {
                   )}
                   {quiz.status === "COMPLETED" || quiz.isAttempted ? (
                     <button
-                      className="action-button view-summary badge text-bg-warning"
+                      className="btn btn-outline-primary"
                       onClick={() => handleViewSummary(quiz.scheduleId)}
                     >
                       View Summary
