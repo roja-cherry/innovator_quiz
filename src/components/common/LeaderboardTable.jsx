@@ -1,39 +1,26 @@
 // LeaderboardTable.js
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { formatToDateTimeString } from "../../utilities";
-import { useParams } from "react-router-dom";
-import { getLeaderBoard } from "../../api/apiService";
+import { useNavigate } from "react-router-dom";
 
-export const LeaderboardTable = ({ title = "" }) => {
-  const [leaderboardData, setLeaderboardData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { scheduleId } = useParams();
+export const LeaderboardTable = ({ title = "", data = [] }) => {
 
-  useEffect(() => {
-    const fetchLeaderboard = async () => {
-      try {
-        setLoading(true);
-        const response = await getLeaderBoard(scheduleId); // Added await here
-        setLeaderboardData(response.data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const navigate = useNavigate();
 
-    fetchLeaderboard();
-  }, [scheduleId]);
-
-  if (loading) {
+  if (!data || data.length === 0) {
     return (
-      <div className="leaderboard-status loading">Loading leaderboard...</div>
+      <div className="container py-5" style={{ marginTop: "6rem" }}>
+        <div className="text-center">
+          <h2 className="fw-light mb-1">{title}</h2>
+          <div
+            className="border-top border-3 border-primary mx-auto mb-4"
+            style={{ width: "80px" }}
+          ></div>
+          <div className="leaderboard-status">No data available</div>
+        </div>
+      </div>
     );
   }
-
-  // if (!leaderboardData || leaderboardData.length === 0) {
-  //   return <div className="leaderboard-status">No data available</div>;
-  // }
 
   return (
     <div className="container py-5" style={{ marginTop: "6rem" }}>
@@ -67,14 +54,7 @@ export const LeaderboardTable = ({ title = "" }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {leaderboardData.length === 0 && (
-                    <tr>
-                      <td colSpan="5" className="text-center py-4">
-                        No data available
-                      </td>
-                    </tr>
-                  )}
-                  {leaderboardData.map((user, index) => (
+                  {data.map((user, index) => (
                     <tr
                       key={user.userId}
                       className={index < 3 ? "border-bottom-0" : ""}
@@ -118,6 +98,12 @@ export const LeaderboardTable = ({ title = "" }) => {
             <small className="text-muted">
               Updated {formatToDateTimeString(new Date())}
             </small>
+          </div>
+
+          <div>
+            <button className="btn btn-primary w-100 mt-4" onClick={()=>navigate("/userhome")}>
+              Back to Home 
+            </button >
           </div>
         </div>
       </div>
