@@ -2,7 +2,6 @@
 import React from "react";
 import { formatToDateTimeString } from "../../utilities";
 
-<<<<<<< HEAD:src/pages/user/Leaderboard.jsx
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,12 +32,6 @@ const Leaderboard = () => {
   // if (!leaderboardData || leaderboardData.length === 0) {
   //   return <div className="leaderboard-status">No data available</div>;
   // }
-=======
-export const LeaderboardTable = ({ data, title, updatedAt }) => {
-  if (!data || data.length === 0) {
-    return <div className="leaderboard-status">No data available</div>;
-  }
->>>>>>> 8ff3955 (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes):src/components/common/LeaderboardTable.jsx
 
   return (
     <div className="container py-5" style={{ marginTop: "6rem" }}>
@@ -72,7 +65,6 @@ export const LeaderboardTable = ({ data, title, updatedAt }) => {
                   </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD:src/pages/user/Leaderboard.jsx
                   {leaderboardData.length === 0 && (
                     <tr>
                       <td colSpan="5" className="text-center py-4">
@@ -81,9 +73,6 @@ export const LeaderboardTable = ({ data, title, updatedAt }) => {
                     </tr>
                   )}
                   {leaderboardData.map((user, index) => (
-=======
-                  {data.map((user, index) => (
->>>>>>> 8ff3955 (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes):src/components/common/LeaderboardTable.jsx
                     <tr
                       key={user.userId}
                       className={index < 3 ? "border-bottom-0" : ""}

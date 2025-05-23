@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { formatToDateTimeString } from "../../utilities";
 import { getGlobalLeaderBoard } from "../../api/apiService"; // Add this API call
 
 const GlobalLeaderboard = () => {
-=======
-import { LeaderboardTable } from "../../components/common/LeaderboardTable";
-import { getAllLeaderboard } from "../../api/apiService";
-
-export const GlobalLeaderboard = () => {
->>>>>>> 8ff3955 (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes)
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,11 +10,7 @@ export const GlobalLeaderboard = () => {
     const fetchLeaderboard = async () => {
       try {
         setLoading(true);
-<<<<<<< HEAD
         const response = await getGlobalLeaderBoard(); // Call global leaderboard API
-=======
-        const response = await getAllLeaderboard() // This would fetch all results
->>>>>>> 8ff3955 (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes)
         setLeaderboardData(response.data);
       } catch (err) {
         console.error(err);
@@ -34,7 +23,6 @@ export const GlobalLeaderboard = () => {
   }, []);
 
   if (loading) {
-<<<<<<< HEAD
     return (
       <div className="leaderboard-status loading">Loading leaderboard...</div>
     );
@@ -131,15 +119,3 @@ export const GlobalLeaderboard = () => {
 };
 
 export default GlobalLeaderboard;
-=======
-    return <div className="leaderboard-status loading">Loading leaderboard...</div>;
-  }
-
-  return (
-    <LeaderboardTable 
-      data={leaderboardData} 
-      title="Global Leaderboard"
-    />
-  );
-};
->>>>>>> 8ff3955 (added leaderboard for all quizzes and also added top 10 leaderboard for each quizzes)
