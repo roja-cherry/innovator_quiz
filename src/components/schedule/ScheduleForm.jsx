@@ -57,11 +57,13 @@ const ScheduleForm = ({ isEdit = false }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [startDateTime, setStartDateTime] = useState(null);
   const [endDateTime, setEndDateTime] = useState(null);
+  const [errors, setErrors] = useState({})
 
   const now = new Date().toISOString().slice(0, 16);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({})
 
     if (new Date(endDateTime) <= new Date(startDateTime)) {
       alert("End Date & Time must be after Start Date & Time");
@@ -90,6 +92,12 @@ const ScheduleForm = ({ isEdit = false }) => {
       if (confirm.isDismissed || confirm.isConfirmed)
         navigate("/admin/quiz-management");
     } catch (error) {
+      const beErrors = error?.response?.data?.errors || []
+      const errorObject = beErrors?.reduce((acc, curr) => {
+        acc[curr.field] = curr.error;
+        return acc;
+      }, {});
+      setErrors(errorObject)
       toast.error(error?.response?.data?.message ?? error?.message);
     }
   };
@@ -109,6 +117,12 @@ const ScheduleForm = ({ isEdit = false }) => {
       if (confirm.isDismissed || confirm.isConfirmed)
         navigate("/admin/quiz-management");
     } catch (error) {
+      const beErrors = error?.response?.data?.errors || []
+      const errorObject = beErrors?.reduce((acc, curr) => {
+        acc[curr.field] = curr.error;
+        return acc;
+      }, {});
+      setErrors(errorObject)
       toast.error(error?.response?.data?.message ?? "Error in creating quiz");
     }
   };
