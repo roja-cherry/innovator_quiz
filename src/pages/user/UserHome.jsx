@@ -38,8 +38,8 @@ const UserHome = () => {
   }, [user,]);
 
   const handleTakeQuiz = (scheduleId) => navigate(`/start/${scheduleId}`);
-  const handleViewSummary = (scheduleId) => navigate(`/summary/${scheduleId}`);
-  const handleLeaderboard = () => navigate("/leaderboard");
+  const handleViewSummary = (scheduleId) => navigate(`/leaderboard/${scheduleId}`);
+  const handleLeaderboard = () => navigate("/leaderboard/global");
 
 //   if (loading) return <div>Loading quizzes...</div>;
 //   if (!user) return <div>Please log in</div>;

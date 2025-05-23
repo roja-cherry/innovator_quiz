@@ -120,4 +120,8 @@ export const getProfile = () => {
 
 export const getUserHomePageQuizzes = (userId) => {
   return axiosInstance.get(`/api/participant/${userId}/homepage`);
+}
+
+export const getGlobalLeaderBoard = () => {
+  return axiosInstance.get("/api/leaderboard/global");
 };
