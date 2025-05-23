@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import CreateQuiz from "./pages/admin/CreateQuiz";
 import EditQuiz from "./pages/admin/EditQuiz";
