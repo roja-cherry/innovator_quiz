@@ -123,7 +123,7 @@ export const QuizLogin = () => {
           <div className="card-body p-4 p-md-5">
             <div className="mb-4">
               <h2 className="fw-bold text-primary m-0">
-                {id ? schedule?.quiz?.quizName : "Participant Login"}
+                {id ? schedule?.quiz?.quizName : "User Login"}
               </h2>
               {id && (
                 <p className="mt-2">
