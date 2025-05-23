@@ -1,8 +1,10 @@
 // LeaderboardTable.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { formatToDateTimeString } from "../../utilities";
+import { useParams } from "react-router-dom";
+import { getLeaderBoard } from "../../api/apiService";
 
-const Leaderboard = () => {
+export const LeaderboardTable = ({ title = "" }) => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { scheduleId } = useParams();
@@ -114,7 +116,7 @@ const Leaderboard = () => {
 
           <div className="text-center mt-4">
             <small className="text-muted">
-              Updated {updatedAt || formatToDateTimeString(new Date())}
+              Updated {formatToDateTimeString(new Date())}
             </small>
           </div>
         </div>

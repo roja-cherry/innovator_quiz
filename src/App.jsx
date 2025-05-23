@@ -66,7 +66,7 @@ export const App = () => {
             <Route path="/start/:scheduleId" element={<StartQuiz />} />
             <Route path="/quiz-score/:attemptId" element={<QuizScore />} />
             <Route path="/attend-quiz/:scheduleId" element={<TakeQuiz />} />
-            <Route path="/leaderboard/:scheduleId" element={<Leaderboard />} />
+            <Route path="/leaderboard/:scheduleId" element={<ScheduleLeaderboard />} />
             <Route path="/leaderboard/global" element={<GlobalLeaderboard />} />
           </Route>
         </Route>

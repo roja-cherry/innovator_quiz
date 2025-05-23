@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getLeaderBoard } from "../../api/apiService";
-
+import { LeaderboardTable } from "../../components/common/LeaderboardTable";
 
 export const ScheduleLeaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
@@ -35,12 +35,4 @@ export const ScheduleLeaderboard = () => {
     />
   )
 
-  // return (
-  //   <LeaderboardTable 
-  //     data={leaderboardData} 
-  //     title="Quiz Leaderboard"
-  //   />
-
-
-  );
 };

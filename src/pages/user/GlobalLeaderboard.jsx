@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { formatToDateTimeString } from "../../utilities";
-import { getGlobalLeaderBoard } from "../../api/apiService"; // Add this API call
+import { getAllLeaderboard } from "../../api/apiService"; // Add this API call
 
-const GlobalLeaderboard = () => {
+export const GlobalLeaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,7 +10,7 @@ const GlobalLeaderboard = () => {
     const fetchLeaderboard = async () => {
       try {
         setLoading(true);
-        const response = await getGlobalLeaderBoard(); // Call global leaderboard API
+        const response = await getAllLeaderboard(); // Call global leaderboard API
         setLeaderboardData(response.data);
       } catch (err) {
         console.error(err);
