@@ -15,37 +15,47 @@ const UserHome = () => {
 
     getUserHomePageQuizzes(user.userId)
       .then((response) => {
-        const mapped = response.data.map((item) => ({
-          id: item.scheduleId,
-          title: item.quizName,
-          status: item.status,
-          statusText:
-            item.status === "ACTIVE"
-              ? "Active"
-              : item.status === "COMPLETED"
-              ? "Completed"
-              : item.status === "PUBLISHED"
-              ? "Published"
-              : "Cancelled",
-          isAttempted: item.isAttempted,
-          scheduleId: item.scheduleId,
-        }));
+        const mapped = response.data
+          .sort((a, b) => {
+            const priority = {
+              ACTIVE: 0,
+              COMPLETED: 2,
+            };
+            return priority[a.status] - priority[b.status];
+          })
+          .map((item) => ({
+            id: item.scheduleId,
+            title: item.quizName,
+            status: item.status,
+            statusText:
+              item.status === "ACTIVE"
+                ? "Active"
+                : item.status === "COMPLETED"
+                ? "Completed"
+                : item.status === "PUBLISHED"
+                ? "Published"
+                : "Cancelled",
+            isAttempted: item.isAttempted,
+            scheduleId: item.scheduleId,
+          }));
+
         setQuizzes(mapped);
       })
       .catch((error) => {
         console.error("Failed to fetch user quizzes:", error);
       });
-  }, [user,]);
+  }, [user]);
 
   const handleTakeQuiz = (scheduleId) => navigate(`/start/${scheduleId}`);
-  const handleViewSummary = (scheduleId) => navigate(`/leaderboard/${scheduleId}`);
+  const handleViewSummary = (scheduleId) =>
+    navigate(`/leaderboard/${scheduleId}`);
   const handleLeaderboard = () => navigate("/leaderboard/global");
 
-//   if (loading) return <div>Loading quizzes...</div>;
-//   if (!user) return <div>Please log in</div>;
+  //   if (loading) return <div>Loading quizzes...</div>;
+  //   if (!user) return <div>Please log in</div>;
 
   return (
-    <div className="user-home-container" style={{paddingTop: "8rem"}}>
+    <div className="user-home-container" style={{ paddingTop: "8rem" }}>
       <header className="user-home-header">
         <h1>My Quizzes</h1>
         <button
@@ -77,7 +87,7 @@ const UserHome = () => {
                 <td className="actions-cell">
                   {quiz.status === "ACTIVE" && !quiz.isAttempted && (
                     <button
-                      className="action-button take-quiz badge text-bg-success"
+                      className="btn btn-primary"
                       onClick={() => handleTakeQuiz(quiz.scheduleId)}
                     >
                       Take Quiz
@@ -85,7 +95,7 @@ const UserHome = () => {
                   )}
                   {quiz.status === "COMPLETED" || quiz.isAttempted ? (
                     <button
-                      className="action-button view-summary badge text-bg-warning"
+                      className="btn btn-outline-primary"
                       onClick={() => handleViewSummary(quiz.scheduleId)}
                     >
                       View Summary

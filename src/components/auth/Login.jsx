@@ -20,7 +20,7 @@ export const Login = () => {
     if (!companyEmailRegex.test(email)) {
       setErrors((prev) => ({
         ...prev,
-        email: "Please enter a valid comapany email address",
+        email: "Please enter a valid company email address",
       }));
       isValid = false;
     } else {
