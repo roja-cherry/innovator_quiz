@@ -17,13 +17,6 @@ function TakeQuiz() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // ✅ Redirect if user is not logged in or role is not PARTICIPANT
-  // useEffect(() => {
-  //   if (!user || user.role !== USER_ROLES.PARTICIPANT) {
-  //     navigate("/login", { replace: true });
-  //   }
-  // }, [user, navigate]);
-
   const handleSubmit = async () => {
     try {
       const response = await submitQuiz(user?.userId, scheduleId, answers);
