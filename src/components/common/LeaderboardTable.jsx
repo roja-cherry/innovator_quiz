@@ -4,7 +4,6 @@ import { formatToDateTimeString } from "../../utilities";
 import { useNavigate } from "react-router-dom";
 
 export const LeaderboardTable = ({ title = "", data = [] }) => {
-
   const navigate = useNavigate();
 
   if (!data || data.length === 0) {
@@ -85,7 +84,9 @@ export const LeaderboardTable = ({ title = "", data = [] }) => {
                         </div>
                       </td>
                       <td className="pe-4 text-end align-middle fw-medium">
-                        {user.totalScore.toLocaleString()}
+                        {user.totalScore != null
+                          ? user.totalScore.toLocaleString()
+                          : "0"}
                       </td>
                     </tr>
                   ))}
@@ -101,9 +102,12 @@ export const LeaderboardTable = ({ title = "", data = [] }) => {
           </div>
 
           <div>
-            <button className="btn btn-primary w-100 mt-4" onClick={()=>navigate("/userhome")}>
-              Back to Home 
-            </button >
+            <button
+              className="btn btn-primary w-100 mt-4"
+              onClick={() => navigate("/userhome")}
+            >
+              Back to Home
+            </button>
           </div>
         </div>
       </div>

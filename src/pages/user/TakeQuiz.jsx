@@ -39,12 +39,24 @@ function TakeQuiz() {
 
     axios
       .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
-      .then((response) => {
+      .then(async (response) => {
         const data = response.data;
 
         if (data.schedule.status !== "ACTIVE") {
           navigate(`/start/${scheduleId}`);
         }
+
+        // 2. Immediately create/load the attempt
+        await axios({
+          method: "post",
+          url: "http://localhost:8080/api/participant/create-attempt",
+          params: {
+            userId: user.userId,
+            scheduleId: scheduleId,
+          },
+          // no `data` field at all
+        });
+
         setQuizData(data);
         setTitle(data.schedule.quizTitle);
         setLoading(false);

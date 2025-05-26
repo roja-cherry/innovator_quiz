@@ -47,7 +47,15 @@ const QuizScore = () => {
   }, [attemptId]);
 
   const { score, maxScore, quizName } = quizData;
-  const percentage = Math.round((score / maxScore) * 100);
+  const percentage = useMemo(() => {
+    const s = Number(score);
+    const max = Number(maxScore);
+  
+    if (isNaN(s) || isNaN(max) || max === 0) return 0;
+  
+    return Math.round((s / max) * 100);
+  }, [score, maxScore]);
+  
   const passed = percentage >= 50;
 
   const result = useMemo(() => {
