@@ -10,6 +10,7 @@ export const AuthContextProvider = ({ children }) => {
     loading: true
   });
 
+
   useEffect(() => {
     // Check for participant in localStorage on initial load
     const participant = localStorage.getItem('user');
@@ -38,6 +39,7 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.removeItem('user');
     }
     setAuthState({ user: null, loading: false });
+    window.location.href="/login"
   };
 
   const isAuthenticated = () => {
