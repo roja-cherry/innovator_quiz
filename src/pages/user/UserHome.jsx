@@ -4,15 +4,17 @@ import { STATUS_CLASSNAME } from "../../utilities";
 import { getUserHomePageQuizzes } from "../../api/apiService";
 import "./UserHome.scss";
 import { useAuth } from "../../context/AuthContext";
+import { useAppContext } from "../../context/AppContext";
 
 const UserHome = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
+  const { setTitle } = useAppContext();
 
   useEffect(() => {
     if (!user) return;
-
+    setTitle("My Quizzes");
     getUserHomePageQuizzes(user.userId)
       .then((response) => {
         const mapped = response.data
@@ -56,8 +58,7 @@ const UserHome = () => {
 
   return (
     <div className="user-home-container" style={{ paddingTop: "8rem" }}>
-      <header className="user-home-header">
-        <h1>My Quizzes</h1>
+      <header className="user-home-header d-flex justify-content-end">
         <button
           className="leaderboard-button badge bg-primary text-white"
           onClick={handleLeaderboard}
@@ -93,16 +94,26 @@ const UserHome = () => {
                       Take Quiz
                     </button>
                   )}
-                  {quiz.status === "COMPLETED" || quiz.isAttempted ? (
+
+                  {quiz.status === "ACTIVE" && quiz.isAttempted && (
+                    <div className="tooltip-container">
+                      <button className="btn btn-outline-primary btn-disabled">
+                        View Summary
+                      </button>
+                      <span className="tooltip-text">
+                        Summary will be available after the quiz period ends
+                      </span>
+                    </div>
+                  )}
+
+                  {quiz.status === "COMPLETED" && (
                     <button
                       className="btn btn-outline-primary"
                       onClick={() => handleViewSummary(quiz.scheduleId)}
                     >
                       View Summary
                     </button>
-                  ) : quiz.status === "PUBLISHED" ? (
-                    <span className="badge text-bg-secondary">Coming Soon</span>
-                  ) : null}
+                  )}
                 </td>
               </tr>
             ))}
