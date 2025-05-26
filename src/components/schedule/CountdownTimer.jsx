@@ -13,6 +13,8 @@ const CountdownTimer = ({ timer = 0.5, onTimeUp = () => {} }) => {
   // Save to sessionStorage whenever timeLeft changes
   useEffect(() => {
     sessionStorage.setItem("quizTimer", timeLeft.toString());
+
+    return () => sessionStorage.clear()
   }, [timeLeft]);
 
   // Timer logic
