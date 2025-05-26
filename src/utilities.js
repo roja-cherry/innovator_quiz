@@ -45,7 +45,7 @@ export const STATUS_CLASSNAME = {
 
 export const copyScheduleAttendUrl = async (scheduleId) => {
   const baseUrl = window.location.origin;
-  const path = QUIZ_LOGIN_URL.replace(":id", scheduleId);
+  const path = `/start/${scheduleId}`
 
   try {
     await navigator.clipboard.writeText(`${baseUrl}${path}`);

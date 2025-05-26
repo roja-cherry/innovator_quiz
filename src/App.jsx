@@ -22,6 +22,7 @@ import QuizScore from "./pages/user/QuizScore";
 import { ScheduleLeaderboard } from "./pages/user/ScheduleLeaderboard";
 import { GlobalLeaderboard } from "./pages/user/GlobalLeaderboard";
 import UserHome from "./pages/user/UserHome";
+
 export const App = () => {
   return (
     <BrowserRouter>

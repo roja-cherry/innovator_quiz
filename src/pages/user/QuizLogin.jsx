@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../components/common/Spinner";
 import {
   getAttemptByUserIdAndScheduleId,
@@ -14,14 +14,15 @@ import { useAuth } from "../../context/AuthContext";
 export const QuizLogin = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation()
+  const { setUser } = useAuth();
+
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
   const [schedule, setSchedule] = useState({});
   const [quizAttempted, setQuizAttempted] = useState(false);
-  const { setUser } = useAuth();
-  // const { setUser } = useAuth(USER_ROLES.PARTICIPANT);
 
   const validateFields = () => {
     const companyEmailRegex = /^[a-zA-Z0-9._%+-]+@ibsplc\.com$/;
@@ -67,7 +68,8 @@ export const QuizLogin = () => {
       if (id) {
         checkQuizAttemptedOrNot(response?.data);
       } else {
-        navigate("/userhome");
+        const redirectUrl = location?.state?.from?.pathname || '/userhome'
+        navigate(redirectUrl);
       }
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
