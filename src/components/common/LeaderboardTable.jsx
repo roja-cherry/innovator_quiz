@@ -43,7 +43,7 @@ export const LeaderboardTable = ({ title = "", data = [] }) => {
                       Rank
                     </th>
                     <th scope="col" className="text-muted fw-normal">
-                      Player
+                      Name
                     </th>
                     <th
                       scope="col"
@@ -80,7 +80,7 @@ export const LeaderboardTable = ({ title = "", data = [] }) => {
                       <td className="align-middle">
                         <div className="d-flex align-items-center">
                           <div className="ms-2">
-                            <div className="fw-medium">{user.userName}</div>
+                            <div className="fw-medium text-capitalize">{user.userName}</div>
                           </div>
                         </div>
                       </td>
