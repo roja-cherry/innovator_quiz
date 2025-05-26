@@ -26,15 +26,6 @@ export const formatToDateTimeString = (dateTime) => {
   return date.toLocaleString("en-US", options);
 };
 
-export const getStatusClassName = (status) => {
-  const statusClassName = {
-    COMPLETED: "badge text-bg-success",
-    PUBLISHED: "badge text-bg-warning",
-    CREATED: "badge bg-badge-blue text-bg-dark-",
-  };
-  return statusClassName[status];
-};
-
 export const STATUS_CLASSNAME = {
   CREATED: "status-badge created",
   COMPLETED: "status-badge completed",
@@ -57,7 +48,6 @@ export const copyScheduleAttendUrl = async (scheduleId) => {
 
 export const goFullScreen = async (elem = document.documentElement) => {
   try {
-    elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {

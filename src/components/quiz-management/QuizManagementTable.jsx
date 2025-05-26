@@ -4,7 +4,6 @@ import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
 import {
   formatToDateTimeString,
-  getStatusClassName,
   STATUS_CLASSNAME,
 } from "../../utilities";
 import { deleteQuiz } from "../../api/apiService";
