@@ -94,16 +94,26 @@ const UserHome = () => {
                       Take Quiz
                     </button>
                   )}
-                  {quiz.status === "COMPLETED" || quiz.isAttempted ? (
+
+                  {quiz.status === "ACTIVE" && quiz.isAttempted && (
+                    <div className="tooltip-container">
+                      <button className="btn btn-outline-primary btn-disabled">
+                        View Summary
+                      </button>
+                      <span className="tooltip-text">
+                        Summary will be available after the quiz period ends
+                      </span>
+                    </div>
+                  )}
+
+                  {quiz.status === "COMPLETED" && (
                     <button
                       className="btn btn-outline-primary"
                       onClick={() => handleViewSummary(quiz.scheduleId)}
                     >
                       View Summary
                     </button>
-                  ) : quiz.status === "PUBLISHED" ? (
-                    <span className="badge text-bg-secondary">Coming Soon</span>
-                  ) : null}
+                  )}
                 </td>
               </tr>
             ))}
