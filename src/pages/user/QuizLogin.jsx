@@ -68,7 +68,8 @@ export const QuizLogin = () => {
       if (id) {
         checkQuizAttemptedOrNot(response?.data);
       } else {
-        const redirectUrl = location?.state?.from?.pathname || '/userhome'
+        const from = location?.state?.from?.pathname || "/userhome"
+        const redirectUrl = from === "/" ? '/userhome' : from
         navigate(redirectUrl);
       }
     } catch (err) {
