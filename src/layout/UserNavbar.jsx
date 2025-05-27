@@ -22,7 +22,7 @@ export const UserNavbar = () => {
 
         <div className="dropdown">
           <button
-            className="btn w-100 py-3 dropdown-toggle d-flex align-items-center justify-content-between text-decoration-none"
+            className="btn w-100 border-0 py-3 dropdown-toggle d-flex align-items-center justify-content-between text-decoration-none"
             type="button"
             id="userDropdown"
             data-bs-toggle="dropdown"
