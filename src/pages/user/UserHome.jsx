@@ -10,11 +10,14 @@ const UserHome = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
+  const [allQuizzes, setAllQuizzes] = useState([]); 
+  const [statusFilter, setStatusFilter] = useState("ACTIVE"); 
   const { setTitle } = useAppContext();
 
   useEffect(() => {
     if (!user) return;
     setTitle("My Quizzes");
+
     getUserHomePageQuizzes(user.userId)
       .then((response) => {
         const mapped = response.data
@@ -41,31 +44,49 @@ const UserHome = () => {
             scheduleId: item.scheduleId,
           }));
 
-        setQuizzes(mapped);
+        setAllQuizzes(mapped); // ✅ store all
       })
       .catch((error) => {
         console.error("Failed to fetch user quizzes:", error);
       });
   }, [user]);
 
+  useEffect(() => {
+    if (statusFilter === "ALL") {
+      setQuizzes(allQuizzes);
+    } else {
+      const filtered = allQuizzes.filter((q) => q.status === statusFilter);
+      setQuizzes(filtered);
+    }
+  }, [statusFilter, allQuizzes]); 
+
   const handleTakeQuiz = (scheduleId) => navigate(`/start/${scheduleId}`);
   const handleViewSummary = (scheduleId) =>
     navigate(`/leaderboard/${scheduleId}`);
   const handleLeaderboard = () => navigate("/leaderboard/global");
 
-  //   if (loading) return <div>Loading quizzes...</div>;
-  //   if (!user) return <div>Please log in</div>;
-
   return (
     <div className="user-home-container" style={{ paddingTop: "8rem" }}>
-      <header className="user-home-header d-flex justify-content-end">
-        <button
-          className="leaderboard-button badge bg-primary text-white"
-          onClick={handleLeaderboard}
-        >
-          Leaderboard
-        </button>
-      </header>
+      <header className="user-home-header d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <select
+      className="form-select w-auto"
+      value={statusFilter}
+      onChange={(e) => setStatusFilter(e.target.value)}
+    >
+      <option value="ALL">All</option>
+      <option value="ACTIVE">Active</option>
+      <option value="COMPLETED">Completed</option>
+    </select>
+  </div>
+  <button
+    className="leaderboard-button badge bg-primary text-white"
+    onClick={handleLeaderboard}
+  >
+    Leaderboard
+  </button>
+</header>
+
 
       <div className="quiz-table-container">
         <table className="quiz-table">
@@ -117,6 +138,13 @@ const UserHome = () => {
                 </td>
               </tr>
             ))}
+            {quizzes.length === 0 && (
+              <tr>
+                <td colSpan="3" className="text-center">
+                  No quizzes found for selected status.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
