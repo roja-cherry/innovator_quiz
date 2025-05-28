@@ -127,11 +127,11 @@ const QuizScore = () => {
 
               <div className={`text-center my-3`}>
                 <Link
-                  to={`/leaderboard/${quizData?.scheduleId}`}
+                  to={`/userhome`}
                   className={`btn btn-outline-dark`}
                   role="button"
                 >
-                  Leadership Board
+                  Go Home
                 </Link>
               </div>
             </div>
