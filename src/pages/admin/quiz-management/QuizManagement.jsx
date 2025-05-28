@@ -15,12 +15,12 @@ const QuizManagement = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [quizList, setQuizList] = useState([]);
-  const {setTitle} = useAppContext()
+  const { setTitle } = useAppContext();
 
   useEffect(() => {
-    setTitle("Quiz Management")
-    return () => setTitle("")
-  }, [])
+    setTitle("Quiz Management");
+    return () => setTitle("");
+  }, []);
 
   const data = useMemo(() => {
     if (!search) return quizList;
@@ -57,7 +57,17 @@ const QuizManagement = () => {
   const getAllQuiz = async (query = filters) => {
     try {
       const res = await getQuizList(query);
-      setQuizList(res?.data);
+
+      const statusOrder = {
+        ACTIVE: 0,
+        PUBLISHED: 1,
+        COMPLETED: 2,
+      };
+
+      const sortedQuizzes = res?.data?.sort((a, b) => {
+        return statusOrder[a.status] - statusOrder[b.status];
+      });
+      setQuizList(sortedQuizzes);
     } catch (error) {
       console.log(error);
       Swal.fire("Error", error?.message, "error");
