@@ -5,8 +5,12 @@ import "./TakeQuiz.scss";
 import CountdownTimer from "../../components/schedule/CountDownTimer";
 import { useAppContext } from "../../context/AppContext";
 import { goFullScreen, USER_ROLES } from "../../utilities";
-import { submitQuiz } from "../../api/apiService";
+import {
+  getAttemptByUserIdAndScheduleId,
+  submitQuiz,
+} from "../../api/apiService";
 import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 function TakeQuiz() {
   const { scheduleId } = useParams();
@@ -35,15 +39,25 @@ function TakeQuiz() {
   useEffect(() => {
     if (!user || !scheduleId) return;
 
-    goFullScreen();
+    const checkAndNavigate = async () => {
+      const isAttempted = await checkAttemptedOrNot();
+      if (isAttempted) {
+        toast.error("Sorry, you can't take this quiz anymore");
+        navigate("/userhome");
+        return;
+      }
 
-    axios
-      .get(`http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`)
-      .then(async (response) => {
+      goFullScreen();
+
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/participant/schedule/${scheduleId}/quiz`
+        );
         const data = response.data;
 
         if (data.schedule.status !== "ACTIVE") {
           navigate(`/start/${scheduleId}`);
+          return;
         }
 
         // 2. Immediately create/load the attempt
@@ -54,18 +68,32 @@ function TakeQuiz() {
             userId: user.userId,
             scheduleId: scheduleId,
           },
-          // no `data` field at all
         });
 
         setQuizData(data);
         setTitle(data.schedule.quizTitle);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching quiz data", error);
         setLoading(false);
-      });
+      }
+    };
+
+    checkAndNavigate();
   }, [scheduleId, user, setTitle]);
+
+  const checkAttemptedOrNot = async () => {
+    try {
+      const userFromLocal = JSON.parse(localStorage.getItem("user"));
+      const response = await getAttemptByUserIdAndScheduleId(
+        userFromLocal?.userId,
+        scheduleId
+      );
+      return !!response?.data;
+    } catch (err) {
+      return false;
+    }
+  };
 
   if (!user) return null; // Prevent rendering before redirect
   if (loading) return <div>Loading Quiz...</div>;
