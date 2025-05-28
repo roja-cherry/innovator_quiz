@@ -30,7 +30,7 @@ export const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    localStorage.clear()
+    localStorage.clear();
     e.preventDefault();
     setErrors({});
 
@@ -44,12 +44,7 @@ export const Login = () => {
       localStorage.setItem("token", response.data);
       const profileResponse = await getProfile();
       setUser(profileResponse.data);
-
-      if (scheduleId) {
-        navigate(`/start/${scheduleId}`, { replace: true });
-      } else {
-        navigate("/", { replace: true });
-      }
+      navigate("/", { replace: true });
     } catch (err) {
       const errorMessage = err.response?.data?.message ?? err?.message;
       setErrors((prev) => ({ ...prev, loginError: errorMessage }));
