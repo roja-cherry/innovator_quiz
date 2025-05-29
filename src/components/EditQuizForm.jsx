@@ -21,8 +21,8 @@ const EditQuizForm = () => {
           toast.error("Can't edit the quiz, Quiz already exists");
           navigate(`/admin/quiz-management`);
         }
-        setQuizName(data.quizName);
-        setTimer(data.timer);
+        setQuizName(data?.quiz?.quizName);
+        setTimer(data?.quiz?.timer);
       } catch (err) {
         // Extracting the message from the backend response if available
         const errorMessage =
@@ -97,7 +97,7 @@ const EditQuizForm = () => {
     <form onSubmit={handleSubmit} className="quiz-form">
       <div>
         <label htmlFor="QuizTitle" className="form-label">
-          Quiz Title :
+          Quiz Title : {quizName}
         </label>
         <input
           value={quizName}

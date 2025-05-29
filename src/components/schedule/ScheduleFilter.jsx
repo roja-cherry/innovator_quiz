@@ -6,8 +6,6 @@ export const ScheduleFilter = ({
   handleFilterChange = () => {},
   applyFilter = () => {},
 }) => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
 
   return (
     <div className="row mt-3 filters bg-light p-2">
