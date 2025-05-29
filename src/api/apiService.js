@@ -89,7 +89,7 @@ export const getScheduleForParticipant = async (id) => {
 };
 
 export const participantLogin = async (scheduleId, data) => {
-  return await axiosInstance.post(`/api/auth/login-for-quiz/`, data, {
+  return await axiosInstance.post(`/api/auth/participant-login`, data, {
     params: {
       scheduleId
     }

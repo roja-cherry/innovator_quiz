@@ -10,8 +10,8 @@ const UserHome = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
-  const [allQuizzes, setAllQuizzes] = useState([]); 
-  const [statusFilter, setStatusFilter] = useState("ACTIVE"); 
+  const [allQuizzes, setAllQuizzes] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("ACTIVE");
   const { setTitle } = useAppContext();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const UserHome = () => {
       const filtered = allQuizzes.filter((q) => q.status === statusFilter);
       setQuizzes(filtered);
     }
-  }, [statusFilter, allQuizzes]); 
+  }, [statusFilter, allQuizzes]);
 
   const handleTakeQuiz = (scheduleId) => navigate(`/start/${scheduleId}`);
   const handleViewSummary = (scheduleId) =>
@@ -68,25 +68,24 @@ const UserHome = () => {
   return (
     <div className="user-home-container" style={{ paddingTop: "8rem" }}>
       <header className="user-home-header d-flex justify-content-between align-items-center mb-3">
-  <div>
-    <select
-      className="form-select w-auto"
-      value={statusFilter}
-      onChange={(e) => setStatusFilter(e.target.value)}
-    >
-      <option value="ALL">All</option>
-      <option value="ACTIVE">Active</option>
-      <option value="COMPLETED">Completed</option>
-    </select>
-  </div>
-  <button
-    className="leaderboard-button badge bg-primary text-white"
-    onClick={handleLeaderboard}
-  >
-    Leaderboard
-  </button>
-</header>
-
+        <div>
+          <select
+            className="form-select w-auto"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="ALL">All</option>
+            <option value="ACTIVE">Active</option>
+            <option value="COMPLETED">Completed</option>
+          </select>
+        </div>
+        <button
+          className="leaderboard-button badge bg-primary text-white"
+          onClick={handleLeaderboard}
+        >
+          Leaderboard
+        </button>
+      </header>
 
       <div className="quiz-table-container">
         <table className="quiz-table">
